@@ -1,0 +1,30 @@
+.home-header {
+  width: 100%;
+  height: 200px; /* Ajusta la altura según sea necesario */
+  padding: 20px 0;
+  background: linear-gradient(135deg, #B159C7, #1B0096, #090030);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px; /* Añade un margen inferior para separar del contenido */
+}
+
+.student-button {
+  background-color: white !important;
+  color: black !important;
+  margin-top: 10px;
+}
+
+.home-card {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  padding: 1px; /* Padding interno */
+}
+
+.home-card:hover {
+  border-color: #1B0096;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al hacer hover */
+  background-color: #f9f9f9; /* Color de fondo ligeramente diferente al hacer hover */
+}
