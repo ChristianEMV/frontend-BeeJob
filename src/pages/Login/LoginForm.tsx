@@ -1,5 +1,8 @@
 import React from "react";
-import { TextField, Button, Box, Typography } from "@mui/material";
+import { TextField, Button, Box, Typography, InputAdornment } from "@mui/material";
+import { Link } from "react-router-dom";
+import EmailIcon from '@mui/icons-material/Email';
+import LockIcon from '@mui/icons-material/Lock';
 import "./Login.css";
 
 type LoginFormProps = {
@@ -44,6 +47,21 @@ const LoginForm: React.FC<LoginFormProps> = ({
         value={email}
         onChange={onEmailChange}
         fullWidth
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <EmailIcon sx={{ color: '#1B0096' }} />
+            </InputAdornment>
+          ),
+        }}
+        sx={{
+          '& .MuiInputLabel-root': { color: '#1B0096' },
+          '& .MuiOutlinedInput-root': {
+            '& fieldset': { borderColor: '#1B0096' },
+            '&:hover fieldset': { borderColor: '#1B0096' },
+            '&.Mui-focused fieldset': { borderColor: '#1B0096' },
+          },
+        }}
       />
       <TextField
         type="password"
@@ -52,12 +70,27 @@ const LoginForm: React.FC<LoginFormProps> = ({
         value={password}
         onChange={onPasswordChange}
         fullWidth
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <LockIcon sx={{ color: '#1B0096' }} />
+            </InputAdornment>
+          ),
+        }}
+        sx={{
+          '& .MuiInputLabel-root': { color: '#1B0096' }, // color del label
+          '& .MuiOutlinedInput-root': {
+            '& fieldset': { borderColor: '#1B0096' }, // color del borde
+            '&:hover fieldset': { borderColor: '#1B0096' }, // color del borde al hacer hover
+            '&.Mui-focused fieldset': { borderColor: '#1B0096' }, // color del borde al estar enfocado
+          },
+        }}
       />
       <Button type="submit" variant="contained" fullWidth className="login-button">
         Log-in
       </Button>
       <Typography variant="body2" sx={{ marginTop: 2 }}>
-        Don't have an account? <a href="/register">Sign up here</a>
+        Don't have an account? <Link to="/register">Sign up here</Link>
       </Typography>
     </Box>
   );

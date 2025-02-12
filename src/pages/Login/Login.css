@@ -35,10 +35,10 @@ h1 {
 }
 
 .login-button {
-  background-color: black !important;
+  background-color: rgb(59, 59, 59) !important;
   color: white !important;
 }
 
 .login-button:hover {
-  background-color: #333 !important;
+  background-color: #131313 !important;
 }

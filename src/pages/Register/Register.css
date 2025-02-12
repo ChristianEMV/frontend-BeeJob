@@ -1,0 +1,44 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .register-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #B159C7, #1B0096, #090030);
+    overflow: hidden;
+  }
+  
+  h1 {
+    margin-bottom: 20px;
+    color: #1B0096;
+    font-family: 'Roboto', sans-serif;
+    z-index: 2;
+  }
+  
+  .register-container > * {
+    z-index: 2;
+  }
+  
+  .logo {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+  }
+  
+  .register-button {
+    background-color: rgb(59, 59, 59) !important;
+    color: white !important;
+  }
+  
+  .register-button:hover {
+    background-color: #131313 !important;
+  }

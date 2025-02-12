@@ -51,7 +51,7 @@ const Home: React.FC = () => {
           Are you a student?
         </Typography>
         <Button variant="contained" color="primary" className="student-button">
-          Yes, I am
+          Yes, I am ☝️
         </Button>
       </Box>
       <Container sx={{ py: 4 }}>
