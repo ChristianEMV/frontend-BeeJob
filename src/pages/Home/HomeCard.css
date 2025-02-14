@@ -1,0 +1,13 @@
+.home-card {
+    transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 16px; /* Ajusta el padding para que sea uniforme */
+    height: 100%; /* Asegura que la card ocupe toda la altura */
+  }
+  
+  .home-card:hover {
+    border-color: #1B0096;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #f9f9f9;
+  }

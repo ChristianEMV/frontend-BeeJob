@@ -1,0 +1,65 @@
+.job-details {
+  display: flex;
+  justify-content: space-between;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  color: rgb(20, 20, 20);
+  gap: 24px; /* Espacio entre columnas */
+}
+
+.left-column {
+  width: 65%;
+}
+
+.right-column {
+  width: 30%;
+  background-color: #ececec;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #333;
+}
+
+h1, h2 {
+  color: #1e003a;
+  margin-bottom: 16px;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.apply-button {
+  background-color: #3c21b4 !important;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  width: 100%;
+  margin-top: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.apply-button:hover {
+  background-color: #18095a !important;
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.list-item-icon {
+  margin-right: 12px;
+  color: #08002b;
+}
+
+.list-item-text {
+  color: #333;
+}
