@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Navbar from './components/Navbar/Navbar';
 import Login from './pages/Login';
 import Home from './pages/Home';
 import Register from './pages/Register';
@@ -8,6 +9,7 @@ import './App.css'
 const App = () => {
   return(
     <Router>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />
