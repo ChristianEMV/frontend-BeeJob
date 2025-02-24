@@ -1,0 +1,26 @@
+.floating-button-container {
+    position: fixed;
+    bottom: 16px;
+    right: 16px;
+    z-index: 1000;
+}
+
+.floating-button {
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1B0096;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.floating-button:hover {
+    background-color: #4A00E0;
+}
+
+.floating-button-logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}

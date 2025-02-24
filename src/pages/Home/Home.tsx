@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react"; // Asegúrate de importar useEffect
 import {
   Container,
   Grid,
@@ -13,16 +13,19 @@ import {
   InputAdornment,
 } from "@mui/material";
 import { Job } from "./Home.types";
-import { Link } from "react-router-dom";
 import HomeCard from "./HomeCard";
 import SearchIcon from "@mui/icons-material/Search";
+import FloatingButton from "../../components/FloatingButton/FloatingButton";
+import NotificationToast from "../../components/Notification/NotificationToast"; // Importa el componente de notificación
 import "./Home.css";
 
 const Home: React.FC = () => {
+  const [showNotification, setShowNotification] = useState(false); // Estado para controlar la notificación
   const [location, setLocation] = useState<string>("");
   const [position, setPosition] = useState<string>("");
   const [area, setArea] = useState<string>("");
 
+  // Datos de ejemplo de trabajos
   const jobs: Job[] = [
     {
       id: 1,
@@ -171,6 +174,12 @@ const Home: React.FC = () => {
     },
   ];
 
+  // Mostrar la notificación cuando el usuario entra a /home
+  useEffect(() => {
+    setShowNotification(true); // Activar la notificación
+  }, []);
+
+  // Filtrar trabajos según los criterios de búsqueda
   const filteredJobs = jobs.filter(
     (job) =>
       (location === "" || job.location.includes(location)) &&
@@ -180,44 +189,46 @@ const Home: React.FC = () => {
 
   return (
     <>
+      {/* Notificación animada */}
+      {showNotification && (
+        <NotificationToast
+          message="Completa tu información aquí!"
+          onClose={() => setShowNotification(false)} // Cerrar la notificación
+        />
+      )}
+
+      {/* Encabezado de la página */}
       <Box className="home-header">
-        <Typography
-          variant="h4"
-          component="h1"
-          gutterBottom
-          align="center"
-          color="white"
-        >
+        <Typography variant="h4" component="h1" gutterBottom align="center" color="white">
           Are you a student?
         </Typography>
         <Button variant="contained" color="primary" className="student-button">
           Yes, I am ☝️
         </Button>
       </Box>
+
+      {/* Contenido principal */}
       <Container sx={{ py: 4, maxWidth: "lg" }}>
+        {/* Filtros de búsqueda */}
         <Box sx={{ display: "flex", gap: 2, mb: 4 }}>
-          <TextField
-            label="Location"
-            variant="outlined"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            fullWidth
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon sx={{ color: "#1B0096" }} />
-                </InputAdornment>
-              ),
-            }}
-            sx={{
-              "& .MuiInputLabel-root": { color: "#1B0096" }, // color del label
-              "& .MuiOutlinedInput-root": {
-                "& fieldset": { borderColor: "#1B0096" }, // color del borde
-                "&:hover fieldset": { borderColor: "#1B0096" }, // color del borde al hacer hover
-                "&.Mui-focused fieldset": { borderColor: "#1B0096" }, // color del borde al estar enfocado
-              },
-            }}
-          />
+        <FormControl fullWidth variant="outlined" sx={{ "& .MuiInputLabel-root": { color: "#1B0096" } }}>
+            <InputLabel>Location</InputLabel>
+            <Select
+              value={location}
+              onChange={(e) => setLocation(e.target.value as string)}
+              label="Location"
+              sx={{
+                "& .MuiOutlinedInput-notchedOutline": { borderColor: "#1B0096" },
+                "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "#1B0096" },
+                "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "#1B0096" },
+              }}
+            >
+              <MenuItem value=""><em>None</em></MenuItem>
+              <MenuItem value="Technology">New York</MenuItem>
+              <MenuItem value="Finance">Brasil</MenuItem>
+              <MenuItem value="Marketing">Mexico</MenuItem>
+            </Select>
+          </FormControl>
           <TextField
             label="Position name"
             variant="outlined"
@@ -232,51 +243,44 @@ const Home: React.FC = () => {
               ),
             }}
             sx={{
-              "& .MuiInputLabel-root": { color: "#1B0096" }, // color del label
+              "& .MuiInputLabel-root": { color: "#1B0096" },
               "& .MuiOutlinedInput-root": {
-                "& fieldset": { borderColor: "#1B0096" }, // color del borde
-                "&:hover fieldset": { borderColor: "#1B0096" }, // color del borde al hacer hover
-                "&.Mui-focused fieldset": { borderColor: "#1B0096" }, // color del borde al estar enfocado
+                "& fieldset": { borderColor: "#1B0096" },
+                "&:hover fieldset": { borderColor: "#1B0096" },
+                "&.Mui-focused fieldset": { borderColor: "#1B0096" },
               },
             }}
           />
-          <FormControl
-            fullWidth
-            variant="outlined"
-            sx={{ "& .MuiInputLabel-root": { color: "#1B0096" } }}
-          >
+          <FormControl fullWidth variant="outlined" sx={{ "& .MuiInputLabel-root": { color: "#1B0096" } }}>
             <InputLabel>Area</InputLabel>
             <Select
               value={area}
               onChange={(e) => setArea(e.target.value as string)}
               label="Area"
               sx={{
-                "& .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "#1B0096",
-                }, // color del borde
-                "&:hover .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "#1B0096",
-                }, // color del borde al hacer hover
-                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                  borderColor: "#1B0096",
-                }, // color del borde al estar enfocado
+                "& .MuiOutlinedInput-notchedOutline": { borderColor: "#1B0096" },
+                "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "#1B0096" },
+                "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "#1B0096" },
               }}
             >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
+              <MenuItem value=""><em>None</em></MenuItem>
               <MenuItem value="Technology">Technology</MenuItem>
               <MenuItem value="Finance">Finance</MenuItem>
               <MenuItem value="Marketing">Marketing</MenuItem>
             </Select>
           </FormControl>
         </Box>
+
+        {/* Lista de trabajos filtrados */}
         <Grid container spacing={3}>
           {filteredJobs.map((job) => (
             <HomeCard key={job.id} job={job} />
           ))}
         </Grid>
       </Container>
+
+      {/* Botón flotante */}
+      <FloatingButton />
     </>
   );
 };
