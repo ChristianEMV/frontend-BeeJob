@@ -80,7 +80,6 @@ const Navbar: React.FC = () => {
                   : "rgba(255, 255, 255, 0.15)",
                 color: "white",
                 ml: 1,
-                borderRadius: 1,
                 padding: "5px 10px",
               }}
             />

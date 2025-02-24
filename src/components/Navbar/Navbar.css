@@ -14,7 +14,10 @@
     flex-grow: 1;
     display: flex;
     justify-content: center;
-    gap: 16px; /* Ajusta el espacio entre los botones */
+    align-items: center; /* Asegura que los elementos estén centrados verticalmente */
+    gap: 10px; /* Ajusta el espacio entre los botones */
+    margin-left: 275px !important; /* Empuja el Box hacia el centro */
+    margin-right: auto !important; /* Empuja el Box hacia el centro */
   }
   
   .Toolbar img {
@@ -23,25 +26,25 @@
   
   .Toolbar .MuiButton-root {
     margin: 0 10px;
-    text-transform: none; /* Evita que el texto se transforme a mayúsculas */
-    font-size: 16px; /* Tamaño de fuente */
-    font-weight: bold; /* Negrita */
-    transition: background-color 0.3s ease; /* Transición suave */
+    text-transform: none;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
   }
   
   .Toolbar .MuiButton-root:hover {
-    background-color: rgba(27, 0, 150, 0.1); /* Efecto hover */
+    background-color: rgba(27, 0, 150, 0.1);
   }
   
   .Toolbar .MuiInputBase-root {
-    background: rgba(255, 255, 255, 0.15) !important;
+    background: rgba(0, 0, 0, 0) !important;
     padding: 5px 10px;
     border-radius: 4px;
-    color: inherit !important; /* Cambia el color según el estado */
+    color: inherit !important;
   }
   
   .Toolbar .MuiIconButton-root {
-    color: inherit !important; /* Cambia el color según el estado */
+    color: inherit !important; 
   }
   
   .MuiMenu-paper {
