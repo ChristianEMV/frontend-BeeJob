@@ -15,13 +15,13 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link, useLocation } from "react-router-dom";
-import "./Navbar.css";
+import "./Navbar.css";  
 
 const Navbar: React.FC = () => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("md")); // Detecta si es móvil
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null); // Para el menú desplegable
-  const location = useLocation(); // Para obtener la ruta actual
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const location = useLocation();
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -31,7 +31,7 @@ const Navbar: React.FC = () => {
     setAnchorEl(null);
   };
 
-  const isHome = location.pathname === "/home"; // Verifica si la ruta actual es "/home"
+  const isHome = location.pathname === "/home";
 
   return (
     <AppBar
@@ -43,9 +43,12 @@ const Navbar: React.FC = () => {
       }}
     >
       <Toolbar className="Toolbar">
-        <Typography variant="h6" component="div">
+        <Typography variant="h6" component="div" >
           <Link to="/home">
-            <img src="/path/to/logo.png" alt="LogoBeeJop" style={{ height: "40px" }} />
+            <img 
+            src={isHome ? "/assets/WI1_500px.png" : "/assets/BI1_500px.png"}
+            alt="LogoBeeJop"
+            style={{ height: "50px" }} />
           </Link>
         </Typography>
         <Box className="CenteredBox">

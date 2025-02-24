@@ -16,7 +16,7 @@ const Profile = () => {
       </aside>
       <div className="content-container">
         {selectedSection === 'personal' && (
-          <div className="profile-container">
+          <div>
             <h1 className="profile-title">
               <img src="path/to/profile-icon.png" alt="Photo" className="profile-icon" />
               Personal Information

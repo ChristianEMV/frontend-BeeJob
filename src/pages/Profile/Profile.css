@@ -39,7 +39,6 @@
     color: #555;
   }
 
-  /* General Styles */
 body {
     font-family: 'Arial', sans-serif;
     background-color: #f4f4f4;
@@ -47,7 +46,6 @@ body {
     padding: 0;
 }
 
-/* Dashboard Container */
 .dashboard-container {
     display: flex;
     height: 100vh;
@@ -58,6 +56,7 @@ body {
     width: 180px;
     background-color: #ffffff;
     color: #1B0096;
+    border:1px solid;
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -88,7 +87,6 @@ body {
     color: white;
 }
 
-/* Content Container */
 .content-container {
     flex: 1;
     padding: 30px;
@@ -96,12 +94,6 @@ body {
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: 20px;
-}
-
-/* Profile Container */
-.profile-container {
-    max-width: 600px;
-    margin: 0 auto;
 }
 
 .profile-title {

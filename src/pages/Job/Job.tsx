@@ -72,7 +72,7 @@ const Job: React.FC = () => {
           {job.responsibilities.map((item, index) => (
             <ListItem key={index} className="list-item">
               <ListItemIcon className="list-item-icon">
-                <WorkIcon style={{ color: "#ffffff" }} />
+                <WorkIcon style={{ color: "#1B0096" }} />
               </ListItemIcon>
               <ListItemText primary={item} />
             </ListItem>
@@ -87,7 +87,7 @@ const Job: React.FC = () => {
           {job.qualificationsRequired.map((item, index) => (
             <ListItem key={index} className="list-item">
               <ListItemIcon className="list-item-icon">
-                <WorkIcon style={{ color: "#ffffff" }} />
+                <WorkIcon style={{ color: "#1B0096" }} />
               </ListItemIcon>
               <ListItemText primary={item} />
             </ListItem>
@@ -102,7 +102,7 @@ const Job: React.FC = () => {
           {job.qualificationsPreferred.map((item, index) => (
             <ListItem key={index} className="list-item">
               <ListItemIcon className="list-item-icon">
-                <WorkIcon style={{ color: "#ffffff" }} />
+                <WorkIcon style={{ color: "#1B0096" }} />
               </ListItemIcon>
               <ListItemText primary={item} />
             </ListItem>

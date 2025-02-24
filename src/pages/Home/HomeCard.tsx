@@ -12,17 +12,17 @@ interface HomeCardProps {
 
 const HomeCard: React.FC<HomeCardProps> = ({ job }) => {
   return (
-    <Grid item xs={12} sm={6} md={4} lg={3} sx={{ padding: 2 }}>
+    <Grid item xs={12} sm={6} md={4} lg={3} >
       <Card
         className="home-card"
         sx={{
-          height: "100%",
+          height: "75%",
           display: "flex",
           flexDirection: "column",
           border: "1px solid transparent",
         }}
       >
-        <CardContent sx={{ flexGrow: 1 }}>
+        <CardContent sx={{ flexGrow: 1}}>
           <Typography variant="h6" component="h3" gutterBottom>
             <WorkIcon sx={{ verticalAlign: "middle", marginRight: 1 }} /> {job.positionName}
           </Typography>

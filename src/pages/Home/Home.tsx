@@ -16,16 +16,16 @@ import { Job } from "./Home.types";
 import HomeCard from "./HomeCard";
 import SearchIcon from "@mui/icons-material/Search";
 import FloatingButton from "../../components/FloatingButton/FloatingButton";
-import NotificationToast from "../../components/Notification/NotificationToast"; // Importa el componente de notificación
+import NotificationToast from "../../components/Notification/NotificationToast";
 import "./Home.css";
 
 const Home: React.FC = () => {
-  const [showNotification, setShowNotification] = useState(false); // Estado para controlar la notificación
+  const [showNotification, setShowNotification] = useState(false);
   const [location, setLocation] = useState<string>("");
   const [position, setPosition] = useState<string>("");
   const [area, setArea] = useState<string>("");
 
-  // Datos de ejemplo de trabajos
+  // Datos de trabajos
   const jobs: Job[] = [
     {
       id: 1,
@@ -174,12 +174,10 @@ const Home: React.FC = () => {
     },
   ];
 
-  // Mostrar la notificación cuando el usuario entra a /home
   useEffect(() => {
-    setShowNotification(true); // Activar la notificación
+    setShowNotification(true);
   }, []);
 
-  // Filtrar trabajos según los criterios de búsqueda
   const filteredJobs = jobs.filter(
     (job) =>
       (location === "" || job.location.includes(location)) &&
@@ -189,15 +187,13 @@ const Home: React.FC = () => {
 
   return (
     <>
-      {/* Notificación animada */}
       {showNotification && (
         <NotificationToast
           message="Completa tu información aquí!"
-          onClose={() => setShowNotification(false)} // Cerrar la notificación
+          onClose={() => setShowNotification(false)}
         />
       )}
 
-      {/* Encabezado de la página */}
       <Box className="home-header">
         <Typography variant="h4" component="h1" gutterBottom align="center" color="white">
           Are you a student?
@@ -207,9 +203,10 @@ const Home: React.FC = () => {
         </Button>
       </Box>
 
-      {/* Contenido principal */}
       <Container sx={{ py: 4, maxWidth: "lg" }}>
-        {/* Filtros de búsqueda */}
+        <Typography color="#1B0096" variant="h5" component="h2" gutterBottom>
+          Find your dream job 🚀
+        </Typography>
         <Box sx={{ display: "flex", gap: 2, mb: 4 }}>
         <FormControl fullWidth variant="outlined" sx={{ "& .MuiInputLabel-root": { color: "#1B0096" } }}>
             <InputLabel>Location</InputLabel>
@@ -271,7 +268,6 @@ const Home: React.FC = () => {
           </FormControl>
         </Box>
 
-        {/* Lista de trabajos filtrados */}
         <Grid container spacing={3}>
           {filteredJobs.map((job) => (
             <HomeCard key={job.id} job={job} />
@@ -279,7 +275,6 @@ const Home: React.FC = () => {
         </Grid>
       </Container>
 
-      {/* Botón flotante */}
       <FloatingButton />
     </>
   );

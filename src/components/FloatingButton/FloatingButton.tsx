@@ -9,7 +9,7 @@ interface FloatingButtonProps {
 }
 
 const FloatingButton: React.FC<FloatingButtonProps> = ({
-  logo = "/default-logo.png",
+  logo = "/assets/WI1_500px.png",
   notificationMessage = "Completar información",
 }) => {
   const navigate = useNavigate();
