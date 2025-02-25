@@ -38,7 +38,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
         boxShadow: 3,
       }}
     >
-      <img src="/path/to/logo.png" alt="LogoBeeJop" className="logo" />
+      <img src="/assets/WI1_500px.png" alt="LogoBeeJop" className="logo" />
       <h1>Welcome back!</h1>
       <TextField
         type="email"
