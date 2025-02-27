@@ -1,10 +1,19 @@
 import React, { useState } from 'react';
 import swal from 'sweetalert';
 import './Profile.css';
+//Run-> npm install --save-dev @iconify/react
+import { Icon } from "@iconify/react"
 
 const Profile = () => {
   const [selectedSection, setSelectedSection] = useState('personal');
+  //perfil info
   const [isEditing, setIsEditing] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  //profesional info
+  const [isEditingPI, setIsEditingPI] = useState(false);
+  const [isSavingPI, setIsSavingPI] = useState(false);
+  //education
+  //job ex
 
   const [personalInfo, setPersonalInfo] = useState({
     firstName: 'John',
@@ -72,7 +81,7 @@ const Profile = () => {
             </div>
             <div className="profile-field">
               <label>First Name:</label>
-              {isEditing ? <input type="text" value={personalInfo.firstName} onChange={(e) => setPersonalInfo({ ...personalInfo, firstName: e.target.value })} /> : <span>{personalInfo.firstName}</span>}
+              {isEditing ? <input type="text" value={personalInfo.firstName} onChange={(e) => setPersonalInfo({ ...personalInfo, firstName: e.target.value })} readOnly  /> : <span>{personalInfo.firstName}</span>}
             </div>
             <div className="profile-field">
               <label>Last Name:</label>
@@ -94,6 +103,9 @@ const Profile = () => {
                 <label>Address Country:</label>
                 {isEditing ? <input type="text" value={personalInfo.addressCountry} onChange={(e) => setPersonalInfo({ ...personalInfo, addressCountry: e.target.value })} /> : <span>{personalInfo.addressCountry}</span>}
               </div>
+              <section>
+               {isSaving? <button title='Save' onClick={() =>  {alert("Toi guardanding"); setIsEditing(false); setIsSaving(false)  } }> Save</button>:<button title='Editar' onClick={() => { setIsEditing(true) ; setIsSaving(true) }}> <Icon icon="cil:pencil" /> Editar</button> }
+              </section>
             </div>
           </div>
         )}
@@ -124,6 +136,9 @@ const Profile = () => {
                   <a key={index} href={link} target="_blank" rel="noopener noreferrer">{link}</a>
                 ))}</span>
               </div>
+              <section>
+               {isSavingPI? <button title='Save' onClick={() =>  {alert("Toi guardanding PI Personal_Information"); setIsEditingPI(false); setIsSavingPI(false)  } }> Save</button>:<button title='Editar' onClick={() => { setIsEditingPI(true) ; setIsSavingPI(true) }}> <Icon icon="cil:pencil" /> Editar</button> }
+              </section>
             </div>
           </div>
         )}
