@@ -6,13 +6,18 @@ import { Icon } from "@iconify/react"
 
 const Profile = () => {
   const [selectedSection, setSelectedSection] = useState('personal');
-  //perfil info
+
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  //perfil info
+  const [isEditingProfile, setIsEditingProfile] = useState(false);
+  const [isSavingProfile, setIsSavingProfile] = useState(false);
   //profesional info
   const [isEditingPI, setIsEditingPI] = useState(false);
   const [isSavingPI, setIsSavingPI] = useState(false);
-  //education
+  //Education and Job Information -> EJI
+  const [isEditingEJI, setIsEditingEJI] = useState(false);
+  const [isSavingEJI, setIsSavingEJT] = useState(false);
   //job ex
 
   const [personalInfo, setPersonalInfo] = useState({
@@ -81,74 +86,81 @@ const Profile = () => {
             </div>
             <div className="profile-field">
               <label>First Name:</label>
-              {isEditing ? <input type="text" value={personalInfo.firstName} onChange={(e) => setPersonalInfo({ ...personalInfo, firstName: e.target.value })} readOnly  /> : <span>{personalInfo.firstName}</span>}
+              {isEditingProfile ? <input type="text" value={personalInfo.firstName} onChange={(e) => setPersonalInfo({ ...personalInfo, firstName: e.target.value })} readOnly  /> : <span>{personalInfo.firstName}</span>}
             </div>
             <div className="profile-field">
               <label>Last Name:</label>
-              {isEditing ? <input type="text" value={personalInfo.lastName} onChange={(e) => setPersonalInfo({ ...personalInfo, lastName: e.target.value })} /> : <span>{personalInfo.lastName}</span>}
+              {isEditingProfile ? <input type="text" value={personalInfo.lastName} onChange={(e) => setPersonalInfo({ ...personalInfo, lastName: e.target.value })} /> : <span>{personalInfo.lastName}</span>}
             </div>
             <div className="profile-field">
               <label>Email:</label>
-              {isEditing ? <input type="email" value={personalInfo.email} onChange={(e) => setPersonalInfo({ ...personalInfo, email: e.target.value })} /> : <span>{personalInfo.email}</span>}
+              {isEditingProfile ? <input type="email" value={personalInfo.email} onChange={(e) => setPersonalInfo({ ...personalInfo, email: e.target.value })} /> : <span>{personalInfo.email}</span>}
             </div>
             <div className="profile-field">
               <label>Phone Number:</label>
-              {isEditing ? <input type="tel" value={personalInfo.phoneNumber} onChange={(e) => setPersonalInfo({ ...personalInfo, phoneNumber: e.target.value })} /> : <span>{personalInfo.phoneNumber}</span>}
+              {isEditingProfile ? <input type="tel" value={personalInfo.phoneNumber} onChange={(e) => setPersonalInfo({ ...personalInfo, phoneNumber: e.target.value })} /> : <span>{personalInfo.phoneNumber}</span>}
               </div>
               <div className="profile-field">
                 <label>Address State:</label>
-                {isEditing ? <input type="text" value={personalInfo.addressState} onChange={(e) => setPersonalInfo({ ...personalInfo, addressState: e.target.value })} /> : <span>{personalInfo.addressState}</span>}
+                {isEditingProfile ? <input type="text" value={personalInfo.addressState} onChange={(e) => setPersonalInfo({ ...personalInfo, addressState: e.target.value })} /> : <span>{personalInfo.addressState}</span>}
               </div>
               <div className="profile-field">
                 <label>Address Country:</label>
-                {isEditing ? <input type="text" value={personalInfo.addressCountry} onChange={(e) => setPersonalInfo({ ...personalInfo, addressCountry: e.target.value })} /> : <span>{personalInfo.addressCountry}</span>}
+                {isEditingProfile ? <input type="text" value={personalInfo.addressCountry} onChange={(e) => setPersonalInfo({ ...personalInfo, addressCountry: e.target.value })} /> : <span>{personalInfo.addressCountry}</span>}
               </div>
               <section>
-               {isSaving? <button title='Save' onClick={() =>  {alert("Toi guardanding"); setIsEditing(false); setIsSaving(false)  } }> Save</button>:<button title='Editar' onClick={() => { setIsEditing(true) ; setIsSaving(true) }}> <Icon icon="cil:pencil" /> Editar</button> }
-              </section>
+               {isSavingProfile? <button title='Guardar' aria-label="notification" onClick={() =>  {alert("Toi guardanding"); setIsEditingProfile(false); setIsSavingProfile(false)  } }> <Icon icon="bi:save" /> Guardar</button>:<button title='Editar'  aria-label="notification" onClick={() => { setIsEditingProfile(true) ; setIsSavingProfile(true) }}> <Icon icon="cil:pencil" /> Editar</button> }
+               </section>
             </div>
           </div>
         )}
 
-        {selectedSection === 'professional' && (
+{selectedSection === 'professional' && (
           <div>
             <h1 className="profile-title">Professional Information</h1>
             <div className="profile-info">
               <div className="profile-field">
                 <label>CV-PDF:</label>
-                <span><a href={professionalInfo.cvLink} target="_blank">View CV</a></span>
+                { isEditingPI? <input type="text" value={professionalInfo.cvLink} onChange={(e) => setProfessionalInfo({ ...professionalInfo, cvLink: e.target.value })} readOnly  />: <span><a href={professionalInfo.cvLink} target="_blank">View CV</a></span> }
               </div>
               <div className="profile-field">
                 <label>Hard Skills:</label>
-                <span>{professionalInfo.hardSkills}</span>
+                { isEditingPI? <input type="text" value={professionalInfo.hardSkills} onChange={(e) => setProfessionalInfo({ ...professionalInfo, hardSkills: e.target.value })} readOnly  /> :<span>{professionalInfo.hardSkills}</span> }
               </div>
               <div className="profile-field">
                 <label>Soft Skills:</label>
-                <span>{professionalInfo.softSkills}</span>
+                { isEditingPI? <input type="text" value={professionalInfo.softSkills} onChange={(e) => setProfessionalInfo({ ...professionalInfo, softSkills: e.target.value })} readOnly  />:<span>{professionalInfo.softSkills}</span> }
               </div>
               <div className="profile-field">
                 <label>Languages:</label>
-                <span>{professionalInfo.languages}</span>
+                { isEditingPI? <input type="text" value={professionalInfo.languages} onChange={(e) => setProfessionalInfo({ ...professionalInfo, languages: e.target.value })} readOnly  />:<span>{professionalInfo.languages}</span> }
               </div>
               <div className="profile-field">
                 <label>Social Media Profiles:</label>
+                { isEditingPI? 
+                <input type="text" value={professionalInfo.socialMedia} onChange={(e) => setProfessionalInfo({ ...professionalInfo, socialMedia: e.target.value })} readOnly  />:
+
                 <span>{professionalInfo.socialMedia.split(', ').map((link, index) => (
                   <a key={index} href={link} target="_blank" rel="noopener noreferrer">{link}</a>
-                ))}</span>
+                ))}</span>  }
+
+
+
               </div>
               <section>
-               {isSavingPI? <button title='Save' onClick={() =>  {alert("Toi guardanding PI Personal_Information"); setIsEditingPI(false); setIsSavingPI(false)  } }> Save</button>:<button title='Editar' onClick={() => { setIsEditingPI(true) ; setIsSavingPI(true) }}> <Icon icon="cil:pencil" /> Editar</button> }
+               {isSavingPI? <button title='Save' aria-label="notification" onClick={() =>  {alert("Toi guardanding PI Personal_Information"); setIsEditingPI(false); setIsSavingPI(false)  } }> <Icon icon="bi:save" /> Guardar </button>:<button title='Editar' aria-label="notification" onClick={() => { setIsEditingPI(true) ; setIsSavingPI(true) }}> <Icon icon="cil:pencil" /> Editar</button> }
               </section>
             </div>
           </div>
         )}
-
+        
         {selectedSection === 'academy' && (
           <div>
             <h1 className="profile-title">Academy and Work Information</h1>
-            
+             
             <div className="sub-section">
-              <h2>Educational Information</h2>
+              <h2>Educational Information <button title='Add' onClick={() => {  }}> <Icon icon="gg:add" /> Add new </button>  </h2>
+              
               <div className="profile-field">
                 <label>Degree:</label>
                 <span>{academyInfo.degree}</span>
@@ -157,6 +169,9 @@ const Profile = () => {
                 <label>University:</label>
                 <span>{academyInfo.university}</span>
               </div>
+              <section>
+              <button title='Editar' onClick={() => { }}> <Icon icon="cil:pencil" /> Editar</button>
+              </section>
             </div>
 
             <div className="sub-section">
