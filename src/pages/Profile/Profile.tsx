@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import swal from 'sweetalert';
 import './Profile.css';
-//Run-> npm install --save-dev @iconify/react
-import { Icon } from "@iconify/react"
+import { Icon } from "@iconify/react";
+import { Tooltip } from "@mui/material";
 
 const Profile = () => {
   const [selectedSection, setSelectedSection] = useState('personal');
-
+  //perfil info
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   //perfil info
@@ -15,9 +15,7 @@ const Profile = () => {
   //profesional info
   const [isEditingPI, setIsEditingPI] = useState(false);
   const [isSavingPI, setIsSavingPI] = useState(false);
-  //Education and Job Information -> EJI
-  const [isEditingEJI, setIsEditingEJI] = useState(false);
-  const [isSavingEJI, setIsSavingEJT] = useState(false);
+  //education
   //job ex
 
   const [personalInfo, setPersonalInfo] = useState({
@@ -49,17 +47,19 @@ const Profile = () => {
     { company: 'InnovateX', position: 'Frontend Developer', years: '2021-Present' },
   ]);
 
-  const handleEdit = () => {
+  const handleEdit = (section: string) => {
     setIsEditing(!isEditing);
     if (isEditing) {
-      // Validate fields
-      if (!personalInfo.firstName || !personalInfo.lastName || !personalInfo.email || !personalInfo.phoneNumber || !personalInfo.addressState || !personalInfo.addressCountry) {
-        swal("Error", "All personal information fields must be filled out", "error");
-        return;
-      }
-      if (!professionalInfo.cvLink || !professionalInfo.hardSkills || !professionalInfo.softSkills || !professionalInfo.languages || !professionalInfo.socialMedia) {
-        swal("Error", "All professional information fields must be filled out", "error");
-        return;
+      if (section === 'personal') {
+        if (!personalInfo.firstName || !personalInfo.lastName || !personalInfo.email || !personalInfo.phoneNumber || !personalInfo.addressState || !personalInfo.addressCountry) {
+          swal("Error", "All personal information fields must be filled out", "error");
+          return;
+        }
+      } else if (section === 'professional') {
+        if (!professionalInfo.cvLink || !professionalInfo.hardSkills || !professionalInfo.softSkills || !professionalInfo.languages || !professionalInfo.socialMedia) {
+          swal("Error", "All professional information fields must be filled out", "error");
+          return;
+        }
       }
       swal("Success", "Information updated successfully", "success");
     }
@@ -86,19 +86,19 @@ const Profile = () => {
             </div>
             <div className="profile-field">
               <label>First Name:</label>
-              {isEditingProfile ? <input type="text" value={personalInfo.firstName} onChange={(e) => setPersonalInfo({ ...personalInfo, firstName: e.target.value })} readOnly  /> : <span>{personalInfo.firstName}</span>}
+              {isEditing ? <input type="text" value={personalInfo.firstName} onChange={(e) => setPersonalInfo({ ...personalInfo, firstName: e.target.value })} readOnly  /> : <span>{personalInfo.firstName}</span>}
             </div>
             <div className="profile-field">
               <label>Last Name:</label>
-              {isEditingProfile ? <input type="text" value={personalInfo.lastName} onChange={(e) => setPersonalInfo({ ...personalInfo, lastName: e.target.value })} /> : <span>{personalInfo.lastName}</span>}
+              {isEditing ? <input type="text" value={personalInfo.lastName} onChange={(e) => setPersonalInfo({ ...personalInfo, lastName: e.target.value })} /> : <span>{personalInfo.lastName}</span>}
             </div>
             <div className="profile-field">
               <label>Email:</label>
-              {isEditingProfile ? <input type="email" value={personalInfo.email} onChange={(e) => setPersonalInfo({ ...personalInfo, email: e.target.value })} /> : <span>{personalInfo.email}</span>}
+              {isEditing ? <input type="email" value={personalInfo.email} onChange={(e) => setPersonalInfo({ ...personalInfo, email: e.target.value })} /> : <span>{personalInfo.email}</span>}
             </div>
             <div className="profile-field">
               <label>Phone Number:</label>
-              {isEditingProfile ? <input type="tel" value={personalInfo.phoneNumber} onChange={(e) => setPersonalInfo({ ...personalInfo, phoneNumber: e.target.value })} /> : <span>{personalInfo.phoneNumber}</span>}
+              {isEditing ? <input type="tel" value={personalInfo.phoneNumber} onChange={(e) => setPersonalInfo({ ...personalInfo, phoneNumber: e.target.value })} /> : <span>{personalInfo.phoneNumber}</span>}
               </div>
               <div className="profile-field">
                 <label>Address State:</label>
@@ -109,8 +109,8 @@ const Profile = () => {
                 {isEditingProfile ? <input type="text" value={personalInfo.addressCountry} onChange={(e) => setPersonalInfo({ ...personalInfo, addressCountry: e.target.value })} /> : <span>{personalInfo.addressCountry}</span>}
               </div>
               <section>
-               {isSavingProfile? <button title='Guardar' aria-label="notification" onClick={() =>  {alert("Toi guardanding"); setIsEditingProfile(false); setIsSavingProfile(false)  } }> <Icon icon="bi:save" /> Guardar</button>:<button title='Editar'  aria-label="notification" onClick={() => { setIsEditingProfile(true) ; setIsSavingProfile(true) }}> <Icon icon="cil:pencil" /> Editar</button> }
-               </section>
+               {isSaving? <button title='Save' onClick={() =>  {alert("Toi guardanding"); setIsEditing(false); setIsSaving(false)  } }> Save</button>:<button title='Editar' onClick={() => { setIsEditing(true) ; setIsSaving(true) }}> <Icon icon="cil:pencil" /> Editar</button> }
+              </section>
             </div>
           </div>
         )}
@@ -125,30 +125,24 @@ const Profile = () => {
               </div>
               <div className="profile-field">
                 <label>Hard Skills:</label>
-                { isEditingPI? <input type="text" value={professionalInfo.hardSkills} onChange={(e) => setProfessionalInfo({ ...professionalInfo, hardSkills: e.target.value })} readOnly  /> :<span>{professionalInfo.hardSkills}</span> }
+                <span>{professionalInfo.hardSkills}</span>
               </div>
               <div className="profile-field">
                 <label>Soft Skills:</label>
-                { isEditingPI? <input type="text" value={professionalInfo.softSkills} onChange={(e) => setProfessionalInfo({ ...professionalInfo, softSkills: e.target.value })} readOnly  />:<span>{professionalInfo.softSkills}</span> }
+                <span>{professionalInfo.softSkills}</span>
               </div>
               <div className="profile-field">
                 <label>Languages:</label>
-                { isEditingPI? <input type="text" value={professionalInfo.languages} onChange={(e) => setProfessionalInfo({ ...professionalInfo, languages: e.target.value })} readOnly  />:<span>{professionalInfo.languages}</span> }
+                <span>{professionalInfo.languages}</span>
               </div>
               <div className="profile-field">
                 <label>Social Media Profiles:</label>
-                { isEditingPI? 
-                <input type="text" value={professionalInfo.socialMedia} onChange={(e) => setProfessionalInfo({ ...professionalInfo, socialMedia: e.target.value })} readOnly  />:
-
                 <span>{professionalInfo.socialMedia.split(', ').map((link, index) => (
                   <a key={index} href={link} target="_blank" rel="noopener noreferrer">{link}</a>
-                ))}</span>  }
-
-
-
+                ))}</span>
               </div>
               <section>
-               {isSavingPI? <button title='Save' aria-label="notification" onClick={() =>  {alert("Toi guardanding PI Personal_Information"); setIsEditingPI(false); setIsSavingPI(false)  } }> <Icon icon="bi:save" /> Guardar </button>:<button title='Editar' aria-label="notification" onClick={() => { setIsEditingPI(true) ; setIsSavingPI(true) }}> <Icon icon="cil:pencil" /> Editar</button> }
+               {isSavingPI? <button title='Save' onClick={() =>  {alert("Toi guardanding PI Personal_Information"); setIsEditingPI(false); setIsSavingPI(false)  } }> Save</button>:<button title='Editar' onClick={() => { setIsEditingPI(true) ; setIsSavingPI(true) }}> <Icon icon="cil:pencil" /> Editar</button> }
               </section>
             </div>
           </div>
