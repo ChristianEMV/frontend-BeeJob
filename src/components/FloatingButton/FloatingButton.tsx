@@ -34,4 +34,4 @@ const FloatingButton: React.FC<FloatingButtonProps> = ({
   );
 };
 
-export default FloatingButton;
+export default FloatingButton; 

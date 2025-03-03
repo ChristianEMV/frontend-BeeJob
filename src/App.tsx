@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Register from './pages/Register';
 import Jobs from './pages/Job';
 import Profile from './pages/Profile/Profile';
+
 import './App.css'
 
 const App = () => {
