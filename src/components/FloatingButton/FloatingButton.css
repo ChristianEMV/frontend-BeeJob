@@ -24,3 +24,10 @@
     height: 40px;
     object-fit: contain;
 }
+
+.mage--robot-happy {
+    display: inline-block;
+    width: 2em;
+    height: 2em;
+    color: #4A00E0;
+   }
