@@ -1,17 +1,18 @@
 import React from "react";
 import { TextField, Button, Box, Typography, InputAdornment } from "@mui/material";
-import { Link } from "react-router-dom";
 import EmailIcon from '@mui/icons-material/Email';
 import LockIcon from '@mui/icons-material/Lock';
+import { Link } from "react-router-dom";
 import "./Login.css";
 
-type LoginFormProps = {
+interface LoginFormProps {
   email: string;
   password: string;
   onEmailChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onPasswordChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (e: React.FormEvent) => void;
-};
+  error: string;
+}
 
 const LoginForm: React.FC<LoginFormProps> = ({
   email,
@@ -19,6 +20,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
   onEmailChange,
   onPasswordChange,
   onSubmit,
+  error,
 }) => {
   return (
     <Box
@@ -40,6 +42,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
     >
       <img src="/assets/WI1_500px.png" alt="LogoBeeJop" className="logo" />
       <h1>Welcome back!</h1>
+      {error && <Typography color="error">{error}</Typography>}
       <TextField
         type="email"
         label="Email"

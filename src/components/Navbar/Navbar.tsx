@@ -17,7 +17,12 @@ import MenuIcon from "@mui/icons-material/Menu";
 import { Link, useLocation } from "react-router-dom";
 import "./Navbar.css";  
 
-const Navbar: React.FC = () => {
+interface NavbarProps {
+  isAuthenticated: boolean;
+  onLogout: () => void;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ isAuthenticated, onLogout }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -90,14 +95,24 @@ const Navbar: React.FC = () => {
             >
               <SearchIcon />
             </IconButton>
-            <Button
-              color="inherit"
-              component={Link}
-              to="/"
-              sx={{ color: isHome ? "#1B0096" : "white" }}
-            >
-              Login
-            </Button>
+            {isAuthenticated ? (
+              <Button
+                color="inherit"
+                onClick={onLogout}
+                sx={{ color: isHome ? "#1B0096" : "white" }}
+              >
+                Logout
+              </Button>
+            ) : (
+              <Button
+                color="inherit"
+                component={Link}
+                to="/login"
+                sx={{ color: isHome ? "#1B0096" : "white" }}
+              >
+                Login
+              </Button>
+            )}
           </Box>
         )}
         {isMobile && (
@@ -150,19 +165,36 @@ const Navbar: React.FC = () => {
               >
                 Jobs
               </MenuItem>
-              <MenuItem
-                onClick={handleMenuClose}
-                component={Link}
-                to="/"
-                sx={{
-                  "&:hover": {
-                    backgroundColor: "white",
-                    color: "#1B0096",
-                  },
-                }}
-              >
-                Login
-              </MenuItem>
+              {isAuthenticated ? (
+                <MenuItem
+                  onClick={() => {
+                    handleMenuClose();
+                    onLogout();
+                  }}
+                  sx={{
+                    "&:hover": {
+                      backgroundColor: "white",
+                      color: "#1B0096",
+                    },
+                  }}
+                >
+                  Logout
+                </MenuItem>
+              ) : (
+                <MenuItem
+                  onClick={handleMenuClose}
+                  component={Link}
+                  to="/login"
+                  sx={{
+                    "&:hover": {
+                      backgroundColor: "white",
+                      color: "#1B0096",
+                    },
+                  }}
+                >
+                  Login
+                </MenuItem>
+              )}
             </Menu>
           </>
         )}

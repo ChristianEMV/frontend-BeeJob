@@ -1,17 +1,46 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginForm from "./LoginForm";
+import { login } from '../../services/authService';
+import Swal from 'sweetalert2';
 import "./Login.css";
 
-const Login: React.FC = () => {
+interface LoginProps {
+  setIsAuthenticated: (isAuthenticated: boolean) => void;
+  setIsAdmin: (isAdmin: boolean) => void;
+}
+
+const Login: React.FC<LoginProps> = ({ setIsAuthenticated, setIsAdmin }) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [error, setError] = useState<string>("");
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value);
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Email:", email, "Password:", password);
-    navigate("/home");
+    try {
+      await login(email, password);
+      const role = localStorage.getItem('role');
+      setIsAuthenticated(true);
+      setIsAdmin(role === 'ADMIN');
+      Swal.fire({
+        icon: 'success',
+        title: 'Login Successful',
+        text: 'You have successfully logged in!',
+      }).then(() => {
+        navigate(role === 'ADMIN' ? '/adminHome' : '/home');
+      });
+    } catch (error) {
+      setError((error as any).message);
+      Swal.fire({
+        icon: 'error',
+        title: 'Login Failed',
+        text: (error as any).message,
+      });
+    }
   };
 
   return (
@@ -20,9 +49,10 @@ const Login: React.FC = () => {
         <LoginForm
           email={email}
           password={password}
-          onEmailChange={(e) => setEmail(e.target.value)}
-          onPasswordChange={(e) => setPassword(e.target.value)}
+          onEmailChange={handleEmailChange}
+          onPasswordChange={handlePasswordChange}
           onSubmit={handleSubmit}
+          error={error}
         />
       </div>
     </div>
