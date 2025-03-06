@@ -1,39 +1,195 @@
+.register-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #b159c7, #1b0096, #090030);
+  overflow: hidden;
+  animation: gradientAnimation 15s ease infinite;
+  background-size: 400% 400%;
+}
 
-  .register-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(135deg, #B159C7, #1B0096, #090030);
-    overflow: hidden;
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
   }
-  
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.register-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 450px;
+  padding: 0 20px;
+}
+
+.register-form-container {
+  position: relative;
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.register-form-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #b159c7, #1b0096);
+}
+
+.register-form-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.form-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+h1 {
+  margin: 15px 0;
+  color: #1b0096;
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-size: 1.8rem;
+  z-index: 2;
+}
+
+.logo {
+  border-radius: 50%;
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border: 3px solid #b159c7;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  margin: 0 auto;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.register-button {
+  background: linear-gradient(45deg, #1b0096, #b159c7) !important;
+  color: white !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.5px !important;
+  padding: 10px 0 !important;
+  border-radius: 8px !important;
+  transition: all 0.3s ease !important;
+  text-transform: none !important;
+  font-size: 1rem !important;
+  box-shadow: 0 4px 10px rgba(27, 0, 150, 0.3) !important;
+}
+
+.register-button:hover {
+  background: linear-gradient(45deg, #b159c7, #1b0096) !important;
+  box-shadow: 0 6px 15px rgba(27, 0, 150, 0.4) !important;
+  transform: translateY(-2px) !important;
+}
+
+.login-link {
+  color: #1b0096;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.login-link:hover {
+  color: #b159c7;
+  text-decoration: underline;
+}
+
+.form-field {
+  margin-bottom: 16px !important;
+}
+
+.form-divider {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.form-divider::before,
+.form-divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: rgba(27, 0, 150, 0.2);
+}
+
+.form-divider-text {
+  padding: 0 10px;
+  color: #1b0096;
+  font-size: 0.9rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .register-form-container {
+    padding: 20px;
+  }
+
   h1 {
-    margin-bottom: 20px;
-    color: #1B0096;
-    font-family: 'Roboto', sans-serif;
-    z-index: 2;
+    font-size: 1.5rem;
   }
-  
-  .register-container > * {
-    z-index: 2;
-  }
-  
+
   .logo {
-    border-radius: 50%;
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
   }
-  
-  .register-button {
-    background-color: rgb(59, 59, 59) !important;
-    color: white !important;
+}
+
+/* Animation for form fields */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
   }
-  
-  .register-button:hover {
-    background-color: #131313 !important;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
+}
+
+.animate-field {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.field-1 {
+  animation-delay: 0.1s;
+}
+.field-2 {
+  animation-delay: 0.2s;
+}
+.field-3 {
+  animation-delay: 0.3s;
+}
+.field-4 {
+  animation-delay: 0.4s;
+}
+.field-5 {
+  animation-delay: 0.5s;
+}
+.field-6 {
+  animation-delay: 0.6s;
+}
+

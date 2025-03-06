@@ -1,4 +1,7 @@
-import React, { useState, useEffect } from "react"; // Asegúrate de importar useEffect
+"use client"
+
+import type React from "react"
+import { useState, useEffect } from "react"
 import {
   Container,
   Grid,
@@ -11,19 +14,23 @@ import {
   FormControl,
   InputLabel,
   InputAdornment,
-} from "@mui/material";
-import { Job } from "./Home.types";
-import HomeCard from "./HomeCard";
-import SearchIcon from "@mui/icons-material/Search";
-import FloatingButton from "../../components/FloatingButton/FloatingButton";
-import NotificationToast from "../../components/Notification/NotificationToast";
-import "./Home.css";
+  Paper,
+  Chip,
+} from "@mui/material"
+import type { Job } from "./Home.types"
+import HomeCard from "./HomeCard"
+import WorkIcon from "@mui/icons-material/Work"
+import LocationOnIcon from "@mui/icons-material/LocationOn"
+import CategoryIcon from "@mui/icons-material/Category"
+import FloatingButton from "../../components/FloatingButton/FloatingButton"
+import NotificationToast from "../../components/Notification/NotificationToast"
+import "./Home.css"
 
 const Home: React.FC = () => {
-  const [showNotification, setShowNotification] = useState(false);
-  const [location, setLocation] = useState<string>("");
-  const [position, setPosition] = useState<string>("");
-  const [area, setArea] = useState<string>("");
+  const [showNotification, setShowNotification] = useState(false)
+  const [location, setLocation] = useState<string>("")
+  const [position, setPosition] = useState<string>("")
+  const [area, setArea] = useState<string>("")
 
   // Datos de trabajos
   const jobs: Job[] = [
@@ -172,103 +179,108 @@ const Home: React.FC = () => {
       positionName: "Risk Manager",
       area: "Finance",
     },
-  ];
+  ]
 
   useEffect(() => {
-    setShowNotification(true);
-  }, []);
+    setShowNotification(true)
+  }, [])
 
   const filteredJobs = jobs.filter(
     (job) =>
-      (location === "" || job.location.includes(location)) &&
-      (position === "" || job.positionName.includes(position)) &&
-      (area === "" || job.area.includes(area))
-  );
+      (location === "" || job.location.toLowerCase().includes(location.toLowerCase())) &&
+      (position === "" || job.positionName.toLowerCase().includes(position.toLowerCase())) &&
+      (area === "" || job.area.toLowerCase().includes(area.toLowerCase())),
+  )
+
+  const uniqueLocations = Array.from(new Set(jobs.map((job) => job.location)))
+  const uniqueAreas = Array.from(new Set(jobs.map((job) => job.area)))
 
   return (
-    <>
+    <Box className="home-container">
       {showNotification && (
-        <NotificationToast
-          message="Completa tu información aquí!"
-          onClose={() => setShowNotification(false)}
-        />
+        <NotificationToast message="¡Completa tu información aquí!" onClose={() => setShowNotification(false)} />
       )}
 
       <Box className="home-header">
-        <Typography variant="h4" component="h1" gutterBottom align="center" color="white">
-          Are you a student?
+        <Typography variant="h3" component="h1" gutterBottom align="center" color="white" className="header-title">
+          Encuentra tu trabajo ideal
         </Typography>
         <Button variant="contained" color="primary" className="student-button">
-          Yes, I am ☝️
+          Soy estudiante 🎓
         </Button>
       </Box>
 
-      <Container sx={{ py: 4, maxWidth: "lg" }}>
-        <Typography color="#1B0096" variant="h5" component="h2" gutterBottom>
-          Find your dream job 🚀
-        </Typography>
-        <Box sx={{ display: "flex", gap: 2, mb: 4 }}>
-        <FormControl fullWidth variant="outlined" sx={{ "& .MuiInputLabel-root": { color: "#1B0096" } }}>
-            <InputLabel>Location</InputLabel>
-            <Select
-              value={location}
-              onChange={(e) => setLocation(e.target.value as string)}
-              label="Location"
-              sx={{
-                "& .MuiOutlinedInput-notchedOutline": { borderColor: "#1B0096" },
-                "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "#1B0096" },
-                "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "#1B0096" },
+      <Container maxWidth="lg" className="main-content">
+        <Paper elevation={3} className="search-container">
+          <Typography variant="h5" component="h2" gutterBottom className="search-title">
+            Explora oportunidades laborales 🚀
+          </Typography>
+          <Box className="search-fields">
+            <FormControl fullWidth variant="outlined">
+              <InputLabel>Ubicación</InputLabel>
+              <Select
+                value={location}
+                onChange={(e) => setLocation(e.target.value as string)}
+                label="Ubicación"
+                startAdornment={<LocationOnIcon className="select-icon" />}
+              >
+                <MenuItem value="">
+                  <em>Todas</em>
+                </MenuItem>
+                {uniqueLocations.map((loc) => (
+                  <MenuItem key={loc} value={loc}>
+                    {loc}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <TextField
+              label="Nombre del puesto"
+              variant="outlined"
+              value={position}
+              onChange={(e) => setPosition(e.target.value)}
+              fullWidth
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <WorkIcon className="text-field-icon" />
+                  </InputAdornment>
+                ),
               }}
-            >
-              <MenuItem value=""><em>None</em></MenuItem>
-              <MenuItem value="Technology">New York</MenuItem>
-              <MenuItem value="Finance">Brasil</MenuItem>
-              <MenuItem value="Marketing">Mexico</MenuItem>
-            </Select>
-          </FormControl>
-          <TextField
-            label="Position name"
-            variant="outlined"
-            value={position}
-            onChange={(e) => setPosition(e.target.value)}
-            fullWidth
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon sx={{ color: "#1B0096" }} />
-                </InputAdornment>
-              ),
-            }}
-            sx={{
-              "& .MuiInputLabel-root": { color: "#1B0096" },
-              "& .MuiOutlinedInput-root": {
-                "& fieldset": { borderColor: "#1B0096" },
-                "&:hover fieldset": { borderColor: "#1B0096" },
-                "&.Mui-focused fieldset": { borderColor: "#1B0096" },
-              },
-            }}
-          />
-          <FormControl fullWidth variant="outlined" sx={{ "& .MuiInputLabel-root": { color: "#1B0096" } }}>
-            <InputLabel>Area</InputLabel>
-            <Select
-              value={area}
-              onChange={(e) => setArea(e.target.value as string)}
-              label="Area"
-              sx={{
-                "& .MuiOutlinedInput-notchedOutline": { borderColor: "#1B0096" },
-                "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "#1B0096" },
-                "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "#1B0096" },
-              }}
-            >
-              <MenuItem value=""><em>None</em></MenuItem>
-              <MenuItem value="Technology">Technology</MenuItem>
-              <MenuItem value="Finance">Finance</MenuItem>
-              <MenuItem value="Marketing">Marketing</MenuItem>
-            </Select>
-          </FormControl>
+            />
+            <FormControl fullWidth variant="outlined">
+              <InputLabel>Área</InputLabel>
+              <Select
+                value={area}
+                onChange={(e) => setArea(e.target.value as string)}
+                label="Área"
+                startAdornment={<CategoryIcon className="select-icon" />}
+              >
+                <MenuItem value="">
+                  <em>Todas</em>
+                </MenuItem>
+                {uniqueAreas.map((a) => (
+                  <MenuItem key={a} value={a}>
+                    {a}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
+        </Paper>
+
+        <Box className="results-summary">
+          <Typography variant="h6" component="h3">
+            Resultados encontrados: {filteredJobs.length}
+          </Typography>
+          <Box className="active-filters">
+            {location && <Chip label={`Ubicación: ${location}`} onDelete={() => setLocation("")} />}
+            {position && <Chip label={`Puesto: ${position}`} onDelete={() => setPosition("")} />}
+            {area && <Chip label={`Área: ${area}`} onDelete={() => setArea("")} />}
+          </Box>
         </Box>
 
-        <Grid container spacing={3}>
+        <Grid container spacing={3} className="job-grid">
           {filteredJobs.map((job) => (
             <HomeCard key={job.id} job={job} />
           ))}
@@ -276,8 +288,9 @@ const Home: React.FC = () => {
       </Container>
 
       <FloatingButton />
-    </>
-  );
-};
+    </Box>
+  )
+}
 
-export default Home;
+export default Home
+

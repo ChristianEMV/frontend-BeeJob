@@ -1,31 +1,135 @@
+.home-container {
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
 .home-header {
   width: 100%;
-  height: 150px;
-  padding: 20px 0;
-  background: linear-gradient(135deg, #B159C7, #1B0096, #090030);
+  height: 250px;
+  padding: 40px 0;
+  background: linear-gradient(135deg, #b159c7, #1b0096, #090030);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+.header-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .student-button {
   background-color: white !important;
-  color: black !important;
-  margin-top: 10px;
+  color: #1b0096 !important;
+  font-weight: bold !important;
+  margin-bottom: 30px !important;
+  padding: 10px 20px !important;
+  border-radius: 25px !important;
+  transition: all 0.3s ease !important;
 }
 
-.home-card {
-  transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 16px;
-  height: 100%;
+.student-button:hover {
+  background-color: #f0f0f0 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.home-card:hover {
-  border-color: #1B0096;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  background-color: #f9f9f9;
+.main-content {
+  margin-top: -50px;
 }
+
+.search-container {
+  padding: 30px;
+  border-radius: 15px !important;
+  margin-bottom: 30px;
+}
+
+.search-title {
+  color: #1b0096;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.search-fields {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.search-fields > * {
+  flex: 1;
+  min-width: 200px;
+}
+
+.select-icon,
+.text-field-icon {
+  color: #1b0096;
+}
+
+.results-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.active-filters {
+  display: flex;
+  gap: 10px;
+}
+
+.job-grid {
+  margin-top: 20px;
+}
+
+/* Estilos para los componentes de Material-UI */
+.MuiOutlinedInput-root {
+  &:hover .MuiOutlinedInput-notchedOutline {
+    border-color: #1b0096;
+  }
+  &.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: #1b0096;
+  }
+}
+
+.MuiInputLabel-root {
+  color: #1b0096 !important;
+}
+
+.MuiChip-root {
+  background-color: #1b0096;
+  color: white;
+}
+
+.MuiChip-deleteIcon {
+  color: white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .home-header {
+    height: 200px;
+  }
+
+  .header-title {
+    font-size: 2rem;
+  }
+
+  .search-fields {
+    flex-direction: column;
+  }
+
+  .results-summary {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .active-filters {
+    margin-top: 10px;
+  }
+}
+
