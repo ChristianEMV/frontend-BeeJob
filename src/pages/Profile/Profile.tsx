@@ -182,7 +182,7 @@ const Profile:React.FC = () => {
           
             <section style={{width: '50%', height: '60%'}}>
               
-            <Modal isOpen={isModalOpen_NewE}  onClose={closeModal_NewE} X={40} Y={50} >
+            <Modal isOpen={isModalOpen_NewE}  onClose={closeModal_NewE} X={40} Y={60} >
                 <h2>Add Educational information</h2>
                 <form action="">
                   <label className="GModalInput" >
@@ -232,7 +232,7 @@ const Profile:React.FC = () => {
                   </div>
                   </form>
             </Modal>
-            <Modal isOpen={isModalOpen_EditE}  onClose={closeModal_NewE} X={40} Y={50} >
+            <Modal isOpen={isModalOpen_EditE}  onClose={closeModal_NewE} X={40} Y={60} >
                 <h2>Add Educational information</h2>
                 <form action="">
                   <label className="GModalInput" >
