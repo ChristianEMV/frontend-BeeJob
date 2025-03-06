@@ -1,0 +1,124 @@
+.admin-card {
+  position: relative;
+  transition: all 0.3s ease;
+  border-radius: 16px !important;
+  box-shadow: 0 4px 20px rgba(27, 0, 150, 0.1) !important;
+  height: 100%;
+  overflow: hidden;
+  border: 2px solid transparent !important;
+  background: linear-gradient(145deg, #ffffff, #f0f0f0);
+}
+
+.admin-card:hover {
+  border-color: #1b0096 !important;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(27, 0, 150, 0.2) !important;
+}
+
+.card-decorator {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, rgba(27, 0, 150, 0.05), rgba(177, 89, 199, 0.05));
+  transform: translate(50px, -50px) rotate(45deg);
+  transition: all 0.3s ease;
+  z-index: 0;
+}
+
+.admin-card:hover .card-decorator {
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(135deg, rgba(27, 0, 150, 0.1), rgba(177, 89, 199, 0.1));
+}
+
+.card-content {
+  position: relative;
+  z-index: 1;
+  padding: 24px !important;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.area-badge {
+  background-color: rgba(27, 0, 150, 0.1) !important;
+  color: #1b0096 !important;
+  font-weight: 600 !important;
+  border: none !important;
+  padding: 4px 12px !important;
+  border-radius: 20px !important;
+}
+
+.job-id {
+  color: #666;
+  font-weight: 500;
+}
+
+.job-title {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-weight: 700 !important;
+  color: #1b0096;
+  margin-bottom: 16px !important;
+  line-height: 1.3 !important;
+}
+
+.title-icon {
+  color: #1b0096;
+  font-size: 1.5rem !important;
+}
+
+.job-details {
+  margin-bottom: 24px;
+}
+
+.job-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  color: #444;
+}
+
+.info-icon {
+  color: #1b0096;
+  margin-right: 8px;
+  font-size: 1.2rem !important;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.edit-button {
+  color: #1b0096 !important;
+  border: 1px solid #1b0096 !important;
+  background-color: white !important;
+  transition: all 0.3s ease !important;
+}
+
+.edit-button:hover {
+  background-color: rgba(27, 0, 150, 0.1) !important;
+}
+
+.visibility-switch {
+  margin-right: -12px !important;
+}
+
+.invisible-card {
+  opacity: 0.5;
+  filter: grayscale(100%);
+}
+
+.invisible-card:hover {
+  opacity: 0.7;
+}
+

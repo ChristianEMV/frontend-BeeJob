@@ -1,13 +1,12 @@
 "use client"
 
 import type React from "react"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import {
   Container,
   Grid,
   Typography,
   Box,
-  Button,
   TextField,
   MenuItem,
   Select,
@@ -16,18 +15,17 @@ import {
   InputAdornment,
   Paper,
   Chip,
+  Button,
 } from "@mui/material"
-import type { Job } from "./Home.types"
-import HomeCard from "./HomeCard"
+import type { Job } from "../../Home/Home.types"
+import AdminCardHome from "./AdminCardHome"
 import WorkIcon from "@mui/icons-material/Work"
 import LocationOnIcon from "@mui/icons-material/LocationOn"
 import CategoryIcon from "@mui/icons-material/Category"
-import FloatingButton from "../../components/FloatingButton/FloatingButton"
-import NotificationToast from "../../components/Notification/NotificationToast"
-import "./Home.css"
+import AddIcon from "@mui/icons-material/Add"
+import "./AdminHome.css"
 
-const Home: React.FC = () => {
-  const [showNotification, setShowNotification] = useState(false)
+const AdminHome: React.FC = () => {
   const [location, setLocation] = useState<string>("")
   const [position, setPosition] = useState<string>("")
   const [area, setArea] = useState<string>("")
@@ -181,10 +179,6 @@ const Home: React.FC = () => {
     },
   ]
 
-  useEffect(() => {
-    setShowNotification(true)
-  }, [])
-
   const filteredJobs = jobs.filter(
     (job) =>
       (location === "" || job.location.toLowerCase().includes(location.toLowerCase())) &&
@@ -196,24 +190,20 @@ const Home: React.FC = () => {
   const uniqueAreas = Array.from(new Set(jobs.map((job) => job.area)))
 
   return (
-    <Box className="home-container">
-      {showNotification && (
-        <NotificationToast message="¡Completa tu información aquí!" onClose={() => setShowNotification(false)} />
-      )}
-
-      <Box className="home-header">
+    <Box className="admin-home-container">
+      <Box className="admin-home-header">
         <Typography variant="h3" component="h1" gutterBottom align="center" color="white" className="header-title">
-          Encuentra tu trabajo ideal
+          Bienvenido, Administrador
         </Typography>
-        <Button variant="contained" color="primary" className="student-button">
-          Soy estudiante 🎓
+        <Button variant="contained" color="primary" className="add-job-button" startIcon={<AddIcon />}>
+          Agregar nuevo trabajo
         </Button>
       </Box>
 
       <Container maxWidth="lg" className="main-content">
         <Paper elevation={3} className="search-container">
           <Typography variant="h5" component="h2" gutterBottom className="search-title">
-            Explora oportunidades laborales 🚀
+            Gestionar trabajos 👨🏽‍💻
           </Typography>
           <Box className="search-fields">
             <FormControl fullWidth variant="outlined">
@@ -271,7 +261,7 @@ const Home: React.FC = () => {
 
         <Box className="results-summary">
           <Typography variant="h6" component="h3">
-            Resultados encontrados: {filteredJobs.length}
+            Trabajos encontrados: {filteredJobs.length}
           </Typography>
           <Box className="active-filters">
             {location && <Chip label={`Ubicación: ${location}`} onDelete={() => setLocation("")} />}
@@ -282,15 +272,13 @@ const Home: React.FC = () => {
 
         <Grid container spacing={3} className="job-grid">
           {filteredJobs.map((job) => (
-            <HomeCard key={job.id} job={job} />
+            <AdminCardHome key={job.id} job={job} />
           ))}
         </Grid>
       </Container>
-
-      <FloatingButton />
     </Box>
   )
 }
 
-export default Home
+export default AdminHome
 

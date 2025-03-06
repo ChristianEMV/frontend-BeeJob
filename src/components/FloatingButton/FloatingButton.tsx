@@ -10,7 +10,6 @@ interface FloatingButtonProps {
 }
 
 const FloatingButton: React.FC<FloatingButtonProps> = ({
-  logo = "/assets/WI1_500px.png",
   notificationMessage = "Completar información",
 }) => {
   const navigate = useNavigate();
@@ -25,8 +24,7 @@ const FloatingButton: React.FC<FloatingButtonProps> = ({
       <Tooltip title={notificationMessage} aria-label="notification">
         <Badge color="secondary" variant="dot" overlap="circular">
           <Fab className="floating-button" onClick={handleClick}>
-            <Icon   icon="majesticons:robot-line" className="mage--robot-happy" /> 
-            {/* <img src={logo} alt="Logo" className="floating-button-logo" /> */}
+            <img src={logo} alt="Logo" className="floating-button-logo" />
           </Fab>
         </Badge>
       </Tooltip>

@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react"
 import {
   Box,
   Typography,
@@ -8,7 +8,10 @@ import {
   ListItemIcon,
   ListItemText,
   Divider,
-} from "@mui/material";
+  Paper,
+  Container,
+  Grid,
+} from "@mui/material"
 import {
   Work as WorkIcon,
   LocationOn as LocationOnIcon,
@@ -16,8 +19,9 @@ import {
   FlightTakeoff as FlightTakeoffIcon,
   AttachMoney as AttachMoneyIcon,
   CalendarToday as CalendarTodayIcon,
-} from "@mui/icons-material";
-import "./Job.css";
+  CheckCircleOutline as CheckCircleOutlineIcon,
+} from "@mui/icons-material"
+import "./Job.css"
 
 const Job: React.FC = () => {
   const job = {
@@ -46,130 +50,150 @@ const Job: React.FC = () => {
     travel: "Occasional",
     salary: "Competitive",
     datePosted: "2025-02-11",
-  };
+  }
 
   return (
-    <Box className="job-details">
-      {/* Columna izquierda */}
-      <Box className="left-column">
-        <Typography variant="h4" component="h1" gutterBottom>
-          {job.positionName}
-        </Typography>
-        <Divider sx={{ bgcolor: "white", mb: 2 }} />
+    <Box className="job-page">
+      <Container maxWidth="xl" className="job-container">
+        <Grid container spacing={4}>
+          <Grid item xs={12} md={8} lg={9}>
+            <Paper elevation={3} className="job-details main-content">
+              <Typography variant="h3" component="h1" className="job-title">
+                {job.positionName}
+              </Typography>
+              <Box className="job-meta-mobile">
+                <Typography variant="subtitle1" className="job-meta-item">
+                  <LocationOnIcon /> {job.location}
+                </Typography>
+                <Typography variant="subtitle1" className="job-meta-item">
+                  <BusinessCenterIcon /> {job.area}
+                </Typography>
+                <Typography variant="subtitle1" className="job-meta-item">
+                  <CalendarTodayIcon /> Posted: {job.datePosted}
+                </Typography>
+              </Box>
+              <Divider className="divider" />
 
-        <Typography variant="h6" component="h2" gutterBottom>
-          Introduction
-        </Typography>
-        <Typography variant="body1" gutterBottom>
-          {job.aboutJob}
-        </Typography>
-        <Divider sx={{ bgcolor: "white", my: 2 }} />
+              <Typography variant="h5" component="h2" className="section-title">
+                About This Role
+              </Typography>
+              <Typography variant="body1" className="job-description">
+                {job.aboutJob}
+              </Typography>
+              <Divider className="divider" />
 
-        <Typography variant="h6" component="h2" gutterBottom>
-          Your Role and Responsibilities
-        </Typography>
-        <List>
-          {job.responsibilities.map((item, index) => (
-            <ListItem key={index} className="list-item">
-              <ListItemIcon className="list-item-icon">
-                <WorkIcon style={{ color: "#1B0096" }} />
-              </ListItemIcon>
-              <ListItemText primary={item} />
-            </ListItem>
-          ))}
-        </List>
-        <Divider sx={{ bgcolor: "white", my: 2 }} />
+              <Typography variant="h5" component="h2" className="section-title">
+                Your Responsibilities
+              </Typography>
+              <List>
+                {job.responsibilities.map((item, index) => (
+                  <ListItem key={index} className="list-item">
+                    <ListItemIcon className="list-item-icon">
+                      <CheckCircleOutlineIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={item} />
+                  </ListItem>
+                ))}
+              </List>
+              <Divider className="divider" />
 
-        <Typography variant="h6" component="h2" gutterBottom>
-          Qualifications Required
-        </Typography>
-        <List>
-          {job.qualificationsRequired.map((item, index) => (
-            <ListItem key={index} className="list-item">
-              <ListItemIcon className="list-item-icon">
-                <WorkIcon style={{ color: "#1B0096" }} />
-              </ListItemIcon>
-              <ListItemText primary={item} />
-            </ListItem>
-          ))}
-        </List>
-        <Divider sx={{ bgcolor: "white", my: 2 }} />
+              <Typography variant="h5" component="h2" className="section-title">
+                Required Qualifications
+              </Typography>
+              <List>
+                {job.qualificationsRequired.map((item, index) => (
+                  <ListItem key={index} className="list-item">
+                    <ListItemIcon className="list-item-icon">
+                      <CheckCircleOutlineIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={item} />
+                  </ListItem>
+                ))}
+              </List>
+              <Divider className="divider" />
 
-        <Typography variant="h6" component="h2" gutterBottom>
-          Qualifications Preferred
-        </Typography>
-        <List>
-          {job.qualificationsPreferred.map((item, index) => (
-            <ListItem key={index} className="list-item">
-              <ListItemIcon className="list-item-icon">
-                <WorkIcon style={{ color: "#1B0096" }} />
-              </ListItemIcon>
-              <ListItemText primary={item} />
-            </ListItem>
-          ))}
-        </List>
-        <Divider sx={{ bgcolor: "white", my: 2 }} />
+              <Typography variant="h5" component="h2" className="section-title">
+                Preferred Qualifications
+              </Typography>
+              <List>
+                {job.qualificationsPreferred.map((item, index) => (
+                  <ListItem key={index} className="list-item">
+                    <ListItemIcon className="list-item-icon">
+                      <CheckCircleOutlineIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={item} />
+                  </ListItem>
+                ))}
+              </List>
+              <Divider className="divider" />
 
-        <Typography variant="h6" component="h2" gutterBottom>
-          Additional Information
-        </Typography>
-        <Typography variant="body1" gutterBottom>
-          {job.additionalInformation}
-        </Typography>
-      </Box>
+              <Typography variant="h5" component="h2" className="section-title">
+                Additional Information
+              </Typography>
+              <Typography variant="body1" className="job-description">
+                {job.additionalInformation}
+              </Typography>
+            </Paper>
+          </Grid>
 
-      {/* Columna derecha */}
-      <Box className="right-column">
-        <List>
-          <ListItem className="list-item">
-            <ListItemIcon className="list-item-icon">
-              <BusinessCenterIcon />
-            </ListItemIcon>
-            <ListItemText primary={`Area: ${job.area}`} />
-          </ListItem>
-          <ListItem className="list-item">
-            <ListItemIcon className="list-item-icon">
-              <LocationOnIcon />
-            </ListItemIcon>
-            <ListItemText primary={`Location: ${job.location}`} />
-          </ListItem>
-          <ListItem className="list-item">
-            <ListItemIcon className="list-item-icon">
-              <BusinessCenterIcon />
-            </ListItemIcon>
-            <ListItemText primary={`Job Type: ${job.jobType}`} />
-          </ListItem>
-          <ListItem className="list-item">
-            <ListItemIcon className="list-item-icon">
-              <FlightTakeoffIcon />
-            </ListItemIcon>
-            <ListItemText primary={`Relocation: ${job.relocation}`} />
-          </ListItem>
-          <ListItem className="list-item">
-            <ListItemIcon className="list-item-icon">
-              <FlightTakeoffIcon />
-            </ListItemIcon>
-            <ListItemText primary={`Travel: ${job.travel}`} />
-          </ListItem>
-          <ListItem className="list-item">
-            <ListItemIcon className="list-item-icon">
-              <AttachMoneyIcon />
-            </ListItemIcon>
-            <ListItemText primary={`Salary: ${job.salary}`} />
-          </ListItem>
-          <ListItem className="list-item">
-            <ListItemIcon className="list-item-icon">
-              <CalendarTodayIcon />
-            </ListItemIcon>
-            <ListItemText primary={`Date Posted: ${job.datePosted}`} />
-          </ListItem>
-        </List>
-        <Button variant="contained" className="apply-button">
-          Apply Now
-        </Button>
-      </Box>
+          <Grid item xs={12} md={4} lg={3}>
+            <Box className="right-column">
+              <Paper elevation={3} className="job-meta">
+                <List>
+                  <ListItem className="meta-item">
+                    <ListItemIcon className="meta-icon">
+                      <BusinessCenterIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Area" secondary={job.area} />
+                  </ListItem>
+                  <ListItem className="meta-item">
+                    <ListItemIcon className="meta-icon">
+                      <LocationOnIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Location" secondary={job.location} />
+                  </ListItem>
+                  <ListItem className="meta-item">
+                    <ListItemIcon className="meta-icon">
+                      <WorkIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Job Type" secondary={job.jobType} />
+                  </ListItem>
+                  <ListItem className="meta-item">
+                    <ListItemIcon className="meta-icon">
+                      <FlightTakeoffIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Relocation" secondary={job.relocation} />
+                  </ListItem>
+                  <ListItem className="meta-item">
+                    <ListItemIcon className="meta-icon">
+                      <FlightTakeoffIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Travel" secondary={job.travel} />
+                  </ListItem>
+                  <ListItem className="meta-item">
+                    <ListItemIcon className="meta-icon">
+                      <AttachMoneyIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Salary" secondary={job.salary} />
+                  </ListItem>
+                  <ListItem className="meta-item">
+                    <ListItemIcon className="meta-icon">
+                      <CalendarTodayIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Date Posted" secondary={job.datePosted} />
+                  </ListItem>
+                </List>
+              </Paper>
+              <Button variant="contained" className="apply-button">
+                Apply Now
+              </Button>
+            </Box>
+          </Grid>
+        </Grid>
+      </Container>
     </Box>
-  );
-};
+  )
+}
 
-export default Job;
+export default Job
+

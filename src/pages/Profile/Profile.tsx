@@ -176,129 +176,15 @@ const Profile:React.FC = () => {
             <h1 className="profile-title">Academy and Work Information</h1>
 
             <div className="sub-section">
-            <h2>Educational Information
-            <button onClick={openModal_NewE} className='buttonNewInfo' title='Add new Educational Info' > <Icon icon="gg:add" /></button> 
-            </h2> 
-          
-            <section style={{width: '50%', height: '60%'}}>
-              
-            <Modal isOpen={isModalOpen_NewE}  onClose={closeModal_NewE} X={40} Y={60} >
-                <h2>Add Educational information</h2>
-                <form action="">
-                  <label className="GModalInput" >
-                    Institution Name
-                    <input className="ModalInput" type="text" name="name" />
-                  </label>
-                  <label className="GModalInput" >
-                    Major
-                    <input className="ModalInput" type="text" name="name" />
-                  </label>
-                  <label className="GModalInput" >
-                    Degree
-                    <input className="ModalInput" type="text" name="name" />
-                  </label>
-                  <label className="GModalInput" >
-                    Address Location
-                    <input className="ModalInput" type="text" name="name" />
-                  </label>
-                  
-                  <label className="GModalInput"  >
-                  Description: 
-                  <br />
-                  <textarea
-                  id="description"
-                  placeholder="Escribe una descripción..."
-                  rows={5}
-                  cols={40}
-                  />
-                  </label>
-                  
-                  <div  style={{  display:'flex',float: 'right',  gap: '10px'}}>
-                    <div style={{  flex:'1', padding: '10px', alignContent:'center'}}>
-                      <label className="GModalInput"  >
-                            From:<input  type="date"   name="initialDate" style={{padding: '10px'  }} className="ModalInput"  />
-                      </label>
-                    </div>
-                    <div style={{ padding: '10px', alignItems:'center' }}>
-                      <label className="GModalInput"  >
-                          To:<input   type="date"  name="finalDate" style={{padding: '10px'}} className="ModalInput" />
-                      </label>
-                    </div>
-                  </div >
-                  
-                    <div style={{ position: 'absolute',bottom: '0',right: '0px',padding: '10px',}}>
-                  <button onClick={()=>{setIsModalOpen_NewE(false)}} className='buttonModal' title='Cancel'>Close</button>
-                  <button onClick={()=>{swal("Saved", "Educational Information :)", "success")}} className='buttonModal' title='Save'>Save</button>
-                  </div>
-                  </form>
-            </Modal>
-            <Modal isOpen={isModalOpen_EditE}  onClose={closeModal_NewE} X={40} Y={60} >
-                <h2>Add Educational information</h2>
-                <form action="">
-                  <label className="GModalInput" >
-                    Institution Name
-                    <input className="ModalInput" value={academyInfo.Institution_Name} type="text" name="name" />
-                  </label>
-                  <label className="GModalInput" >
-                    Major
-                    <input className="ModalInput" value={academyInfo.Major }  type="text" name="name" />
-                  </label>
-                  <label className="GModalInput" >
-                    Degree
-                    <input className="ModalInput" value={academyInfo.degree}  type="text" name="name" />
-                  </label>
-                  <label className="GModalInput" >
-                    Address Location
-                    <input className="ModalInput" value={academyInfo.Location }  type="text" name="name" />
-                  </label>
-                  
-                  <label className="GModalInput"  >
-                  Description: 
-                  <br />
-                  <textarea
-                  id="description"
-                  value={academyInfo.Description} 
-                  rows={5}
-                  cols={40}
-                  />
-                  </label>
-                  
-                  <div  style={{  display:'flex',float: 'right',  gap: '10px'}}>
-                    <div style={{  flex:'1', padding: '10px', alignContent:'center'}}>
-                      <label className="GModalInput"  >
-                            From:<input  type="date"   name="initialDate" style={{padding: '10px'  }} className="ModalInput"  />
-                      </label>
-                    </div>
-                    <div style={{ padding: '10px', alignItems:'center' }}>
-                      <label className="GModalInput"  >
-                          To:<input   type="date"  name="finalDate" style={{padding: '10px'}} className="ModalInput" />
-                      </label>
-                    </div>
-                  </div >
-                  
-                    <div style={{ position: 'absolute',bottom: '0',right: '0px',padding: '10px',}}>
-                  <button onClick={()=>{setIsModalOpen_NewE(false)}} className='buttonModal' title='Cancel'>Close</button>
-                  <button onClick={()=>{swal("Saved", "Educational Information :)", "success")}} className='buttonModal' title='Save'>Save</button>
-                  </div>
-                  </form>
-            </Modal>
-              </section>
-
-            
-            
-
-              <section className="work-entry">
-                <div className="profile-field">
+              <h2>Educational Information</h2>
+              <div className="profile-field">
                 <label>Degree:</label>
                 <span>{academyInfo.degree}</span>
-                </div>
-                <div className="profile-field">
-                  <label>University:</label>
-                  <span>{academyInfo.Institution_Name}</span>
-                </div>
-                <button onClick={openModal_EditE} className='buttonNewInfo' title='Edit Educational Info.' > <Icon icon="cil:pencil" />  Editar</button> 
-             </section>
-
+              </div>
+              <div className="profile-field">
+                <label>University:</label>
+                <span>{academyInfo.university}</span>
+              </div>
             </div>
 
             {/* Work */}
@@ -410,5 +296,3 @@ const Profile:React.FC = () => {
 };
 
 export default Profile;
-
-
