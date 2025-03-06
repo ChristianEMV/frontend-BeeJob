@@ -1,27 +1,34 @@
-import React, { useState, useEffect } from "react";
+"use client"
+
+import type React from "react"
+import { useState } from "react"
 import {
   Container,
   Grid,
   Typography,
   Box,
-  Button,
   TextField,
   MenuItem,
   Select,
   FormControl,
   InputLabel,
   InputAdornment,
-} from "@mui/material";
-import { Job } from "../../Home/Home.types";
-import AdminCardHome from "./AdminCardHome";
-import SearchIcon from "@mui/icons-material/Search";
-import AdminNavbar from "../../../components/AdminNavbar/AdminNav";
-import "./AdminHome.css";
+  Paper,
+  Chip,
+  Button,
+} from "@mui/material"
+import type { Job } from "../../Home/Home.types"
+import AdminCardHome from "./AdminCardHome"
+import WorkIcon from "@mui/icons-material/Work"
+import LocationOnIcon from "@mui/icons-material/LocationOn"
+import CategoryIcon from "@mui/icons-material/Category"
+import AddIcon from "@mui/icons-material/Add"
+import "./AdminHome.css"
 
 const AdminHome: React.FC = () => {
-  const [location, setLocation] = useState<string>("");
-  const [position, setPosition] = useState<string>("");
-  const [area, setArea] = useState<string>("");
+  const [location, setLocation] = useState<string>("")
+  const [position, setPosition] = useState<string>("")
+  const [area, setArea] = useState<string>("")
 
   // Datos de trabajos
   const jobs: Job[] = [
@@ -170,98 +177,108 @@ const AdminHome: React.FC = () => {
       positionName: "Risk Manager",
       area: "Finance",
     },
-  ];
+  ]
 
   const filteredJobs = jobs.filter(
     (job) =>
-      (location === "" || job.location.includes(location)) &&
-      (position === "" || job.positionName.includes(position)) &&
-      (area === "" || job.area.includes(area))
-  );
+      (location === "" || job.location.toLowerCase().includes(location.toLowerCase())) &&
+      (position === "" || job.positionName.toLowerCase().includes(position.toLowerCase())) &&
+      (area === "" || job.area.toLowerCase().includes(area.toLowerCase())),
+  )
+
+  const uniqueLocations = Array.from(new Set(jobs.map((job) => job.location)))
+  const uniqueAreas = Array.from(new Set(jobs.map((job) => job.area)))
 
   return (
-    <>
-      <AdminNavbar />
-      <Box className="home-header">
-        <Typography variant="h4" component="h1" gutterBottom align="center" color="white">
-          Welcome Back Admin
+    <Box className="admin-home-container">
+      <Box className="admin-home-header">
+        <Typography variant="h3" component="h1" gutterBottom align="center" color="white" className="header-title">
+          Bienvenido, Administrador
         </Typography>
+        <Button variant="contained" color="primary" className="add-job-button" startIcon={<AddIcon />}>
+          Agregar nuevo trabajo
+        </Button>
       </Box>
 
-      <Container sx={{ py: 4, maxWidth: "lg" }}>
-        <Typography color="#1B0096" variant="h5" component="h2" gutterBottom>
-            Manage jobs 🤖
-        </Typography>
-        <Box sx={{ display: "flex", gap: 2, mb: 4 }}>
-          <FormControl fullWidth variant="outlined" sx={{ "& .MuiInputLabel-root": { color: "#1B0096" } }}>
-            <InputLabel>Location</InputLabel>
-            <Select
-              value={location}
-              onChange={(e) => setLocation(e.target.value as string)}
-              label="Location"
-              sx={{
-                "& .MuiOutlinedInput-notchedOutline": { borderColor: "#1B0096" },
-                "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "#1B0096" },
-                "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "#1B0096" },
+      <Container maxWidth="lg" className="main-content">
+        <Paper elevation={3} className="search-container">
+          <Typography variant="h5" component="h2" gutterBottom className="search-title">
+            Gestionar trabajos 👨🏽‍💻
+          </Typography>
+          <Box className="search-fields">
+            <FormControl fullWidth variant="outlined">
+              <InputLabel>Ubicación</InputLabel>
+              <Select
+                value={location}
+                onChange={(e) => setLocation(e.target.value as string)}
+                label="Ubicación"
+                startAdornment={<LocationOnIcon className="select-icon" />}
+              >
+                <MenuItem value="">
+                  <em>Todas</em>
+                </MenuItem>
+                {uniqueLocations.map((loc) => (
+                  <MenuItem key={loc} value={loc}>
+                    {loc}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+            <TextField
+              label="Nombre del puesto"
+              variant="outlined"
+              value={position}
+              onChange={(e) => setPosition(e.target.value)}
+              fullWidth
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <WorkIcon className="text-field-icon" />
+                  </InputAdornment>
+                ),
               }}
-            >
-              <MenuItem value=""><em>None</em></MenuItem>
-              <MenuItem value="New York">New York</MenuItem>
-              <MenuItem value="Brasil">Brasil</MenuItem>
-              <MenuItem value="Mexico">Mexico</MenuItem>
-            </Select>
-          </FormControl>
-          <TextField
-            label="Position name"
-            variant="outlined"
-            value={position}
-            onChange={(e) => setPosition(e.target.value)}
-            fullWidth
-            InputProps={{
-              startAdornment: (
-                <InputAdornment position="start">
-                  <SearchIcon sx={{ color: "#1B0096" }} />
-                </InputAdornment>
-              ),
-            }}
-            sx={{
-              "& .MuiInputLabel-root": { color: "#1B0096" },
-              "& .MuiOutlinedInput-root": {
-                "& fieldset": { borderColor: "#1B0096" },
-                "&:hover fieldset": { borderColor: "#1B0096" },
-                "&.Mui-focused fieldset": { borderColor: "#1B0096" },
-              },
-            }}
-          />
-          <FormControl fullWidth variant="outlined" sx={{ "& .MuiInputLabel-root": { color: "#1B0096" } }}>
-            <InputLabel>Area</InputLabel>
-            <Select
-              value={area}
-              onChange={(e) => setArea(e.target.value as string)}
-              label="Area"
-              sx={{
-                "& .MuiOutlinedInput-notchedOutline": { borderColor: "#1B0096" },
-                "&:hover .MuiOutlinedInput-notchedOutline": { borderColor: "#1B0096" },
-                "&.Mui-focused .MuiOutlinedInput-notchedOutline": { borderColor: "#1B0096" },
-              }}
-            >
-              <MenuItem value=""><em>None</em></MenuItem>
-              <MenuItem value="Technology">Technology</MenuItem>
-              <MenuItem value="Finance">Finance</MenuItem>
-              <MenuItem value="Marketing">Marketing</MenuItem>
-            </Select>
-          </FormControl>
+            />
+            <FormControl fullWidth variant="outlined">
+              <InputLabel>Área</InputLabel>
+              <Select
+                value={area}
+                onChange={(e) => setArea(e.target.value as string)}
+                label="Área"
+                startAdornment={<CategoryIcon className="select-icon" />}
+              >
+                <MenuItem value="">
+                  <em>Todas</em>
+                </MenuItem>
+                {uniqueAreas.map((a) => (
+                  <MenuItem key={a} value={a}>
+                    {a}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
+        </Paper>
+
+        <Box className="results-summary">
+          <Typography variant="h6" component="h3">
+            Trabajos encontrados: {filteredJobs.length}
+          </Typography>
+          <Box className="active-filters">
+            {location && <Chip label={`Ubicación: ${location}`} onDelete={() => setLocation("")} />}
+            {position && <Chip label={`Puesto: ${position}`} onDelete={() => setPosition("")} />}
+            {area && <Chip label={`Área: ${area}`} onDelete={() => setArea("")} />}
+          </Box>
         </Box>
 
-        <Grid container spacing={3}>
+        <Grid container spacing={3} className="job-grid">
           {filteredJobs.map((job) => (
             <AdminCardHome key={job.id} job={job} />
           ))}
         </Grid>
       </Container>
+    </Box>
+  )
+}
 
-    </>
-  );
-};
+export default AdminHome
 
-export default AdminHome;

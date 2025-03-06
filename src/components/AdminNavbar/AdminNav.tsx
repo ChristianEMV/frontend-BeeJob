@@ -36,7 +36,7 @@ const AdminNavbar: React.FC<AdminNavbarProps> = ({ isAuthenticated, onLogout }) 
     setAnchorEl(null);
   };
 
-  const isHome = location.pathname === "/home";
+  const isHome = location.pathname === "/adminhome";
 
   return (
     <AppBar
@@ -49,7 +49,7 @@ const AdminNavbar: React.FC<AdminNavbarProps> = ({ isAuthenticated, onLogout }) 
     >
       <Toolbar className="Toolbar">
         <Typography variant="h6" component="div" >
-          <Link to="/home">
+          <Link to="/adminhome">
             <img 
             src={isHome ? "/assets/WI1_500px.png" : "/assets/BI1_500px.png"}
             alt="LogoBeeJop"
@@ -60,7 +60,7 @@ const AdminNavbar: React.FC<AdminNavbarProps> = ({ isAuthenticated, onLogout }) 
           <Button
             color="inherit"
             component={Link}
-            to="/home"
+            to="/adminhome"
             sx={{ color: isHome ? "#1B0096" : "white" }}
           >
             Home
