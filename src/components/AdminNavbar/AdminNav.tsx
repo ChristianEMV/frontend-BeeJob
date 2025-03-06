@@ -14,8 +14,10 @@ import {
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import MenuIcon from "@mui/icons-material/Menu";
+import LogoutIcon from "@mui/icons-material/Logout";
 import { Link, useLocation } from "react-router-dom";
 import "./AdminNav.css";  
+import Swal from "sweetalert2";
 
 interface AdminNavbarProps {
   isAuthenticated: boolean;
@@ -36,7 +38,41 @@ const AdminNavbar: React.FC<AdminNavbarProps> = ({ isAuthenticated, onLogout }) 
     setAnchorEl(null);
   };
 
-  const isHome = location.pathname === "/adminhome";
+  const handleLogoutClick = () => {
+    interface SwalResult {
+      isConfirmed: boolean;
+    }
+
+    interface SwalOptions {
+      title: string;
+      text: string;
+      icon: 'warning';
+      showCancelButton: boolean;
+      confirmButtonColor: string;
+      cancelButtonColor: string;
+      confirmButtonText: string;
+      cancelButtonText: string;
+    }
+
+    const swalOptions: SwalOptions = {
+      title: 'Cerrar Sesión',
+      text: '¿Estas seguro que deseas cerrar sesión?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Logout',
+      cancelButtonText: 'Cancelar'
+    };
+
+    Swal.fire(swalOptions).then((result: SwalResult) => {
+      if (result.isConfirmed) {
+        onLogout();
+      }
+    });
+  };
+
+  const isHome = location.pathname === "/adminHome";
 
   return (
     <AppBar
@@ -49,7 +85,7 @@ const AdminNavbar: React.FC<AdminNavbarProps> = ({ isAuthenticated, onLogout }) 
     >
       <Toolbar className="Toolbar">
         <Typography variant="h6" component="div" >
-          <Link to="/adminhome">
+          <Link to="/adminHome">
             <img 
             src={isHome ? "/assets/WI1_500px.png" : "/assets/BI1_500px.png"}
             alt="LogoBeeJop"
@@ -60,7 +96,7 @@ const AdminNavbar: React.FC<AdminNavbarProps> = ({ isAuthenticated, onLogout }) 
           <Button
             color="inherit"
             component={Link}
-            to="/adminhome"
+            to="/adminHome"
             sx={{ color: isHome ? "#1B0096" : "white" }}
           >
             Home
@@ -104,13 +140,13 @@ const AdminNavbar: React.FC<AdminNavbarProps> = ({ isAuthenticated, onLogout }) 
               <SearchIcon />
             </IconButton>
             {isAuthenticated ? (
-              <Button
-                color="inherit"
-                onClick={onLogout}
-                sx={{ color: isHome ? "#1B0096" : "white" }}
+              <IconButton
+                sx={{ p: "10px", color: isHome ? "#1B0096" : "white" }}
+                aria-label="logout"
+                onClick={handleLogoutClick}
               >
-                Logout
-              </Button>
+                <LogoutIcon />
+              </IconButton>
             ) : (
               <Button
                 color="inherit"
@@ -190,7 +226,7 @@ const AdminNavbar: React.FC<AdminNavbarProps> = ({ isAuthenticated, onLogout }) 
                 <MenuItem
                   onClick={() => {
                     handleMenuClose();
-                    onLogout();
+                    handleLogoutClick();
                   }}
                   sx={{
                     "&:hover": {
