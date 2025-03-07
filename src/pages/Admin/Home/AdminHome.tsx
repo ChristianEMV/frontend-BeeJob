@@ -23,14 +23,13 @@ import WorkIcon from "@mui/icons-material/Work"
 import LocationOnIcon from "@mui/icons-material/LocationOn"
 import CategoryIcon from "@mui/icons-material/Category"
 import AddIcon from "@mui/icons-material/Add"
-import "./AdminHome.css"
+import styles from "./styles.module.css";
 
 const AdminHome: React.FC = () => {
   const [location, setLocation] = useState<string>("")
   const [position, setPosition] = useState<string>("")
   const [area, setArea] = useState<string>("")
 
-  // Datos de trabajos
   const jobs: Job[] = [
     {
       id: 1,
@@ -190,29 +189,29 @@ const AdminHome: React.FC = () => {
   const uniqueAreas = Array.from(new Set(jobs.map((job) => job.area)))
 
   return (
-    <Box className="admin-home-container">
-      <Box className="admin-home-header">
-        <Typography variant="h3" component="h1" gutterBottom align="center" color="white" className="header-title">
+    <Box className={styles.adminhomecontainer}>
+      <Box className={styles.adminhomeheader}>
+        <Typography variant="h3" component="h1" gutterBottom align="center" color="white" className={styles.headertitle}>
           Bienvenido, Administrador
         </Typography>
-        <Button variant="contained" color="primary" className="add-job-button" startIcon={<AddIcon />}>
+        <Button variant="contained" color="primary" className={styles.addjobbutton} startIcon={<AddIcon />}>
           Agregar nuevo trabajo
         </Button>
       </Box>
 
-      <Container maxWidth="lg" className="main-content">
-        <Paper elevation={3} className="search-container">
-          <Typography variant="h5" component="h2" gutterBottom className="search-title">
+      <Container maxWidth="lg" className={styles.maincontent}>
+        <Paper elevation={3} className={styles.searchcontainer}>
+          <Typography variant="h5" component="h2" gutterBottom className={styles.searchtitle}>
             Gestionar trabajos 👨🏽‍💻
           </Typography>
-          <Box className="search-fields">
+          <Box className={styles.searchfields}>
             <FormControl fullWidth variant="outlined">
               <InputLabel>Ubicación</InputLabel>
               <Select
                 value={location}
                 onChange={(e) => setLocation(e.target.value as string)}
                 label="Ubicación"
-                startAdornment={<LocationOnIcon className="select-icon" />}
+                startAdornment={<LocationOnIcon className={styles.selecticon} />}
               >
                 <MenuItem value="">
                   <em>Todas</em>
@@ -233,7 +232,7 @@ const AdminHome: React.FC = () => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <WorkIcon className="text-field-icon" />
+                    <WorkIcon className={styles.textfieldicon} />
                   </InputAdornment>
                 ),
               }}
@@ -244,7 +243,7 @@ const AdminHome: React.FC = () => {
                 value={area}
                 onChange={(e) => setArea(e.target.value as string)}
                 label="Área"
-                startAdornment={<CategoryIcon className="select-icon" />}
+                startAdornment={<CategoryIcon className={styles.selecticon}/>}
               >
                 <MenuItem value="">
                   <em>Todas</em>
@@ -259,18 +258,18 @@ const AdminHome: React.FC = () => {
           </Box>
         </Paper>
 
-        <Box className="results-summary">
+        <Box className={styles.resultssummary}>
           <Typography variant="h6" component="h3">
             Trabajos encontrados: {filteredJobs.length}
           </Typography>
-          <Box className="active-filters">
+          <Box className={styles.activefilters}>
             {location && <Chip label={`Ubicación: ${location}`} onDelete={() => setLocation("")} />}
             {position && <Chip label={`Puesto: ${position}`} onDelete={() => setPosition("")} />}
             {area && <Chip label={`Área: ${area}`} onDelete={() => setArea("")} />}
           </Box>
         </Box>
 
-        <Grid container spacing={3} className="job-grid">
+        <Grid container spacing={3} className={styles.jobgrid}>
           {filteredJobs.map((job) => (
             <AdminCardHome key={job.id} job={job} />
           ))}

@@ -1,4 +1,4 @@
-.register-background {
+.registerbackground {
   position: fixed;
   top: 0;
   left: 0;
@@ -25,7 +25,7 @@
   }
 }
 
-.register-container {
+.registercontainer {
   position: relative;
   z-index: 2;
   width: 100%;
@@ -33,7 +33,7 @@
   padding: 0 20px;
 }
 
-.register-form-container {
+.registerformcontainer {
   position: relative;
   backdrop-filter: blur(10px);
   border-radius: 16px;
@@ -42,7 +42,7 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.register-form-container::before {
+.registerformcontainer::before {
   content: "";
   position: absolute;
   top: 0;
@@ -52,12 +52,12 @@
   background: linear-gradient(90deg, #b159c7, #1b0096);
 }
 
-.register-form-container:hover {
+.registerformcontainer:hover {
   transform: translateY(-5px);
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
 }
 
-.form-header {
+.formheader {
   text-align: center;
   margin-bottom: 20px;
 }
@@ -87,7 +87,7 @@ h1 {
   transform: scale(1.05);
 }
 
-.register-button {
+.registerbutton {
   background: linear-gradient(45deg, #1b0096, #b159c7) !important;
   color: white !important;
   font-weight: 600 !important;
@@ -100,51 +100,50 @@ h1 {
   box-shadow: 0 4px 10px rgba(27, 0, 150, 0.3) !important;
 }
 
-.register-button:hover {
+.registerbutton:hover {
   background: linear-gradient(45deg, #b159c7, #1b0096) !important;
   box-shadow: 0 6px 15px rgba(27, 0, 150, 0.4) !important;
   transform: translateY(-2px) !important;
 }
 
-.login-link {
+.loginlink {
   color: #1b0096;
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s ease;
 }
 
-.login-link:hover {
+.loginlink:hover {
   color: #b159c7;
   text-decoration: underline;
 }
 
-.form-field {
+.formfield {
   margin-bottom: 16px !important;
 }
 
-.form-divider {
+.formdivider {
   display: flex;
   align-items: center;
   margin: 20px 0;
 }
 
-.form-divider::before,
-.form-divider::after {
+.formdivider::before,
+.formdivider::after {
   content: "";
   flex: 1;
   height: 1px;
   background-color: rgba(27, 0, 150, 0.2);
 }
 
-.form-divider-text {
+.formdivider-text {
   padding: 0 10px;
   color: #1b0096;
   font-size: 0.9rem;
 }
 
-/* Responsive adjustments */
 @media (max-width: 600px) {
-  .register-form-container {
+  .registerformcontainer {
     padding: 20px;
   }
 
@@ -158,7 +157,6 @@ h1 {
   }
 }
 
-/* Animation for form fields */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -170,26 +168,26 @@ h1 {
   }
 }
 
-.animate-field {
+.animatefield {
   animation: fadeIn 0.5s ease forwards;
 }
 
-.field-1 {
+.field1 {
   animation-delay: 0.1s;
 }
-.field-2 {
+.field2 {
   animation-delay: 0.2s;
 }
-.field-3 {
+.field3 {
   animation-delay: 0.3s;
 }
-.field-4 {
+.field4 {
   animation-delay: 0.4s;
 }
-.field-5 {
+.field5 {
   animation-delay: 0.5s;
 }
-.field-6 {
+.field6 {
   animation-delay: 0.6s;
 }
 

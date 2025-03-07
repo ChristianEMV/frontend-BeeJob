@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"
 import LoginForm from "./LoginForm"
 import { login } from "../../services/authService"
 import Swal from "sweetalert2"
-import "./login.css"
+import styles from "./styles.module.css"
 
 interface LoginProps {
   setIsAuthenticated: (isAuthenticated: boolean) => void
@@ -33,7 +33,6 @@ const Login: React.FC<LoginProps> = ({ setIsAuthenticated, setIsAdmin }) => {
       await login(email, password)
       const role = localStorage.getItem("role")
 
-      // If remember me is checked, store the email in localStorage
       if (rememberMe) {
         localStorage.setItem("rememberedEmail", email)
       } else {
@@ -76,8 +75,8 @@ const Login: React.FC<LoginProps> = ({ setIsAuthenticated, setIsAdmin }) => {
   }, [])
 
   return (
-    <div className="login-background">
-      <div className="login-container">
+    <div className={styles.loginbackground}>
+      <div className={styles.logincontainer}>
         <LoginForm
           email={email}
           password={password}

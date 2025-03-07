@@ -18,7 +18,6 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Link, useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
-import "./Navbar.css";  
 
 
 interface NavbarProps {
@@ -63,7 +62,6 @@ const Navbar: React.FC<NavbarProps> = ({ isAuthenticated, onLogout }) => {
     <>
       <AppBar
         position="static"
-        className="AppBar"
         sx={{
           background: isHome ? "white" : "linear-gradient(135deg, #B159C7, #1B0096, #090030)",
           color: isHome ? "#1B0096" : "white",

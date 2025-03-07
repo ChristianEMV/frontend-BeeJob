@@ -10,7 +10,7 @@ import BadgeIcon from "@mui/icons-material/Badge"
 import { register } from "../../services/authService"
 import { useNavigate } from "react-router-dom"
 import Swal from "sweetalert2"
-import "./Register.css"
+import styles from "./styles.module.css"
 
 const RegisterForm: React.FC = () => {
   const [fullName, setFullName] = useState("")
@@ -60,7 +60,7 @@ const RegisterForm: React.FC = () => {
   return (
     <Paper
       elevation={0}
-      className="register-form-container"
+      className={styles.registerformcontainer}
       sx={{
         backgroundColor: "rgba(255, 255, 255, 0.95)",
         padding: { xs: 3, sm: 4 },
@@ -75,8 +75,8 @@ const RegisterForm: React.FC = () => {
           width: "100%",
         }}
       >
-        <div className="form-header">
-          <img src="/path/to/logo.png" alt="LogoBeeJop" className="logo" />
+        <div className={styles.formheader}>
+          <img src="/assets/WI1_500px.png" alt="LogoBeeJop" className={styles.logo} />
           <h1>Create an account</h1>
         </div>
 
@@ -97,7 +97,7 @@ const RegisterForm: React.FC = () => {
         )}
 
         <TextField
-          className="form-field animate-field field-1"
+          className={`${styles.formfield} ${styles.animatefield} ${styles.field1}`}
           type="text"
           label="Full Name"
           variant="outlined"
@@ -124,7 +124,7 @@ const RegisterForm: React.FC = () => {
         />
 
         <TextField
-          className="form-field animate-field field-2"
+          className={`${styles.formfield} ${styles.animatefield} ${styles.field2}`}
           type="text"
           label="First Last Name"
           variant="outlined"
@@ -151,7 +151,7 @@ const RegisterForm: React.FC = () => {
         />
 
         <TextField
-          className="form-field animate-field field-3"
+          className={`${styles.formfield} ${styles.animatefield} ${styles.field3}`}
           type="text"
           label="Second Last Name"
           variant="outlined"
@@ -177,16 +177,16 @@ const RegisterForm: React.FC = () => {
           }}
         />
 
-        <div className="form-divider">
+        <div className={styles.formdivider}>
           <Divider sx={{ flexGrow: 1 }} />
-          <Typography variant="body2" className="form-divider-text">
+          <Typography variant="body2" className={styles.formdividertext}>
             Account Details
           </Typography>
           <Divider sx={{ flexGrow: 1 }} />
         </div>
 
         <TextField
-          className="form-field animate-field field-4"
+          className={`${styles.formfield} ${styles.animatefield} ${styles.field4}`}
           type="email"
           label="Email"
           variant="outlined"
@@ -213,7 +213,7 @@ const RegisterForm: React.FC = () => {
         />
 
         <TextField
-          className="form-field animate-field field-5"
+          className={`${styles.formfield} ${styles.animatefield} ${styles.field5}`}
           type="password"
           label="Password"
           variant="outlined"
@@ -240,7 +240,7 @@ const RegisterForm: React.FC = () => {
         />
 
         <TextField
-          className="form-field animate-field field-6"
+          className={`${styles.formfield} ${styles.animatefield} ${styles.field6}`}
           type="password"
           label="Confirm Password"
           variant="outlined"
@@ -270,7 +270,7 @@ const RegisterForm: React.FC = () => {
           type="submit"
           variant="contained"
           fullWidth
-          className="register-button"
+          className={styles.registerbutton}
           disabled={loading}
           sx={{ height: "48px" }}
         >
@@ -286,7 +286,7 @@ const RegisterForm: React.FC = () => {
           }}
         >
           Already have an account?{" "}
-          <a href="/login" className="login-link">
+          <a href="/login" className={styles.loginlink}>
             Log in here
           </a>
         </Typography>

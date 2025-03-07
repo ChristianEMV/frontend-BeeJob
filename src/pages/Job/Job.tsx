@@ -21,7 +21,7 @@ import {
   CalendarToday as CalendarTodayIcon,
   CheckCircleOutline as CheckCircleOutlineIcon,
 } from "@mui/icons-material"
-import "./Job.css"
+import styles from "./styles.module.css"
 
 const Job: React.FC = () => {
   const job = {
@@ -53,138 +53,138 @@ const Job: React.FC = () => {
   }
 
   return (
-    <Box className="job-page">
-      <Container maxWidth="xl" className="job-container">
+    <Box className={styles.jobpage}>
+      <Container maxWidth="xl" className={styles.jobcontainer}>
         <Grid container spacing={4}>
           <Grid item xs={12} md={8} lg={9}>
-            <Paper elevation={3} className="job-details main-content">
-              <Typography variant="h3" component="h1" className="job-title">
+            <Paper elevation={3} className={`${styles.jobdetails} ${styles.maincontent}`}>
+              <Typography variant="h3" component="h1" className={styles.jobtitle}>
                 {job.positionName}
               </Typography>
-              <Box className="job-meta-mobile">
-                <Typography variant="subtitle1" className="job-meta-item">
+              <Box className={styles.jobmetamobile}>
+                <Typography variant="subtitle1" className={styles.jobmetaitem}>
                   <LocationOnIcon /> {job.location}
                 </Typography>
-                <Typography variant="subtitle1" className="job-meta-item">
+                <Typography variant="subtitle1" className={styles.jobmetaitem}>
                   <BusinessCenterIcon /> {job.area}
                 </Typography>
-                <Typography variant="subtitle1" className="job-meta-item">
+                <Typography variant="subtitle1" className={styles.jobmetaitem}>
                   <CalendarTodayIcon /> Posted: {job.datePosted}
                 </Typography>
               </Box>
-              <Divider className="divider" />
+              <Divider className={styles.divider}/>
 
-              <Typography variant="h5" component="h2" className="section-title">
+              <Typography variant="h5" component="h2" className={styles.sectiontitle}>
                 About This Role
               </Typography>
-              <Typography variant="body1" className="job-description">
+              <Typography variant="body1" className={styles.jobdescription}>
                 {job.aboutJob}
               </Typography>
-              <Divider className="divider" />
+              <Divider className={styles.divider}/>
 
-              <Typography variant="h5" component="h2" className="section-title">
+              <Typography variant="h5" component="h2" className={styles.sectiontitle}>
                 Your Responsibilities
               </Typography>
               <List>
                 {job.responsibilities.map((item, index) => (
-                  <ListItem key={index} className="list-item">
-                    <ListItemIcon className="list-item-icon">
+                  <ListItem key={index} className={styles.listitem}>
+                    <ListItemIcon className={styles.listitemicon}>
                       <CheckCircleOutlineIcon />
                     </ListItemIcon>
                     <ListItemText primary={item} />
                   </ListItem>
                 ))}
               </List>
-              <Divider className="divider" />
+              <Divider className={styles.divider} />
 
-              <Typography variant="h5" component="h2" className="section-title">
+              <Typography variant="h5" component="h2" className={styles.sectiontitle}>
                 Required Qualifications
               </Typography>
               <List>
                 {job.qualificationsRequired.map((item, index) => (
-                  <ListItem key={index} className="list-item">
-                    <ListItemIcon className="list-item-icon">
+                  <ListItem key={index} className={styles.listitem}>
+                    <ListItemIcon className={styles.listitemicon}>
                       <CheckCircleOutlineIcon />
                     </ListItemIcon>
                     <ListItemText primary={item} />
                   </ListItem>
                 ))}
               </List>
-              <Divider className="divider" />
+              <Divider className={styles.divider} />
 
-              <Typography variant="h5" component="h2" className="section-title">
+              <Typography variant="h5" component="h2" className={styles.sectiontitle}>
                 Preferred Qualifications
               </Typography>
               <List>
                 {job.qualificationsPreferred.map((item, index) => (
-                  <ListItem key={index} className="list-item">
-                    <ListItemIcon className="list-item-icon">
+                  <ListItem key={index} className={styles.listitem}>
+                    <ListItemIcon className={styles.listitemicon}>
                       <CheckCircleOutlineIcon />
                     </ListItemIcon>
                     <ListItemText primary={item} />
                   </ListItem>
                 ))}
               </List>
-              <Divider className="divider" />
+              <Divider className={styles.divider} />
 
-              <Typography variant="h5" component="h2" className="section-title">
+              <Typography variant="h5" component="h2" className={styles.sectiontitle}>
                 Additional Information
               </Typography>
-              <Typography variant="body1" className="job-description">
+              <Typography variant="body1" className={styles.jobdescription}>
                 {job.additionalInformation}
               </Typography>
             </Paper>
           </Grid>
 
           <Grid item xs={12} md={4} lg={3}>
-            <Box className="right-column">
-              <Paper elevation={3} className="job-meta">
+            <Box className={styles.rightcolumn}>
+              <Paper elevation={3} className={styles.jobmeta}>
                 <List>
-                  <ListItem className="meta-item">
-                    <ListItemIcon className="meta-icon">
+                  <ListItem className={styles.metaitem}>
+                    <ListItemIcon className={styles.metaicon}>
                       <BusinessCenterIcon />
                     </ListItemIcon>
                     <ListItemText primary="Area" secondary={job.area} />
                   </ListItem>
-                  <ListItem className="meta-item">
-                    <ListItemIcon className="meta-icon">
+                  <ListItem className={styles.metaitem}>
+                    <ListItemIcon className={styles.metaicon}>
                       <LocationOnIcon />
                     </ListItemIcon>
                     <ListItemText primary="Location" secondary={job.location} />
                   </ListItem>
-                  <ListItem className="meta-item">
-                    <ListItemIcon className="meta-icon">
+                  <ListItem className={styles.metaitem}>
+                    <ListItemIcon className={styles.metaicon}>
                       <WorkIcon />
                     </ListItemIcon>
                     <ListItemText primary="Job Type" secondary={job.jobType} />
                   </ListItem>
-                  <ListItem className="meta-item">
-                    <ListItemIcon className="meta-icon">
+                  <ListItem className={styles.metaitem}>
+                    <ListItemIcon className={styles.metaicon}>
                       <FlightTakeoffIcon />
                     </ListItemIcon>
                     <ListItemText primary="Relocation" secondary={job.relocation} />
                   </ListItem>
-                  <ListItem className="meta-item">
-                    <ListItemIcon className="meta-icon">
+                  <ListItem className={styles.metaitem}>
+                    <ListItemIcon className={styles.metaicon}>
                       <FlightTakeoffIcon />
                     </ListItemIcon>
                     <ListItemText primary="Travel" secondary={job.travel} />
                   </ListItem>
-                  <ListItem className="meta-item">
-                    <ListItemIcon className="meta-icon">
+                  <ListItem className={styles.metaitem}>
+                    <ListItemIcon className={styles.metaicon}>
                       <AttachMoneyIcon />
                     </ListItemIcon>
                     <ListItemText primary="Salary" secondary={job.salary} />
                   </ListItem>
-                  <ListItem className="meta-item">
-                    <ListItemIcon className="meta-icon">
+                  <ListItem className={styles.metaitem}>
+                    <ListItemIcon className={styles.metaicon}>
                       <CalendarTodayIcon />
                     </ListItemIcon>
                     <ListItemText primary="Date Posted" secondary={job.datePosted} />
                   </ListItem>
                 </List>
               </Paper>
-              <Button variant="contained" className="apply-button">
+              <Button variant="contained" className={styles.applybutton}>
                 Apply Now
               </Button>
             </Box>

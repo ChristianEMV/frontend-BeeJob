@@ -9,6 +9,7 @@ import Jobs from './pages/Job/Job';
 import Profile from './pages/Profile/Profile';
 import AdminHome from './pages/Admin/Home/AdminHome';
 import AdminJob from "./pages/Admin/Jobs/Job";
+import Applicant from "./pages/Admin/Applicants/Applicants";
 import { logout } from './services/authService';
 import './App.css';
 
@@ -49,6 +50,7 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         <Route path="/jobs" element={<ProtectedRoute><Jobs /></ProtectedRoute>} />
+        <Route path="/adminApplicants" element={<ProtectedRoute><Applicant /></ProtectedRoute>} />
         <Route path="/adminHome" element={<ProtectedRoute><AdminHome /></ProtectedRoute>} />
         <Route path="/adminjob" element={<ProtectedRoute><AdminJob /></ProtectedRoute>} />
       </Routes>

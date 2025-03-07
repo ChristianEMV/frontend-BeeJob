@@ -77,7 +77,6 @@ const AdminNavbar: React.FC<AdminNavbarProps> = ({ isAuthenticated, onLogout }) 
   return (
     <AppBar
       position="static"
-      className="AppBar"
       sx={{
         background: isHome ? "white" : "linear-gradient(135deg, #B159C7, #1B0096, #090030)",
         color: isHome ? "#1B0096" : "white",
@@ -104,7 +103,7 @@ const AdminNavbar: React.FC<AdminNavbarProps> = ({ isAuthenticated, onLogout }) 
           <Button
             color="inherit"
             component={Link}
-            to="/applicants"
+            to="/adminApplicants"
             sx={{ color: isHome ? "#1B0096" : "white" }}
           >
             Applicants

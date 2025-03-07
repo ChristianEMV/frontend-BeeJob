@@ -5,7 +5,7 @@ import LocationOnIcon from "@mui/icons-material/LocationOn"
 import WorkIcon from "@mui/icons-material/Work"
 import BusinessIcon from "@mui/icons-material/Business"
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward"
-import "./HomeCard.css"
+import styles from "./styles.module.css"
 
 interface HomeCardProps {
   job: Job
@@ -14,22 +14,19 @@ interface HomeCardProps {
 const HomeCard: React.FC<HomeCardProps> = ({ job }) => {
   return (
     <Grid item xs={12} sm={6} md={4} lg={3}>
-      <Card className="home-card">
-        {/* Elemento decorativo en la esquina */}
-        <Box className="card-decorator"></Box>
+      <Card className={styles.homecard}>
+        <Box className={styles.carddecorator}></Box>
 
         <CardContent sx={{ position: "relative", zIndex: 1, p: 3 }}>
-          {/* Badge del área */}
           <Box sx={{ mb: 2 }}>
-            <Chip label={job.area} size="small" className="area-badge" />
+            <Chip label={job.area} size="small" className={styles.areabadge} />
           </Box>
 
-          {/* Título del puesto */}
           <Typography
             variant="h6"
             component="h3"
             gutterBottom
-            className="job-title"
+            className={styles.jobtitle}
             sx={{
               display: "flex",
               alignItems: "flex-start",
@@ -42,7 +39,6 @@ const HomeCard: React.FC<HomeCardProps> = ({ job }) => {
             {job.positionName}
           </Typography>
 
-          {/* Detalles del trabajo */}
           <Box sx={{ mb: 3 }}>
             <Typography
               variant="body2"
@@ -70,8 +66,7 @@ const HomeCard: React.FC<HomeCardProps> = ({ job }) => {
             </Typography>
           </Box>
 
-          {/* Botón de acción */}
-          <Button variant="outlined" endIcon={<ArrowForwardIcon />} className="view-details-button" fullWidth>
+          <Button variant="outlined" endIcon={<ArrowForwardIcon />} className={styles.viewdetailsbutton} fullWidth>
             Ver detalles
           </Button>
         </CardContent>

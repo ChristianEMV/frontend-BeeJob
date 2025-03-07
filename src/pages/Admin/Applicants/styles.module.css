@@ -1,0 +1,172 @@
+/* Main Container */
+.applicantscontainer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+  }
+  
+  .applicantstitle {
+    margin-bottom: 24px;
+    color: #090030;
+  }
+  
+  /* Tabs */
+  .applicantstabs {
+    margin-bottom: 24px;
+  }
+  
+  /* Grid Layout */
+  .applicantsgrid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 24px;
+  }
+  
+  @media (min-width: 600px) {
+    .applicantsgrid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (min-width: 960px) {
+    .applicantsgrid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  /* Applicant Card */
+  .applicantcard {
+    border: 1px solid rgba(9, 0, 48, 0.2);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .applicantcard:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .cardheader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .cardtitle {
+    color: #090030;
+  }
+  
+  .cardcontent {
+    margin-bottom: 16px;
+  }
+  
+  .vacancyinfo,
+  .emailinfo,
+  .dateinfo {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  
+  .vacancyinfo svg,
+  .emailinfo svg,
+  .dateinfo svg {
+    margin-right: 8px;
+    color: #1b0096;
+  }
+  
+  .skillscontainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 16px;
+  }
+  
+  .skillbadge {
+    background-color: rgba(27, 0, 150, 0.1) !important;
+    color: #1b0096 !important;
+  }
+  
+  .cardactions {
+    justify-content: flex-end;
+    padding-top: 8px;
+    border-top: 1px solid rgba(9, 0, 48, 0.1);
+  }
+  
+  .statusbadge {
+    font-size: 0.75rem !important;
+  }
+  
+  .statusbadge.pending {
+    background-color: #1b0096 !important;
+    color: white !important;
+  }
+  
+  .statusbadge.accepted {
+    background-color: #4caf50 !important;
+    color: white !important;
+  }
+  
+  .statusbadge.rejected {
+    background-color: #f44336 !important;
+    color: white !important;
+  }
+  
+  .viewkardexbtn {
+    color: #1b0096 !important;
+  }
+  
+  .acceptbtn {
+    background-color: #1b0096 !important;
+    color: white !important;
+  }
+  
+  .rejectbtn {
+    color: #f44336 !important;
+  }
+  
+  /* Kardex Dialog */
+  .kardextitle {
+    color: #090030 !important;
+  }
+  
+  .kardexcontent {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  
+  @media (min-width: 600px) {
+    .kardexcontent {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  .kardexsection {
+    margin-bottom: 24px;
+  }
+  
+  .sectiontitle {
+    color: #1b0096 !important;
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .sectiontitle svg {
+    margin-right: 8px;
+  }
+  
+  @media (max-width: 600px) {
+    .cardactionsApplicants {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  
+    .cardactionsApplicants button {
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      margin-bottom: 8px;
+    }
+  }
+  
+  

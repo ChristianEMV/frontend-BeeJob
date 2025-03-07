@@ -23,7 +23,7 @@ import VisibilityIcon from "@mui/icons-material/Visibility"
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff"
 import { Link } from "react-router-dom"
 import { styled } from "@mui/material/styles"
-import "./AdminCardHome.css"
+import styles from "./styles.module.css"
 
 interface AdminCardHomeProps {
   job: Job
@@ -50,35 +50,35 @@ const AdminCardHome: React.FC<AdminCardHomeProps> = ({ job }) => {
 
   return (
     <Grid item xs={12} sm={6} md={4} lg={3}>
-      <Card className={`admin-card ${!isVisible ? "invisible-card" : ""}`}>
-        <Box className="card-decorator"></Box>
-        <CardContent className="card-content">
-          <Box className="card-header">
-            <Chip label={job.area} size="small" className="area-badge" />
-            <Typography variant="caption" className="job-id">
+      <Card className={`styles.admincard ${!isVisible ? styles.invisiblecard : ""}`}>
+        <Box className={styles.carddecorator}></Box>
+        <CardContent className={styles.cardcontent}>
+          <Box className={styles.cardheader}>
+            <Chip label={job.area} size="small" className={styles.areabadge} />
+            <Typography variant="caption" className={styles.jobid}>
               ID: {job.id}
             </Typography>
           </Box>
 
-          <Typography variant="h6" component="h3" className="job-title">
-            <WorkIcon className="title-icon" />
+          <Typography variant="h6" component="h3" className={styles.jobtitle}>
+            <WorkIcon className={styles.titleicon} />
             {job.positionName}
           </Typography>
 
-          <Box className="job-details">
-            <Typography variant="body2" className="job-info">
-              <LocationOnIcon className="info-icon" />
+          <Box className={styles.jobdetails}>
+            <Typography variant="body2" className={styles.jobinfo}>
+              <LocationOnIcon className={styles.infoicon} />
               {job.location}
             </Typography>
-            <Typography variant="body2" className="job-info">
-              <BusinessIcon className="info-icon" />
+            <Typography variant="body2" className={styles.jobinfo}>
+              <BusinessIcon className={styles.infoicon} />
               {job.area}
             </Typography>
           </Box>
 
-          <Box className="card-actions">
+          <Box className={styles.cardactions}>
             <Tooltip title="Edit Job" placement="top">
-              <IconButton component={Link} to={`/admin/edit-job/${job.id}`} className="edit-button">
+              <IconButton component={Link} to={`/admin/edit-job/${job.id}`} className={styles.editbutton}>
                 <EditIcon />
               </IconButton>
             </Tooltip>

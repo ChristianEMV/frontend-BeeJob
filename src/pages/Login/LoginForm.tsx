@@ -19,7 +19,7 @@ import LockIcon from "@mui/icons-material/Lock"
 import Visibility from "@mui/icons-material/Visibility"
 import VisibilityOff from "@mui/icons-material/VisibilityOff"
 import { Link } from "react-router-dom"
-import "./login.css"
+import styles from "./styles.module.css"
 
 interface LoginFormProps {
   email: string
@@ -92,7 +92,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
   return (
     <Paper
       elevation={8}
-      className="login-form-paper"
+      className={styles.loginformpaper}
       sx={{
         borderRadius: "16px",
         overflow: "hidden",
@@ -104,7 +104,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
       <Box
         component="form"
         onSubmit={handleSubmit}
-        className="login-form-container"
+        className={styles.loginformcontainer}
         sx={{
           display: "flex",
           flexDirection: "column",
@@ -115,21 +115,21 @@ const LoginForm: React.FC<LoginFormProps> = ({
           backgroundColor: "white",
         }}
       >
-        <div className="logo-container">
-          <img src="/assets/WI1_500px.png" alt="LogoBeeJop" className="logo" />
+        <div className={styles.logocontainer}>
+          <img src="/assets/WI1_500px.png" alt="LogoBeeJop" className={styles.logo} />
         </div>
 
-        <Typography variant="h4" component="h1" className="welcome-text">
+        <Typography variant="h4" component="h1" className={styles.welcometext}>
           Welcome back!
         </Typography>
 
-        <Typography variant="body1" className="subtitle-text">
+        <Typography variant="body1" className={styles.subtitletext}>
           Please enter your credentials to continue
         </Typography>
 
         {error && (
-          <Box className="error-container">
-            <Typography color="error" className="error-message">
+          <Box className={styles.errorcontainer}>
+            <Typography color="error" className={styles.errormessage}>
               {error}
             </Typography>
           </Box>
@@ -155,7 +155,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
               </InputAdornment>
             ),
           }}
-          className="form-input"
+          className={styles.forminput}
           sx={{
             "& .MuiInputLabel-root": { color: emailError ? "error.main" : "#1B0096" },
             "& .MuiOutlinedInput-root": {
@@ -186,7 +186,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
               </InputAdornment>
             ),
           }}
-          className="form-input"
+          className={styles.forminput}
           sx={{
             "& .MuiInputLabel-root": { color: passwordError ? "error.main" : "#1B0096" },
             "& .MuiOutlinedInput-root": {
@@ -215,7 +215,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
             sx={{ color: "#555" }}
           />
 
-          <Link to="/forgot-password" className="forgot-password-link">
+          <Link to="/forgot-password" className={styles.forgotpasswordlink}>
             Forgot password?
           </Link>
         </Box>
@@ -225,7 +225,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
           variant="contained"
           fullWidth
           disabled={isLoading}
-          className="login-button"
+          className={styles.loginbutton}
           sx={{
             py: 1.5,
             mt: 1,
@@ -251,7 +251,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
 
         <Typography variant="body2" sx={{ mt: 2, textAlign: "center" }}>
           Don't have an account?{" "}
-          <Link to="/register" className="signup-link">
+          <Link to="/register" className={styles.signuplink}>
             Sign up here
           </Link>
         </Typography>

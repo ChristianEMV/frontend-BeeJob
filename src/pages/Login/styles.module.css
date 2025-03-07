@@ -6,7 +6,7 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
-.login-background {
+.loginbackground {
   position: fixed;
   top: 0;
   left: 0;
@@ -17,30 +17,55 @@ body {
   align-items: center;
   background: linear-gradient(135deg, #b159c7, #1b0096, #090030);
   overflow: hidden;
-  padding: 20px;
+  animation: gradientAnimation 15s ease infinite;
+  background-size: 400% 400%;
 }
 
-.login-container {
-  width: 200%;
-  max-width: 490px;
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.logincontainer {
+  position: relative;
   z-index: 2;
+  width: 100%;
+  max-width: 450px;
+  padding: 0 20px;
 }
 
-.login-form-paper {
+.loginform-aper {
   transition: transform 0.3s ease;
 }
 
-.login-form-paper:hover {
+.loginformpaper:hover {
   transform: translateY(-5px);
 }
 
-.login-form-container {
+.loginformcontainer {
   position: relative;
   width: 100%;
   max-width: 400px;
 }
 
-.logo-container {
+.loginformcontainer::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #b159c7, #1b0096);
+}
+
+.logocontainer {
   display: flex;
   justify-content: center;
   margin-bottom: 10px;
@@ -49,10 +74,13 @@ body {
 
 .logo {
   border-radius: 50%;
-  width: 100px;
-  height: 100px;
+  width: 90px;
+  height: 90px;
   object-fit: cover;
-  box-shadow: 0 4px 20px rgba(27, 0, 150, 0.2);
+  border: 3px solid #b159c7;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  margin: 0 auto;
+  display: block;
   transition: transform 0.3s ease;
 }
 
@@ -60,29 +88,29 @@ body {
   transform: scale(1.05);
 }
 
-.welcome-text {
+.welcometext {
   color: #1b0096;
   font-weight: 700;
   margin-bottom: 0;
   text-align: center;
 }
 
-.subtitle-text {
+.subtitletext {
   color: #666;
   margin-bottom: 10px;
   text-align: center;
 }
 
-.form-input {
+.forminput {
   margin-bottom: 16px;
   transition: transform 0.2s ease;
 }
 
-.form-input:focus-within {
+.forminput:focus-within {
   transform: scale(1.02);
 }
 
-.error-container {
+.errorcontainer {
   width: 100%;
   padding: 10px;
   background-color: rgba(255, 0, 0, 0.05);
@@ -90,52 +118,54 @@ body {
   margin-bottom: 10px;
 }
 
-.error-message {
+.errormessage {
   font-size: 0.875rem;
   text-align: center;
 }
 
-.login-button {
-  background-color: #1b0096 !important;
+.loginbutton {
+  background: linear-gradient(45deg, #1b0096, #b159c7) !important;
   color: white !important;
   font-weight: 600 !important;
+  letter-spacing: 0.5px !important;
+  padding: 10px 0 !important;
+  border-radius: 8px !important;
+  transition: all 0.3s ease !important;
   text-transform: none !important;
   font-size: 1rem !important;
-  border-radius: 8px !important;
-  box-shadow: 0 4px 12px rgba(27, 0, 150, 0.3) !important;
-  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 10px rgba(27, 0, 150, 0.3) !important;
 }
 
-.login-button:hover {
-  background-color: #150075 !important;
-  box-shadow: 0 6px 16px rgba(27, 0, 150, 0.4) !important;
-  transform: translateY(-2px);
+.loginbutton:hover {
+  background: linear-gradient(45deg, #b159c7, #1b0096) !important;
+  box-shadow: 0 6px 15px rgba(27, 0, 150, 0.4) !important;
+  transform: translateY(-2px) !important;
 }
 
-.login-button:active {
+.loginbutton:active {
   transform: translateY(0);
 }
 
-.forgot-password-link {
+.forgotpassword-link {
   color: #1b0096;
   text-decoration: none;
   font-size: 0.875rem;
   transition: color 0.2s ease;
 }
 
-.forgot-password-link:hover {
+.forgotpassword-link:hover {
   color: #b159c7;
   text-decoration: underline;
 }
 
-.signup-link {
+.signuplink {
   color: #1b0096;
   font-weight: 600;
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
-.signup-link:hover {
+.signuplink:hover {
   color: #b159c7;
   text-decoration: underline;
 }
@@ -154,7 +184,7 @@ body {
 
 /* Responsive adjustments */
 @media (max-width: 600px) {
-  .login-container {
+  .logincontainer {
     padding: 10px;
   }
 
@@ -163,7 +193,7 @@ body {
     height: 80px;
   }
 
-  .welcome-text {
+  .welcometext {
     font-size: 1.5rem;
   }
 }

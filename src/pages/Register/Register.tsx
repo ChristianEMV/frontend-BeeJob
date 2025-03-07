@@ -1,11 +1,11 @@
 import type React from "react"
 import RegisterForm from "./RegisterForm"
-import "./Register.css"
+import styles from "./styles.module.css"
 
 const Register: React.FC = () => {
   return (
-    <div className="register-background">
-      <div className="register-container">
+    <div className={styles.registerbackground}>
+      <div className={styles.registercontainer}>
         <RegisterForm />
       </div>
     </div>
