@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { useState } from "react"
+import type React from "react";
+import { useState } from "react";
 import {
   TextField,
   Button,
@@ -13,24 +13,28 @@ import {
   FormControlLabel,
   CircularProgress,
   Paper,
-} from "@mui/material"
-import EmailIcon from "@mui/icons-material/Email"
-import LockIcon from "@mui/icons-material/Lock"
-import Visibility from "@mui/icons-material/Visibility"
-import VisibilityOff from "@mui/icons-material/VisibilityOff"
-import { Link } from "react-router-dom"
-import styles from "./styles.module.css"
+} from "@mui/material";
+import EmailIcon from "@mui/icons-material/Email";
+import LockIcon from "@mui/icons-material/Lock";
+import Visibility from "@mui/icons-material/Visibility";
+import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { Link } from "react-router-dom";
+import styles from "./styles.module.css";
 
 interface LoginFormProps {
-  email: string
-  password: string
-  onEmailChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
-  onPasswordChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
-  onSubmit: (e: React.FormEvent) => void
-  error: string
-  isLoading: boolean
-  rememberMe: boolean
-  onRememberMeChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  email: string;
+  password: string;
+  onEmailChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  onPasswordChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  onSubmit: (e: React.FormEvent) => void;
+  error: string;
+  isLoading: boolean;
+  rememberMe: boolean;
+  onRememberMeChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const LoginForm: React.FC<LoginFormProps> = ({
@@ -44,50 +48,50 @@ const LoginForm: React.FC<LoginFormProps> = ({
   rememberMe,
   onRememberMeChange,
 }) => {
-  const [showPassword, setShowPassword] = useState(false)
-  const [emailError, setEmailError] = useState("")
-  const [passwordError, setPasswordError] = useState("")
+  const [showPassword, setShowPassword] = useState(false);
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   const handleClickShowPassword = () => {
-    setShowPassword(!showPassword)
-  }
+    setShowPassword(!showPassword);
+  };
 
   const validateEmail = (email: string) => {
     if (!email) {
-      setEmailError("Email is required")
-      return false
+      setEmailError("Email is required");
+      return false;
     }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      setEmailError("Please enter a valid email address")
-      return false
+      setEmailError("Please enter a valid email address");
+      return false;
     }
 
-    setEmailError("")
-    return true
-  }
+    setEmailError("");
+    return true;
+  };
 
   const validatePassword = (password: string) => {
     if (!password) {
-      setPasswordError("Password is required")
-      return false
+      setPasswordError("Password is required");
+      return false;
     }
 
-    setPasswordError("")
-    return true
-  }
+    setPasswordError("");
+    return true;
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    const isEmailValid = validateEmail(email)
-    const isPasswordValid = validatePassword(password)
+    const isEmailValid = validateEmail(email);
+    const isPasswordValid = validatePassword(password);
 
     if (isEmailValid && isPasswordValid) {
-      onSubmit(e)
+      onSubmit(e);
     }
-  }
+  };
 
   return (
     <Paper
@@ -116,7 +120,11 @@ const LoginForm: React.FC<LoginFormProps> = ({
         }}
       >
         <div className={styles.logocontainer}>
-          <img src="/assets/WI1_500px.png" alt="LogoBeeJop" className={styles.logo} />
+          <img
+            src="/assets/WI1_500px.png"
+            alt="LogoBeeJop"
+            className={styles.logo}
+          />
         </div>
 
         <Typography variant="h4" component="h1" className={styles.welcometext}>
@@ -135,19 +143,23 @@ const LoginForm: React.FC<LoginFormProps> = ({
           </Box>
         )}
 
+        {/*Label Email */}
         <TextField
           type="email"
           label="Email"
           variant="outlined"
           value={email}
           onChange={(e) => {
-            onEmailChange(e)
-            if (emailError) validateEmail(e.target.value)
+            onEmailChange(e);
+            if (emailError) validateEmail(e.target.value);
           }}
           onBlur={(e) => validateEmail(e.target.value)}
           fullWidth
           error={!!emailError}
           helperText={emailError}
+          InputLabelProps={{
+            shrink: true,
+          }}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
@@ -157,11 +169,19 @@ const LoginForm: React.FC<LoginFormProps> = ({
           }}
           className={styles.forminput}
           sx={{
-            "& .MuiInputLabel-root": { color: emailError ? "error.main" : "#1B0096" },
+            "& .MuiInputLabel-root": {
+              color: emailError ? "error.main" : "#1B0096",
+            },
             "& .MuiOutlinedInput-root": {
-              "& fieldset": { borderColor: emailError ? "error.main" : "#1B0096" },
-              "&:hover fieldset": { borderColor: emailError ? "error.main" : "#1B0096" },
-              "&.Mui-focused fieldset": { borderColor: emailError ? "error.main" : "#1B0096" },
+              "& fieldset": {
+                borderColor: emailError ? "error.main" : "#1B0096",
+              },
+              "&:hover fieldset": {
+                borderColor: emailError ? "error.main" : "#1B0096",
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: emailError ? "error.main" : "#1B0096",
+              },
             },
           }}
         />
@@ -172,8 +192,8 @@ const LoginForm: React.FC<LoginFormProps> = ({
           variant="outlined"
           value={password}
           onChange={(e) => {
-            onPasswordChange(e)
-            if (passwordError) validatePassword(e.target.value)
+            onPasswordChange(e);
+            if (passwordError) validatePassword(e.target.value);
           }}
           onBlur={(e) => validatePassword(e.target.value)}
           fullWidth
@@ -182,22 +202,51 @@ const LoginForm: React.FC<LoginFormProps> = ({
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
-                <LockIcon sx={{ color: "#1B0096" }} />
+                <LockIcon sx={{ color: "#1B0096" }} aria-hidden="true" />
+              </InputAdornment>
+            ),
+            inputProps: {
+              "aria-label": "Password",
+            },
+            endAdornment: (
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label={showPassword ? "Hide password" : "Show password"}
+                  onClick={handleClickShowPassword}
+                  edge="end"
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
               </InputAdornment>
             ),
           }}
           className={styles.forminput}
           sx={{
-            "& .MuiInputLabel-root": { color: passwordError ? "error.main" : "#1B0096" },
+            "& .MuiInputLabel-root": {
+              color: passwordError ? "error.main" : "#1B0096",
+            },
             "& .MuiOutlinedInput-root": {
-              "& fieldset": { borderColor: passwordError ? "error.main" : "#1B0096" },
-              "&:hover fieldset": { borderColor: passwordError ? "error.main" : "#1B0096" },
-              "&.Mui-focused fieldset": { borderColor: passwordError ? "error.main" : "#1B0096" },
+              "& fieldset": {
+                borderColor: passwordError ? "error.main" : "#1B0096",
+              },
+              "&:hover fieldset": {
+                borderColor: passwordError ? "error.main" : "#1B0096",
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: passwordError ? "error.main" : "#1B0096",
+              },
             },
           }}
         />
 
-        <Box sx={{ display: "flex", justifyContent: "space-between", width: "100%", alignItems: "center" }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            width: "100%",
+            alignItems: "center",
+          }}
+        >
           <FormControlLabel
             control={
               <Checkbox
@@ -238,7 +287,8 @@ const LoginForm: React.FC<LoginFormProps> = ({
               left: "-100%",
               width: "100%",
               height: "100%",
-              background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)",
+              background:
+                "linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)",
               transition: "all 0.5s",
             },
             "&:hover::after": {
@@ -246,7 +296,11 @@ const LoginForm: React.FC<LoginFormProps> = ({
             },
           }}
         >
-          {isLoading ? <CircularProgress size={24} color="inherit" /> : "Log in"}
+          {isLoading ? (
+            <CircularProgress size={24} color="inherit" />
+          ) : (
+            "Log in"
+          )}
         </Button>
 
         <Typography variant="body2" sx={{ mt: 2, textAlign: "center" }}>
@@ -257,8 +311,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
         </Typography>
       </Box>
     </Paper>
-  )
-}
+  );
+};
 
-export default LoginForm
-
+export default LoginForm;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import swal from 'sweetalert';
-import './Profile.css';
+import Swal from 'sweetalert2';
+import styles from './styles.module.css';
 import { Icon } from "@iconify/react";
 import { Tooltip } from "@mui/material";
 import { MarginRounded } from '@mui/icons-material';
@@ -75,22 +75,22 @@ const Profile:React.FC = () => {
     if (isEditing) {
       if (section === 'personal') {
         if (!personalInfo.firstName || !personalInfo.lastName || !personalInfo.email || !personalInfo.phoneNumber || !personalInfo.addressState || !personalInfo.addressCountry) {
-          swal("Error", "All personal information fields must be filled out", "error");
+          Swal.fire("Error", "All personal information fields must be filled out", "error");
           return;
         }
       } else if (section === 'professional') {
         if (!professionalInfo.cvLink || !professionalInfo.hardSkills || !professionalInfo.softSkills || !professionalInfo.languages || !professionalInfo.socialMedia) {
-          swal("Error", "All professional information fields must be filled out", "error");
+          Swal.fire("Error", "All professional information fields must be filled out", "error");
           return;
         }
       }
-      swal("Success", "Information updated successfully", "success");
+      Swal.fire("Success", "Information updated successfully", "success");
     }
   };
 
   return (
-    <div className="dashboard-container">
-      <aside className="sidebar">
+    <div className={styles.dashboardcontainer}>
+      <aside className={styles.sidebar}>
         <h2>Profile 👨🏽‍💻</h2>
         <ul>
           <li className={selectedSection === 'personal' ? 'active' : ''} onClick={() => setSelectedSection('personal')}>Personal Information</li>
@@ -99,40 +99,40 @@ const Profile:React.FC = () => {
         </ul>
       </aside>
 
-      <div className="content-container">
+      <div className={styles.contentcontainer}>
         {selectedSection === 'personal' && (
           <div>
-          <h1 className="profile-title">Personal Information</h1>
-          <div className="profile-info">
-            <div className="profile-field profile-picture">
-              <img src={personalInfo.profilePicture} alt="Profile" className="profile-icon" />
+          <h1 className={styles.profiletitle}>Personal Information</h1>
+          <div className={styles.profileinfo}>
+            <div className={`${styles.profilefield} ${styles.profilepicture}`}>
+              <img src={personalInfo.profilePicture} alt="Profile" className={styles.profileicon} />
             </div>
-            <div className="profile-field">
+            <div className={styles.profilefield}>
               <label>First Name:</label>
               {isEditingProfile ? <input type="text" value={personalInfo.firstName} onChange={(e) => setPersonalInfo({ ...personalInfo, firstName: e.target.value })} readOnly  /> : <span>{personalInfo.firstName}</span>}
             </div>
-            <div className="profile-field">
+            <div className={styles.profilefield}>
               <label>Last Name:</label>
               {isEditingProfile ? <input type="text" value={personalInfo.lastName} onChange={(e) => setPersonalInfo({ ...personalInfo, lastName: e.target.value })} /> : <span>{personalInfo.lastName}</span>}
             </div>
-            <div className="profile-field">
+            <div className={styles.profilefield}>
               <label>Email:</label>
               {isEditingProfile ? <input type="email" value={personalInfo.email} onChange={(e) => setPersonalInfo({ ...personalInfo, email: e.target.value })} /> : <span>{personalInfo.email}</span>}
             </div>
-            <div className="profile-field">
+            <div className={styles.profilefield}>
               <label>Phone Number:</label>
               {isEditingProfile ? <input type="tel" value={personalInfo.phoneNumber} onChange={(e) => setPersonalInfo({ ...personalInfo, phoneNumber: e.target.value })} /> : <span>{personalInfo.phoneNumber}</span>}
               </div>
-              <div className="profile-field">
+              <div className={styles.profilefield}>
                 <label>Address State:</label>
                 {isEditingProfile ? <input type="text" value={personalInfo.addressState} onChange={(e) => setPersonalInfo({ ...personalInfo, addressState: e.target.value })} /> : <span>{personalInfo.addressState}</span>}
               </div>
-              <div className="profile-field">
+              <div className={styles.profilefield}>
                 <label>Address Country:</label>
                 {isEditingProfile ? <input type="text" value={personalInfo.addressCountry} onChange={(e) => setPersonalInfo({ ...personalInfo, addressCountry: e.target.value })} /> : <span>{personalInfo.addressCountry}</span>}
               </div>
               <section>
-               {isSavingProfile? <button title='Save' onClick={() =>  {swal("Saved", "Professional Information", "success"); setIsEditingProfile(false); setIsSavingProfile(false)  } }> Save</button>:<button title='Editar' onClick={() => { setIsEditingProfile(true) ; setIsSavingProfile(true) }}> <Icon icon="cil:pencil" /> Editar</button> }
+               {isSavingProfile? <button title='Save' onClick={() =>  {Swal.fire("Saved", "Professional Information", "success"); setIsEditingProfile(false); setIsSavingProfile(false)  } }> Save</button>:<button title='Editar' onClick={() => { setIsEditingProfile(true) ; setIsSavingProfile(true) }}> <Icon icon="cil:pencil" /> Editar</button> }
               </section>
             </div>
           </div>
@@ -140,32 +140,32 @@ const Profile:React.FC = () => {
 
         {selectedSection === 'professional' && (
           <div>
-            <h1 className="profile-title">Professional Information</h1>
-            <div className="profile-info">
-              <div className="profile-field">
+            <h1 className={styles.profiletitle}>Professional Information</h1>
+            <div className={styles.profileinfo}>
+              <div className={styles.profilefield}>
                 <label>CV-PDF:</label>
                 { isEditingPI? <input type="text" value={professionalInfo.cvLink} onChange={(e) => setProfessionalInfo({ ...professionalInfo, cvLink: e.target.value })} readOnly  />: <span><a href={professionalInfo.cvLink} target="_blank">View CV</a></span> }
               </div>
-              <div className="profile-field">
+              <div className={styles.profilefield}>
                 <label>Hard Skills:</label>
                 { isEditingPI? <input type="text" value={professionalInfo.hardSkills} onChange={(e) => setProfessionalInfo({ ...professionalInfo, hardSkills: e.target.value })} readOnly  />:<span>{professionalInfo.hardSkills}</span> }
               </div>
-              <div className="profile-field">
+              <div className={styles.profilefield}>
                 <label>Soft Skills:</label>
                 { isEditingPI? <input type="text" value={professionalInfo.softSkills} onChange={(e) => setProfessionalInfo({ ...professionalInfo, softSkills: e.target.value })} readOnly  />:<span>{professionalInfo.softSkills}</span> }
               </div>
-              <div className="profile-field">
+              <div className={styles.profilefield}>
                 <label>Languages:</label>
                 { isEditingPI? <input type="text" value={professionalInfo.languages} onChange={(e) => setProfessionalInfo({ ...professionalInfo, languages: e.target.value })} readOnly  />:<span>{professionalInfo.languages}</span> }
               </div>
-              <div className="profile-field">
+              <div className={styles.profilefield}>
                 <label>Social Media Profiles:</label>
                 { isEditingPI? <input type="text" value={professionalInfo.socialMedia} onChange={(e) => setProfessionalInfo({ ...professionalInfo, socialMedia: e.target.value })} readOnly  />:<span>{professionalInfo.socialMedia.split(', ').map((link, index) => (
                   <a key={index} href={link} target="_blank" rel="noopener noreferrer">{link}</a>
                 ))}</span>  }
               </div>
               <section>
-               {isSavingPI? <button title='Save' onClick={() =>  {swal("Saved", "Profrssional Information :)", "success"); setIsEditingPI(false); setIsSavingPI(false)  } }> Save</button>:<button title='Editar' onClick={() => { setIsEditingPI(true) ; setIsSavingPI(true) }}> <Icon icon="cil:pencil" /> Editar</button> }
+               {isSavingPI? <button title='Save' onClick={() =>  {Swal.fire("Saved", "Profrssional Information :)", "success"); setIsEditingPI(false); setIsSavingPI(false)  } }> Save</button>:<button title='Editar' onClick={() => { setIsEditingPI(true) ; setIsSavingPI(true) }}> <Icon icon="cil:pencil" /> Editar</button> }
               </section>
             </div>
           </div>
@@ -173,11 +173,11 @@ const Profile:React.FC = () => {
                 
         {selectedSection === 'academy' && (
           <div>
-            <h1 className="profile-title">Academy and Work Information</h1>
+            <h1 className={styles.profiletitle}>Academy and Work Information</h1>
 
-            <div className="sub-section">
+            <div className={styles.subsection}>
             <h2>Educational Information
-            <button onClick={openModal_NewE} className='buttonNewInfo' title='Add new Educational Info' > <Icon icon="gg:add" /></button> 
+            <button onClick={openModal_NewE} className={styles.buttonNewInfo} title='Add new Educational Info' > <Icon icon="gg:add" /></button> 
             </h2> 
           
             <section style={{width: '50%', height: '60%'}}>
@@ -185,24 +185,24 @@ const Profile:React.FC = () => {
             <Modal isOpen={isModalOpen_NewE}  onClose={closeModal_NewE} X={40} Y={50} >
                 <h2>Add Educational information</h2>
                 <form action="">
-                  <label className="GModalInput" >
+                  <label className={styles.GModalInput} >
                     Institution Name
-                    <input className="ModalInput" type="text" name="name" />
+                    <input className={styles.ModalInput} type="text" name="name" />
                   </label>
-                  <label className="GModalInput" >
+                  <label className={styles.GModalInput} >
                     Major
-                    <input className="ModalInput" type="text" name="name" />
+                    <input className={styles.ModalInput} type="text" name="name" />
                   </label>
-                  <label className="GModalInput" >
+                  <label className={styles.GModalInput} >
                     Degree
-                    <input className="ModalInput" type="text" name="name" />
+                    <input className={styles.ModalInput} type="text" name="name" />
                   </label>
-                  <label className="GModalInput" >
+                  <label className={styles.GModalInput} >
                     Address Location
-                    <input className="ModalInput" type="text" name="name" />
+                    <input className={styles.ModalInput} type="text" name="name" />
                   </label>
                   
-                  <label className="GModalInput"  >
+                  <label className={styles.GModalInput}  >
                   Description: 
                   <br />
                   <textarea
@@ -215,44 +215,44 @@ const Profile:React.FC = () => {
                   
                   <div  style={{  display:'flex',float: 'right',  gap: '10px'}}>
                     <div style={{  flex:'1', padding: '10px', alignContent:'center'}}>
-                      <label className="GModalInput"  >
-                            From:<input  type="date"   name="initialDate" style={{padding: '10px'  }} className="ModalInput"  />
+                      <label className={styles.GModalInput}  >
+                            From:<input  type="date"   name="initialDate" style={{padding: '10px'  }} className={styles.ModalInput}  />
                       </label>
                     </div>
                     <div style={{ padding: '10px', alignItems:'center' }}>
-                      <label className="GModalInput"  >
-                          To:<input   type="date"  name="finalDate" style={{padding: '10px'}} className="ModalInput" />
+                      <label className={styles.GModalInput}  >
+                          To:<input   type="date"  name="finalDate" style={{padding: '10px'}} className={styles.ModalInput} />
                       </label>
                     </div>
                   </div >
                   
                     <div style={{ position: 'absolute',bottom: '0',right: '0px',padding: '10px',}}>
-                  <button onClick={()=>{setIsModalOpen_NewE(false)}} className='buttonModal' title='Cancel'>Close</button>
-                  <button onClick={()=>{swal("Saved", "Educational Information :)", "success")}} className='buttonModal' title='Save'>Save</button>
+                  <button onClick={()=>{setIsModalOpen_NewE(false)}} className={styles.buttonModal} title='Cancel'>Close</button>
+                  <button onClick={()=>{Swal.fire("Saved", "Educational Information :)", "success")}} className={styles.buttonModal} title='Save'>Save</button>
                   </div>
                   </form>
             </Modal>
             <Modal isOpen={isModalOpen_EditE}  onClose={closeModal_NewE} X={40} Y={50} >
                 <h2>Add Educational information</h2>
                 <form action="">
-                  <label className="GModalInput" >
+                  <label className={styles.GModalInput} >
                     Institution Name
-                    <input className="ModalInput" value={academyInfo.Institution_Name} type="text" name="name" />
+                    <input className={styles.ModalInput} value={academyInfo.Institution_Name} type="text" name="name" />
                   </label>
-                  <label className="GModalInput" >
+                  <label className={styles.GModalInput} >
                     Major
-                    <input className="ModalInput" value={academyInfo.Major }  type="text" name="name" />
+                    <input className={styles.ModalInput} value={academyInfo.Major }  type="text" name="name" />
                   </label>
-                  <label className="GModalInput" >
+                  <label className={styles.GModalInput} >
                     Degree
-                    <input className="ModalInput" value={academyInfo.degree}  type="text" name="name" />
+                    <input className={styles.ModalInput} value={academyInfo.degree}  type="text" name="name" />
                   </label>
-                  <label className="GModalInput" >
+                  <label className={styles.GModalInput} >
                     Address Location
-                    <input className="ModalInput" value={academyInfo.Location }  type="text" name="name" />
+                    <input className={styles.ModalInput} value={academyInfo.Location }  type="text" name="name" />
                   </label>
                   
-                  <label className="GModalInput"  >
+                  <label className={styles.GModalInput}  >
                   Description: 
                   <br />
                   <textarea
@@ -265,20 +265,20 @@ const Profile:React.FC = () => {
                   
                   <div  style={{  display:'flex',float: 'right',  gap: '10px'}}>
                     <div style={{  flex:'1', padding: '10px', alignContent:'center'}}>
-                      <label className="GModalInput"  >
-                            From:<input  type="date"   name="initialDate" style={{padding: '10px'  }} className="ModalInput"  />
+                      <label className={styles.GModalInput}  >
+                            From:<input  type="date"   name="initialDate" style={{padding: '10px'  }} className={styles.ModalInput}  />
                       </label>
                     </div>
                     <div style={{ padding: '10px', alignItems:'center' }}>
-                      <label className="GModalInput"  >
-                          To:<input   type="date"  name="finalDate" style={{padding: '10px'}} className="ModalInput" />
+                      <label className={styles.GModalInput}  >
+                          To:<input   type="date"  name="finalDate" style={{padding: '10px'}} className={styles.ModalInput} />
                       </label>
                     </div>
                   </div >
                   
                     <div style={{ position: 'absolute',bottom: '0',right: '0px',padding: '10px',}}>
-                  <button onClick={()=>{setIsModalOpen_NewE(false)}} className='buttonModal' title='Cancel'>Close</button>
-                  <button onClick={()=>{swal("Saved", "Educational Information :)", "success")}} className='buttonModal' title='Save'>Save</button>
+                  <button onClick={()=>{setIsModalOpen_NewE(false)}} className={styles.buttonModal} title='Cancel'>Close</button>
+                  <button onClick={()=>{Swal.fire("Saved", "Educational Information :)", "success")}} className={styles.buttonModal} title='Save'>Save</button>
                   </div>
                   </form>
             </Modal>
@@ -287,42 +287,42 @@ const Profile:React.FC = () => {
             
             
 
-              <section className="work-entry">
-                <div className="profile-field">
+              <section className={styles.workentry}>
+                <div className={styles.profilefield}>
                 <label>Degree:</label>
                 <span>{academyInfo.degree}</span>
                 </div>
-                <div className="profile-field">
+                <div className={styles.profilefield}>
                   <label>University:</label>
                   <span>{academyInfo.Institution_Name}</span>
                 </div>
-                <button onClick={openModal_EditE} className='buttonNewInfo' title='Edit Educational Info.' > <Icon icon="cil:pencil" />  Editar</button> 
+                <button onClick={openModal_EditE} className={styles.buttonNewInfo} title='Edit Educational Info.' > <Icon icon="cil:pencil" />  Editar</button> 
              </section>
 
             </div>
 
             {/* Work */}
-            <div className="sub-section">
+            <div className={styles.subsection}>
               <h2>Work Experiences
-              <button onClick={openModal_NewJ} className='buttonNewInfo' title='Add new Work Experience' > <Icon icon="gg:add" /></button> 
+              <button onClick={openModal_NewJ} className={styles.buttonNewInfo} title='Add new Work Experience' > <Icon icon="gg:add" /></button> 
             </h2> 
 
-              <section className='ModalSize'>
+              <section className={styles.ModalSize}>
               <Modal isOpen={isModalOpen_NewJ}  onClose={closeModal_NewJ } X={30} Y={40} >
                 <h2>Add Job Experience</h2>
                 <form action="">
-                  <label className="GModalInput"   >
+                  <label className={styles.GModalInput}   >
                     Title
-                    <input className="ModalInput" type="text" name="name" />
+                    <input className={styles.ModalInput} type="text" name="name" />
                   </label >
-                  <label className="GModalInput">
+                  <label className={styles.GModalInput}>
                     Company
-                    <input className="ModalInput" type="text" name="name" />
+                    <input className={styles.ModalInput} type="text" name="name" />
                   </label>
-                    <label className="GModalInput">
+                    <label className={styles.GModalInput}>
                   Description: 
                   <br />
-                  <textarea className="ModalInput"
+                  <textarea className={styles.ModalInput}
                   id="description"
                   placeholder="Escribe una descripción..."
                   rows={5}
@@ -332,20 +332,20 @@ const Profile:React.FC = () => {
                   
                   <div  style={{  display:'flex',float: 'right',  gap: '10px'}}>
                     <div style={{  flex:'1', padding: '10px', alignContent:'center'}}>
-                      <label className="GModalInput"  >
-                            From:<input  type="date"   name="initialDate" style={{padding: '10px'  }} className="ModalInput"  />
+                      <label className={styles.GModalInput}  >
+                            From:<input  type="date"   name="initialDate" style={{padding: '10px'  }} className={styles.ModalInput}  />
                       </label>
                     </div>
                     <div style={{ padding: '10px', alignItems:'center' }}>
-                      <label className="GModalInput"  >
-                          To:<input   type="date"  name="finalDate" style={{padding: '10px'}} className="ModalInput" />
+                      <label className={styles.GModalInput}  >
+                          To:<input   type="date"  name="finalDate" style={{padding: '10px'}} className={styles.ModalInput} />
                       </label>
                     </div>
                   </div >
 
                     <div style={{ position: 'absolute',bottom: '0',right: '0px',padding: '10px',}}>
-                  <button onClick={()=>{setIsModalOpen_NewJ(false)}} className='buttonModal' title='Cancel'>Close</button>
-                  <button onClick={()=>{swal("Saved", "Educational Information :)", "success")}} className='buttonModal' title='Save'>Save</button>
+                  <button onClick={()=>{setIsModalOpen_NewJ(false)}} className={styles.buttonModal} title='Cancel'>Close</button>
+                  <button onClick={()=>{Swal.fire("Saved", "Educational Information :)", "success")}} className={styles.buttonModal} title='Save'>Save</button>
                   </div>
                   
                 </form>
@@ -354,28 +354,28 @@ const Profile:React.FC = () => {
                   <h2>Edit Experience</h2>
                   <form action="">
                   
-                      <label className="GModalInput"  >
+                      <label className={styles.GModalInput}  >
                           Title
-                          <input className="ModalInput"  type="text" name="name" value={"cx"} />
+                          <input className={styles.ModalInput}  type="text" name="name" value={"cx"} />
                         </label>
-                        <label className="GModalInput" >
+                        <label className={styles.GModalInput} >
                           Company
-                          <input className="ModalInput"  type="text" name="name" value={"cx"} />
+                          <input className={styles.ModalInput}  type="text" name="name" value={"cx"} />
                         </label >
-                        <label className="GModalInput"  >
+                        <label className={styles.GModalInput}  >
                         Description: 
                         <br />
-                        <textarea className="ModalInput"  id="description" value={"cx"} rows={5} cols={40}/>
+                        <textarea className={styles.ModalInput}  id="description" value={"cx"} rows={5} cols={40}/>
                         </label>
                         <div  style={{  display:'flex',float: 'right',  gap: '10px'}}>
                           <div style={{  flex:'1', padding: '10px', alignContent:'center'}}>
-                          <label className="GModalInput"  >
-                            From:<input  type="date"   name="initialDate" style={{padding: '10px'  }} className="ModalInput"  />
+                          <label className={styles.GModalInput}  >
+                            From:<input  type="date"   name="initialDate" style={{padding: '10px'  }} className={styles.ModalInput}  />
                           </label>
                           </div>
                           <div style={{ padding: '10px', alignItems:'center' }}>
-                          <label className="GModalInput"  >
-                            To:<input   type="date"  name="finalDate" style={{padding: '10px'}} className="ModalInput" />
+                          <label className={styles.GModalInput}  >
+                            To:<input   type="date"  name="finalDate" style={{padding: '10px'}} className={styles.ModalInput} />
                           </label>
                           </div>
                           
@@ -384,8 +384,8 @@ const Profile:React.FC = () => {
                   
                   
                 <div style={{ position: 'absolute',bottom: '0',right: '0px',padding: '10px',}}>
-                  <button onClick={()=>{setIsModalOpen_EditJ(false)}} className='buttonModal' title='Cancel'>Close</button>
-                  <button onClick={()=>{swal("Actualizado", "Educational Information:)", "success")}} className='buttonModal' title='Save'>Save</button>
+                  <button onClick={()=>{setIsModalOpen_EditJ(false)}} className={styles.buttonModal} title='Cancel'>Close</button>
+                  <button onClick={()=>{Swal.fire("Actualizado", "Educational Information:)", "success")}} className={styles.buttonModal} title='Save'>Save</button>
                 </div>
               </form>
               </Modal>
@@ -393,9 +393,9 @@ const Profile:React.FC = () => {
               </section>
 
               {workExperiences.map((work, index) => (
-                <div key={index} className="work-entry">
+                <div key={index} className={styles.workentry}>
                   <strong>{work.company}</strong> - {work.position} ({work.years})
-                  <button onClick={openModal_EditJ } className='buttonNewInfo' title='Edit my Woerk Experience' > <Icon icon="cil:pencil" />  Edit</button> 
+                  <button onClick={openModal_EditJ } className={styles.buttonNewInfo} title='Edit my Woerk Experience' > <Icon icon="cil:pencil" />  Edit</button> 
                 </div>
               ))}
             </div>
