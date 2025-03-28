@@ -1,0 +1,375 @@
+.newJobModalContent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  z-index: 1000;
+}
+
+.newJobModalHeader {
+  padding: 24px 30px;
+  border-bottom: 1px solid #f0f0f0;
+  background: linear-gradient(to right, rgba(27, 0, 150, 0.03), rgba(177, 89, 199, 0.03));
+}
+
+.headerTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.newJobModalHeader h2 {
+  color: #1b0096;
+  font-weight: 600;
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.closeButton {
+  color: #666 !important;
+}
+
+.closeButton:hover {
+  color: #1b0096 !important;
+  background-color: rgba(27, 0, 150, 0.08) !important;
+}
+
+.stepsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  margin-top: 10px;
+}
+
+.stepIndicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  cursor: pointer;
+  flex: 1;
+}
+
+.stepIconContainer {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.stepIcon {
+  color: #999;
+  font-size: 1.2rem !important;
+}
+
+.activeStep .stepIconContainer {
+  background: linear-gradient(135deg, #1b0096, #b159c7);
+  box-shadow: 0 4px 10px rgba(27, 0, 150, 0.2);
+}
+
+.activeStep .stepIcon {
+  color: white;
+}
+
+.stepLabel {
+  font-size: 0.8rem;
+  color: #666;
+  font-weight: 500;
+  text-align: center;
+}
+
+.activeStep .stepLabel {
+  color: #1b0096;
+  font-weight: 600;
+}
+
+.stepConnector {
+  position: absolute;
+  top: 20px;
+  right: calc(-50% + 20px);
+  width: calc(100% - 40px);
+  height: 3px;
+  background-color: #f0f0f0;
+  z-index: 1;
+}
+
+.activeStep .stepConnector {
+  background: linear-gradient(90deg, #1b0096, #b159c7);
+}
+
+.newJobModalBody {
+  padding: 30px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.formSection {
+  background-color: #fafafa;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #f0f0f0;
+}
+
+.newJobStepContent h3 {
+  color: #1b0096;
+  font-weight: 600;
+  margin: 0 0 20px 0;
+  font-size: 1.1rem;
+}
+
+.newJobFormField {
+  margin-bottom: 20px;
+}
+
+.newJobFormField label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: #333;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+.newJobFormField input,
+.newJobFormField select,
+.newJobFormField textarea {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.newJobFormField input:focus,
+.newJobFormField select:focus,
+.newJobFormField textarea:focus {
+  outline: none;
+  border-color: #1b0096;
+  box-shadow: 0 0 0 3px rgba(27, 0, 150, 0.1);
+}
+
+.newJobFormField textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.newJobFormGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.checkboxGroup {
+  margin-top: 10px;
+}
+
+.checkboxContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.checkboxContainer input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  cursor: pointer;
+}
+
+.checkboxContainer label {
+  margin: 0;
+  cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  .newJobFormGrid,
+  .formRow {
+    grid-template-columns: 1fr;
+  }
+
+  .stepLabel {
+    font-size: 0.7rem;
+  }
+
+  .stepIconContainer {
+    width: 32px;
+    height: 32px;
+  }
+
+  .stepConnector {
+    top: 16px;
+  }
+
+  .newJobModalHeader {
+    padding: 16px 20px;
+  }
+
+  .newJobModalBody {
+    padding: 20px;
+  }
+}
+
+.newJobModalFooter {
+  padding: 20px 30px;
+  border-top: 1px solid #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  background-color: #fafafa;
+}
+
+.newJobModalButton {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.95rem;
+  min-width: 120px;
+}
+
+.newJobModalButtonBack {
+  background: white;
+  color: #1b0096;
+  border: 2px solid #1b0096;
+}
+
+.newJobModalButtonBack:hover {
+  background: #f8f5ff;
+}
+
+.newJobModalButton:not(.newJobModalButtonBack) {
+  background: #1b0096;
+  color: white;
+  border: 2px solid #1b0096;
+}
+
+.newJobModalButton:not(.newJobModalButtonBack):hover {
+  background: #2c0bc7;
+  border-color: #2c0bc7;
+}
+
+.newJobModalButtonSubmit {
+  background: linear-gradient(90deg, #1b0096, #b058c6) !important;
+  border: none !important;
+  box-shadow: 0 4px 10px rgba(27, 0, 150, 0.2);
+}
+
+.newJobModalButtonSubmit:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(27, 0, 150, 0.25);
+}
+
+/* React Quill Editor Styles */
+.quillEditor {
+  background-color: white;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.quillEditor :global(.ql-toolbar) {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-color: #e0e0e0;
+  background-color: #f9f9f9;
+}
+
+.quillEditor :global(.ql-container) {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-color: #e0e0e0;
+  min-height: 120px;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.quillEditor :global(.ql-editor) {
+  min-height: 120px;
+}
+
+.quillEditor :global(.ql-editor:focus) {
+  border-color: #1b0096;
+  box-shadow: 0 0 0 3px rgba(27, 0, 150, 0.1);
+}
+
+.quillEditor :global(.ql-toolbar.ql-snow .ql-picker-label:hover),
+.quillEditor :global(.ql-toolbar.ql-snow .ql-picker-label.ql-active),
+.quillEditor :global(.ql-toolbar.ql-snow .ql-picker-item:hover),
+.quillEditor :global(.ql-toolbar.ql-snow .ql-picker-item.ql-selected),
+.quillEditor :global(.ql-toolbar.ql-snow button:hover),
+.quillEditor :global(.ql-toolbar.ql-snow button.ql-active) {
+  color: #1b0096;
+}
+
+.quillEditor :global(.ql-toolbar.ql-snow .ql-picker-label.ql-active),
+.quillEditor :global(.ql-toolbar.ql-snow .ql-picker-item.ql-selected),
+.quillEditor :global(.ql-toolbar.ql-snow button.ql-active) {
+  color: #1b0096;
+}
+
+.quillEditor :global(.ql-snow.ql-toolbar button:hover .ql-stroke),
+.quillEditor :global(.ql-snow .ql-toolbar button:hover .ql-stroke),
+.quillEditor :global(.ql-snow.ql-toolbar button.ql-active .ql-stroke),
+.quillEditor :global(.ql-snow .ql-toolbar button.ql-active .ql-stroke),
+.quillEditor :global(.ql-snow.ql-toolbar .ql-picker-label:hover .ql-stroke),
+.quillEditor :global(.ql-snow .ql-toolbar .ql-picker-label:hover .ql-stroke),
+.quillEditor :global(.ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-stroke),
+.quillEditor :global(.ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-stroke),
+.quillEditor :global(.ql-snow.ql-toolbar .ql-picker-item:hover .ql-stroke),
+.quillEditor :global(.ql-snow .ql-toolbar .ql-picker-item:hover .ql-stroke),
+.quillEditor :global(.ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-stroke),
+.quillEditor :global(.ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-stroke) {
+  stroke: #1b0096;
+}
+
+.quillEditor :global(.ql-snow.ql-toolbar button:hover .ql-fill),
+.quillEditor :global(.ql-snow .ql-toolbar button:hover .ql-fill),
+.quillEditor :global(.ql-snow.ql-toolbar button.ql-active .ql-fill),
+.quillEditor :global(.ql-snow .ql-toolbar button.ql-active .ql-fill),
+.quillEditor :global(.ql-snow.ql-toolbar .ql-picker-label:hover .ql-fill),
+.quillEditor :global(.ql-snow .ql-toolbar .ql-picker-label:hover .ql-fill),
+.quillEditor :global(.ql-snow.ql-toolbar .ql-picker-label.ql-active .ql-fill),
+.quillEditor :global(.ql-snow .ql-toolbar .ql-picker-label.ql-active .ql-fill),
+.quillEditor :global(.ql-snow.ql-toolbar .ql-picker-item:hover .ql-fill),
+.quillEditor :global(.ql-snow .ql-toolbar .ql-picker-item:hover .ql-fill),
+.quillEditor :global(.ql-snow.ql-toolbar .ql-picker-item.ql-selected .ql-fill),
+.quillEditor :global(.ql-snow .ql-toolbar .ql-picker-item.ql-selected .ql-fill) {
+  fill: #1b0096;
+}
+
+.errorText {
+  color: red;
+  font-size: 0.8rem;
+  margin-top: 4px;
+}
