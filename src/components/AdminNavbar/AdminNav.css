@@ -1,0 +1,64 @@
+.AppBar {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra */
+    padding: 0 15px; /* Añade padding horizontal */
+  }
+  
+  .Toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px; /* Añade padding horizontal */
+  }
+  
+  .CenteredBox {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Asegura que los elementos estén centrados verticalmente */
+    gap: 10px; /* Ajusta el espacio entre los botones */
+    margin-left: 275px !important; /* Empuja el Box hacia el centro */
+    margin-right: auto !important; /* Empuja el Box hacia el centro */
+  }
+  
+  .Toolbar img {
+    height: 40px;
+  }
+  
+  .Toolbar .MuiButton-root {
+    margin: 0 10px;
+    text-transform: none;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .Toolbar .MuiButton-root:hover {
+    background-color: rgba(27, 0, 150, 0.1);
+  }
+  
+  .Toolbar .MuiInputBase-root {
+    background: rgba(0, 0, 0, 0) !important;
+    padding: 5px 10px;
+    border-radius: 4px;
+    color: inherit !important;
+  }
+  
+  .Toolbar .MuiIconButton-root {
+    color: inherit !important; 
+  }
+  
+  .MuiMenu-paper {
+    background: linear-gradient(135deg, #B159C7, #1B0096, #090030) !important;
+    color: white !important;
+  }
+  
+  .MuiMenuItem-root {
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .MuiMenuItem-root:hover {
+    background-color: white !important;
+    color: #1B0096 !important;
+}

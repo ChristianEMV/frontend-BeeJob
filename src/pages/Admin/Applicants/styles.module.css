@@ -1,0 +1,585 @@
+/* Main Container */
+.applicantscontainer {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 32px;
+}
+
+.headerContainer {
+  margin-bottom: 32px;
+}
+
+.applicantstitle {
+  color: #090030;
+  font-weight: 600;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 8px;
+}
+
+.applicantstitle::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #1b0096;
+  border-radius: 2px;
+}
+
+.applicantsSubtitle {
+  color: rgba(9, 0, 48, 0.6);
+}
+
+/* Error Alert */
+.errorAlert {
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+
+/* Filter Tabs */
+.filterTabsContainer {
+  margin-bottom: 32px;
+  border-bottom: 1px solid rgba(9, 0, 48, 0.1);
+  overflow-x: auto;
+}
+
+.tabsContainer {
+  display: flex;
+  min-width: max-content;
+}
+
+.filterTabItem {
+  display: flex;
+  align-items: center;
+  padding: 16px 24px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+  color: rgba(9, 0, 48, 0.6);
+}
+
+.filterTabItem:hover {
+  color: #1b0096;
+  background-color: rgba(27, 0, 150, 0.05);
+}
+
+.filterTabIcon {
+  margin-right: 8px;
+  font-size: 20px;
+}
+
+.filterTabText {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+}
+
+.filterTabBadge {
+  margin-left: 8px;
+  background-color: #f0f0f0;
+  color: rgba(9, 0, 48, 0.7);
+  font-weight: 600;
+  border-radius: 4px;
+}
+
+.activeFilterTab {
+  color: #1b0096;
+  position: relative;
+}
+
+.activeFilterTab::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #1b0096;
+}
+
+@media (max-width: 600px) {
+  .filterTabsContainer {
+    margin-bottom: 24px;
+  }
+
+  .filterTabItem {
+    padding: 12px 16px;
+  }
+
+  .filterTabText {
+    font-size: 12px;
+  }
+}
+
+/* Loading State */
+.loadingContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+  gap: 16px;
+}
+
+.loadingSpinner {
+  color: #1b0096 !important;
+}
+
+.loadingText {
+  color: #1b0096;
+  font-weight: 500;
+}
+
+.loadingProgress {
+  height: 4px;
+  background-color: rgba(27, 0, 150, 0.1);
+}
+
+.loadingProgress .MuiLinearProgress-bar {
+  background-color: #1b0096;
+}
+
+/* Empty State */
+.noApplicants {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  border: 1px dashed rgba(9, 0, 48, 0.1);
+  width: 100%;
+}
+
+.emptyStateContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  padding: 24px;
+}
+
+.emptyIcon {
+  font-size: 48px;
+  color: rgba(9, 0, 48, 0.2);
+  margin-bottom: 8px;
+}
+
+/* Status Chips */
+.statusPending {
+  background-color: #f0a12b !important;
+  color: white !important;
+}
+
+.statusAccepted {
+  background-color: #4caf50 !important;
+  color: white !important;
+}
+
+.statusRejected {
+  background-color: #ce0e00 !important;
+  color: white !important;
+}
+
+/* Kardex Dialog */
+.kardexDialog {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.kardextitle {
+  background-color: #1b0096;
+  color: white !important;
+  padding: 20px 24px !important;
+}
+
+.kardexTitleContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.closeIconButton {
+  color: white !important;
+}
+
+.kardexDialogContent {
+  padding: 0 !important;
+}
+
+.applicantHeader {
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border-bottom: 1px solid rgba(9, 0, 48, 0.08);
+}
+
+.kardexAvatar {
+  background-color: #1b0096 !important;
+  color: white !important;
+  width: 56px !important;
+  height: 56px !important;
+  font-weight: 600 !important;
+  font-size: 20px !important;
+}
+
+.applicantHeaderInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.applicantName {
+  font-weight: 600;
+  margin: 0;
+}
+
+.kardexStatusChip {
+  align-self: flex-start;
+  font-weight: 500 !important;
+  height: 24px !important;
+  font-size: 12px !important;
+  border-radius: 12px !important;
+}
+
+.kardexTabs {
+  padding: 0;
+  border-bottom: 1px solid rgba(9, 0, 48, 0.08);
+  overflow-x: auto;
+}
+
+.tabItem {
+  display: flex;
+  align-items: center;
+  padding: 16px 24px;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+  color: rgba(9, 0, 48, 0.6);
+}
+
+.tabItem:hover {
+  color: #1b0096;
+  background-color: rgba(27, 0, 150, 0.05);
+}
+
+.tabIcon {
+  margin-right: 8px;
+  font-size: 20px;
+}
+
+.tabText {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.activeTab {
+  color: #1b0096;
+  position: relative;
+}
+
+.activeTab::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #1b0096;
+}
+
+.kardexTabContent {
+  padding: 24px;
+}
+
+.kardexSection {
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  padding: 20px;
+  height: 100%;
+  margin-bottom: 16px;
+}
+
+.sectionTitle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #1b0096;
+  font-weight: 600;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(27, 0, 150, 0.1);
+}
+
+.sectionIcon {
+  color: #1b0096;
+  font-size: 20px;
+}
+
+.infoItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.infoItemIcon {
+  color: #1b0096;
+  margin-top: 2px;
+}
+
+/* CV Preview Styles */
+.pdfPreviewContainer {
+  margin-top: 16px;
+}
+
+.pdfPreview {
+  width: 100%;
+  height: 400px;
+  border: 1px solid rgba(9, 0, 48, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  background-color: #f5f5f5;
+}
+
+.pdfFrame {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.cvPreviewContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cvActions {
+  display: flex;
+  gap: 12px;
+}
+
+.cvButton {
+  color: #1b0096 !important;
+  border-color: #1b0096 !important;
+  text-transform: none !important;
+}
+
+.downloadButton {
+  background-color: #1b0096 !important;
+  color: white !important;
+  text-transform: none !important;
+}
+
+.noCvContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+  gap: 16px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+}
+
+.noCvIcon {
+  font-size: 48px;
+  color: rgba(9, 0, 48, 0.2);
+}
+
+/* Skills Styles */
+.skillsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.skillChip {
+  background-color: rgba(27, 0, 150, 0.1) !important;
+  color: #1b0096 !important;
+  font-weight: 500 !important;
+}
+
+.softSkillChip {
+  background-color: rgba(76, 175, 80, 0.1) !important;
+  color: #4caf50 !important;
+  font-weight: 500 !important;
+}
+
+/* Languages Styles */
+.languagesContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.languageItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+}
+
+.languageName {
+  font-weight: 500;
+}
+
+.languageLevel {
+  background-color: rgba(27, 0, 150, 0.1) !important;
+  color: #1b0096 !important;
+}
+
+/* Education & Experience Styles */
+.educationItem,
+.experienceItem {
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(9, 0, 48, 0.08);
+}
+
+.educationItem:last-child,
+.experienceItem:last-child {
+  border-bottom: none;
+}
+
+.educationDegree,
+.experienceTitle {
+  color: #1b0096;
+  margin-bottom: 4px;
+}
+
+.educationInstitution,
+.experienceCompany {
+  margin-bottom: 4px;
+}
+
+.educationDescription,
+.experienceDescription {
+  margin-top: 8px;
+  color: rgba(9, 0, 48, 0.7);
+}
+
+/* Social Media Styles */
+.socialMediaContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.socialMediaLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.socialMediaItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 8px;
+  background-color: #f5f5f5;
+  transition: all 0.2s ease;
+  min-width: 100px;
+  text-align: center;
+}
+
+.socialMediaItem:hover {
+  background-color: rgba(27, 0, 150, 0.1);
+  transform: translateY(-2px);
+}
+
+.kardexActions {
+  padding: 16px 24px !important;
+  background-color: #f9f9f9;
+  border-top: 1px solid rgba(9, 0, 48, 0.08);
+}
+
+.closeButton {
+  background-color: #1b0096 !important;
+  color: white !important;
+  text-transform: none !important;
+}
+
+.acceptDialogBtn {
+  background-color: #1b0096 !important;
+  color: white !important;
+  text-transform: none !important;
+}
+
+.rejectDialogBtn {
+  color: #ce0e00 !important;
+  border-color: #ce0e00 !important;
+  text-transform: none !important;
+}
+
+@media (max-width: 600px) {
+  .applicantscontainer {
+    padding: 16px;
+  }
+
+  .kardexTitleContent {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .closeIconButton {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+  }
+
+  .applicantHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .kardexActions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .kardexActions button {
+    width: 100%;
+  }
+
+  .pdfPreview {
+    height: 300px;
+  }
+
+  .cvActions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .cvActions button {
+    width: 100%;
+  }
+
+  .languageItem {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .socialMediaContainer {
+    justify-content: center;
+  }
+}
+

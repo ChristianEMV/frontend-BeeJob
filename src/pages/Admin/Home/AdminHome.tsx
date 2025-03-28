@@ -1,13 +1,12 @@
 "use client"
 
 import type React from "react"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import {
   Container,
   Grid,
   Typography,
   Box,
-  Button,
   TextField,
   MenuItem,
   Select,
@@ -16,18 +15,17 @@ import {
   InputAdornment,
   Paper,
   Chip,
+  Button,
 } from "@mui/material"
-import type { Job } from "./Home.types"
-import HomeCard from "./HomeCard"
+import type { Job } from "../../Home/Home.types"
+import AdminCardHome from "./AdminCardHome"
 import WorkIcon from "@mui/icons-material/Work"
 import LocationOnIcon from "@mui/icons-material/LocationOn"
 import CategoryIcon from "@mui/icons-material/Category"
-import FloatingButton from "../../components/FloatingButton/FloatingButton"
-import NotificationToast from "../../components/Notification/NotificationToast"
-import styles from "./styles.module.css"
+import AddIcon from "@mui/icons-material/Add"
+import styles from "./styles.module.css";
 
-const Home: React.FC = () => {
-  const [showNotification, setShowNotification] = useState(false)
+const AdminHome: React.FC = () => {
   const [location, setLocation] = useState<string>("")
   const [position, setPosition] = useState<string>("")
   const [area, setArea] = useState<string>("")
@@ -180,10 +178,6 @@ const Home: React.FC = () => {
     },
   ]
 
-  useEffect(() => {
-    setShowNotification(true)
-  }, [])
-
   const filteredJobs = jobs.filter(
     (job) =>
       (location === "" || job.location.toLowerCase().includes(location.toLowerCase())) &&
@@ -195,24 +189,20 @@ const Home: React.FC = () => {
   const uniqueAreas = Array.from(new Set(jobs.map((job) => job.area)))
 
   return (
-    <Box className={styles.homecontainer}>
-      {showNotification && (
-        <NotificationToast message="¡Completa tu información aquí!" onClose={() => setShowNotification(false)} />
-      )}
-
-      <Box className={styles.homeheader}>
+    <Box className={styles.adminhomecontainer}>
+      <Box className={styles.adminhomeheader}>
         <Typography variant="h3" component="h1" gutterBottom align="center" color="white" className={styles.headertitle}>
-          Encuentra tu trabajo ideal
+          Bienvenido, Administrador
         </Typography>
-        <Button variant="contained" color="primary" className={styles.studentbutton}>
-          Soy estudiante 🎓
+        <Button variant="contained" color="primary" className={styles.addjobbutton} startIcon={<AddIcon />}>
+          Agregar nuevo trabajo
         </Button>
       </Box>
 
       <Container maxWidth="lg" className={styles.maincontent}>
         <Paper elevation={3} className={styles.searchcontainer}>
           <Typography variant="h5" component="h2" gutterBottom className={styles.searchtitle}>
-            Explora oportunidades laborales 🚀
+            Gestionar trabajos 👨🏽‍💻
           </Typography>
           <Box className={styles.searchfields}>
             <FormControl fullWidth variant="outlined">
@@ -221,7 +211,7 @@ const Home: React.FC = () => {
                 value={location}
                 onChange={(e) => setLocation(e.target.value as string)}
                 label="Ubicación"
-                startAdornment={<LocationOnIcon className={styles.selecticon}/>}
+                startAdornment={<LocationOnIcon className={styles.selecticon} />}
               >
                 <MenuItem value="">
                   <em>Todas</em>
@@ -242,7 +232,7 @@ const Home: React.FC = () => {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <WorkIcon className={styles.textfieldicon}/>
+                    <WorkIcon className={styles.textfieldicon} />
                   </InputAdornment>
                 ),
               }}
@@ -270,7 +260,7 @@ const Home: React.FC = () => {
 
         <Box className={styles.resultssummary}>
           <Typography variant="h6" component="h3">
-            Resultados encontrados: {filteredJobs.length}
+            Trabajos encontrados: {filteredJobs.length}
           </Typography>
           <Box className={styles.activefilters}>
             {location && <Chip label={`Ubicación: ${location}`} onDelete={() => setLocation("")} />}
@@ -281,15 +271,13 @@ const Home: React.FC = () => {
 
         <Grid container spacing={3} className={styles.jobgrid}>
           {filteredJobs.map((job) => (
-            <HomeCard key={job.id} job={job} />
+            <AdminCardHome key={job.id} job={job} />
           ))}
         </Grid>
       </Container>
-
-      <FloatingButton />
     </Box>
   )
 }
 
-export default Home
+export default AdminHome
 
