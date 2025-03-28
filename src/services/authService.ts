@@ -5,6 +5,105 @@ const API_URL_USER = "http://localhost:8080/api/beejob/users"
 const API_URL_AUTH = "http://localhost:8080/api/auth"
 const API_URL_ADMIN = "http://localhost:8080/api/beejob"
 
+
+// User types - Actualizada para reflejar la estructura real de la API
+export interface UserInSession {
+  userId: number
+  email: string
+  role?: string
+  status?: boolean
+  name?: string
+  firstLastName?: string
+  secondLastName?: string | null
+  phoneNumber?: string | null
+  adressState?: string | null
+  adressCountry?: string | null
+  image?: string | null
+  personalInformation?: any // Parece ser un objeto vacío en la respuesta
+  professionalInformation?: {
+    cvLink?: string | null
+    hardSkills?: string | null
+    softSkills?: string | null
+    languages?: string | null
+    socialMedia?: string | null
+    resume?: {
+      id: number
+      pdf: string // Base64 encoded PDF
+    } | null
+  }
+}
+
+
+// Añadir esta nueva interfaz después de getUserInSession
+export interface UpdateUserPersonalInfoRequest {
+  email: string
+  password?: string
+  name: string
+  firstLastName: string
+  secondLastName: string
+  phoneNumber: string
+  adressState: string
+  adressCountry: string
+}
+
+// Interfaz para la solicitud de paginación y filtros
+export interface PaginationRequestDTO {
+  page: number
+  size: number
+  status?: boolean | null
+  search?: string | null
+  sortBy?: string // "ASC" o "DESC"
+}
+
+
+// Interfaz para actualizar el estado de un postulante
+export interface UpdateUserStatusDTO {
+  userId: number
+  status: boolean
+}
+// Interfaz para la respuesta de un postulante
+export interface ResponseGetPostulantsDTO {
+  userId: number
+  email: string
+  name: string
+  firstLastName: string
+  secondLastName: string
+  phoneNumber: string
+  adressState: string
+  adressCountry: string
+  status: boolean
+}
+
+export interface PageResponse<T> {
+  content: T[]
+  pageable: {
+    pageNumber: number
+    pageSize: number
+    sort: {
+      empty: boolean
+      sorted: boolean
+      unsorted: boolean
+    }
+    offset: number
+    paged: boolean
+    unpaged: boolean
+  }
+  last: boolean
+  totalElements: number
+  totalPages: number
+  size: number
+  number: number
+  sort: {
+    empty: boolean
+    sorted: boolean
+    unsorted: boolean
+  }
+  first: boolean
+  numberOfElements: number
+  empty: boolean
+}
+
+
 export const register = async (
   name: string,
   firstLastName: string,
@@ -54,6 +153,107 @@ export const logout = () => {
   localStorage.removeItem("token")
   localStorage.removeItem("role")
 }
+
+
+// Actualiza la función getUserInSession para manejar la estructura real de la API
+export const getUserInSession = async (): Promise<UserInSession> => {
+  try {
+    const token = localStorage.getItem("token")
+    if (!token) {
+      throw new Error("Authentication token not found")
+    }
+
+    const response = await axios.get(`${API_URL_USER}/get-user-in-session`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+
+    // Log completo de la respuesta para depuración
+    console.log("Respuesta completa de la API:", response)
+    console.log("Datos del usuario:", response.data)
+
+    // Devuelve directamente los datos de la respuesta
+    return response.data
+  } catch (error) {
+    console.error("Error fetching user in session:", error)
+    if (axios.isAxiosError(error) && error.response) {
+      console.error("Respuesta de error de la API:", error.response)
+      if (error.response.status === 401) {
+        // Handle unauthorized error - could redirect to login
+        console.error("Authentication error: Token may be invalid or expired")
+        localStorage.removeItem("token") // Clear invalid token
+      }
+      throw new Error(error.response.data?.message || "Error fetching user information")
+    } else {
+      throw new Error("Error fetching user information")
+    }
+  }
+}
+
+// Añadir esta nueva función después de getUserInSession
+export const updateUserPersonalInfo = async (userData: UpdateUserPersonalInfoRequest): Promise<UserInSession> => {
+  try {
+    const token = localStorage.getItem("token")
+    if (!token) {
+      throw new Error("Authentication token not found")
+    }
+
+    const response = await axios.put(`${API_URL_USER}/update-user`, userData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
+
+    console.log("Usuario actualizado:", response.data)
+    return response.data
+  } catch (error) {
+    console.error("Error updating user information:", error)
+    if (axios.isAxiosError(error) && error.response) {
+      console.error("Respuesta de error de la API:", error.response)
+      throw new Error(error.response.data?.message || "Error updating user information")
+    } else {
+      throw new Error("Error updating user information")
+    }
+  }
+}
+
+// Añadir el servicio para actualizar la imagen de perfil
+export const updateUserImage = async (imageFile: File): Promise<UserInSession> => {
+  try {
+    const token = localStorage.getItem("token")
+    if (!token) {
+      throw new Error("Authentication token not found")
+    }
+
+    // Crear un objeto FormData para enviar el archivo
+    const formData = new FormData()
+    formData.append("image", imageFile)
+
+    const response = await axios.put(`${API_URL_USER}/update-image`, formData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "multipart/form-data",
+      },
+    })
+
+    console.log("Imagen de perfil actualizada:", response.data)
+    return response.data
+  } catch (error) {
+    console.error("Error updating profile image:", error)
+    if (axios.isAxiosError(error) && error.response) {
+      console.error("Respuesta de error de la API:", error.response)
+      throw new Error(error.response.data?.message || "Error updating profile image")
+    } else {
+      throw new Error("Error updating profile image")
+    }
+  }
+}
+
+
+
+
 
 export const createVacant = async (vacantData: any) => {
   try {
