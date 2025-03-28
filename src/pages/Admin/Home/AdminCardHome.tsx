@@ -29,7 +29,7 @@ interface AdminCardHomeProps {
   job: Job
 }
 
-const CustomSwitch = styled(Switch)(({ theme }) => ({
+const CustomSwitch = styled(Switch)(() => ({
   "& .MuiSwitch-switchBase.Mui-checked": {
     color: "#1b0096",
     "&:hover": {

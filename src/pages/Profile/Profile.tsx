@@ -2,10 +2,8 @@ import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import styles from './styles.module.css';
 import { Icon } from "@iconify/react";
-import { Tooltip } from "@mui/material";
-import { MarginRounded } from '@mui/icons-material';
 import Modal from '../Modal/Modal';
-import { text } from 'stream/consumers';
+
 
 
 
@@ -21,7 +19,6 @@ const Profile:React.FC = () => {
   //Modal Edit Education
   const[isModalOpen_EditE, setIsModalOpen_EditE]=useState(false)
   const openModal_EditE =() => setIsModalOpen_EditE(true)
-  const closeModal_EditE =() => setIsModalOpen_EditE(false)
   //Modal Edit Job
   const[isModalOpen_EditJ, setIsModalOpen_EditJ]=useState(false)
   const openModal_EditJ =() => setIsModalOpen_EditJ(true)
@@ -29,7 +26,6 @@ const Profile:React.FC = () => {
 
   const [selectedSection, setSelectedSection] = useState('personal');
   //general Editing
-  const [isEditing, setIsEditing] = useState(false);
   //perfil info
   const [isEditingProfile, setIsEditingProfile] = useState(false);
   const [isSavingProfile, setIsSavingProfile] = useState(false);
@@ -55,7 +51,7 @@ const Profile:React.FC = () => {
     socialMedia: 'https://linkedin.com/in/johndoe, https://github.com/johndoe',
   });
 
-  const [academyInfo, setAcademyInfo] = useState({
+  const [academyInfo] = useState({
     degree: "Engenier",
     Institution_Name: 'XYZ University',
     Major:"Bachelor's in Computer Science",
@@ -65,28 +61,11 @@ const Profile:React.FC = () => {
     Location:"Avenida Lazaro Cardenas Bario 23, lomas de Santo Tomas"
   });
 
-  const [workExperiences, setWorkExperiences] = useState([
+  const [workExperiences] = useState([
     { company: 'TechCorp', position: 'Software Engineer', years: '2018-2021' },
     { company: 'InnovateX', position: 'Frontend Developer', years: '2021-Present' },
   ]);
 
-  const handleEdit = (section: string) => {
-    setIsEditing(!isEditing);
-    if (isEditing) {
-      if (section === 'personal') {
-        if (!personalInfo.firstName || !personalInfo.lastName || !personalInfo.email || !personalInfo.phoneNumber || !personalInfo.addressState || !personalInfo.addressCountry) {
-          Swal.fire("Error", "All personal information fields must be filled out", "error");
-          return;
-        }
-      } else if (section === 'professional') {
-        if (!professionalInfo.cvLink || !professionalInfo.hardSkills || !professionalInfo.softSkills || !professionalInfo.languages || !professionalInfo.socialMedia) {
-          Swal.fire("Error", "All professional information fields must be filled out", "error");
-          return;
-        }
-      }
-      Swal.fire("Success", "Information updated successfully", "success");
-    }
-  };
 
   return (
     <div className={styles.dashboardcontainer}>
