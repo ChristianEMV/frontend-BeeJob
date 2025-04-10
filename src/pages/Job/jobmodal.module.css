@@ -1,0 +1,592 @@
+.dialogpaper {
+  border-radius: 28px;
+  overflow: hidden;
+  max-height: 90vh;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.07), 0 10px 30px rgba(0, 0, 0, 0.05);
+  border: none;
+  background-color: #ffffff;
+  animation: fadeIn 0.4s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: flex-end;
+  padding: 16px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.closebutton {
+  color: #666;
+  transition: all 0.2s ease;
+  background-color: rgba(0, 0, 0, 0.04);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.closebutton:hover {
+  color: #333;
+  background-color: rgba(0, 0, 0, 0.08);
+  transform: rotate(90deg);
+}
+
+.debugButton {
+  color: #666;
+  transition: all 0.2s ease;
+  background-color: rgba(0, 0, 0, 0.04);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.debugButton:hover {
+  color: #ff9800;
+  background-color: rgba(255, 152, 0, 0.08);
+}
+
+.dialogcontent {
+  padding: 48px 56px 56px;
+  background-color: #ffffff;
+}
+
+.jobHeader {
+  margin-bottom: 48px;
+}
+
+.titleBackground {
+  position: relative;
+  padding: 32px;
+  border-radius: 24px;
+  background: linear-gradient(135deg, rgba(60, 33, 180, 0.03) 0%, rgba(60, 33, 180, 0.08) 100%);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  overflow: hidden;
+}
+
+.titleBackground::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at top right, rgba(60, 33, 180, 0.1), transparent 70%);
+  z-index: 0;
+}
+
+.jobTags {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.jobTag {
+  background-color: rgba(60, 33, 180, 0.1);
+  color: #3c21b4;
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  backdrop-filter: blur(5px);
+}
+
+.jobtitle {
+  color: #111;
+  font-weight: 700;
+  font-size: 2.5rem;
+  letter-spacing: -0.5px;
+  margin-bottom: 16px;
+  line-height: 1.2;
+  position: relative;
+  z-index: 1;
+}
+
+.companyInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+  z-index: 1;
+}
+
+.companyName {
+  font-weight: 500;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+.postedDate {
+  color: #777;
+  font-size: 0.85rem;
+}
+
+.jobinfo {
+  background-color: white;
+  border-radius: 0;
+  padding: 0;
+}
+
+.sectiontitle {
+  color: #111;
+  margin-bottom: 24px;
+  font-weight: 600;
+  font-size: 1.25rem;
+  letter-spacing: -0.3px;
+}
+
+.jobdescription {
+  color: #444;
+  line-height: 1.8;
+  margin-bottom: 32px;
+  font-size: 1rem;
+}
+
+/* Rich Text Content Styles */
+.jobdescription h1 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+  color: #111;
+  letter-spacing: -0.3px;
+}
+
+.jobdescription h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #111;
+  letter-spacing: -0.3px;
+}
+
+.jobdescription h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+  color: #111;
+  letter-spacing: -0.3px;
+}
+
+.jobdescription p {
+  margin-bottom: 1.2rem;
+  line-height: 1.8;
+}
+
+.jobdescription ul {
+  list-style-type: none;
+  margin-left: 0;
+  margin-bottom: 1.2rem;
+}
+
+.jobdescription ul li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.jobdescription ul li::before {
+  content: "•";
+  color: #3c21b4;
+  position: absolute;
+  left: 0;
+  font-size: 1.2rem;
+}
+
+.jobdescription ol {
+  list-style-type: decimal;
+  margin-left: 1.5rem;
+  margin-bottom: 1.2rem;
+  counter-reset: item;
+}
+
+.jobdescription ol li {
+  margin-bottom: 0.8rem;
+}
+
+.jobdescription a {
+  color: #3c21b4;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.jobdescription a:hover {
+  border-bottom-color: #3c21b4;
+}
+
+.divider {
+  margin: 40px 0;
+  background-color: #f0f0f0;
+  height: 1px;
+}
+
+.jobmeta {
+  background-color: #fafafa;
+  border-radius: 24px;
+  padding: 40px;
+  position: sticky;
+  top: 20px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+}
+
+.metaHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.metaSectionTitle {
+  color: #111;
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: -0.3px;
+}
+
+.actionIconButtons {
+  display: flex;
+  gap: 8px;
+}
+
+.actionIconButton {
+  color: #777 !important;
+  background-color: rgba(0, 0, 0, 0.03) !important;
+  padding: 8px !important;
+  transition: all 0.2s ease !important;
+}
+
+.actionIconButton:hover {
+  color: #3c21b4 !important;
+  background-color: rgba(60, 33, 180, 0.08) !important;
+}
+
+.metaContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  margin-bottom: 40px;
+}
+
+.metaCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.metaIcon {
+  color: #3c21b4;
+  font-size: 1.2rem;
+  opacity: 0.8;
+}
+
+.metaCardTitle {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #777;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.metaCardValue {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.applySection {
+  margin-bottom: 24px;
+}
+
+.progressContainer {
+  margin-bottom: 16px;
+}
+
+.progressBar {
+  height: 4px;
+  border-radius: 2px;
+  background-color: rgba(60, 33, 180, 0.1);
+}
+
+.progressBar .MuiLinearProgress-bar {
+  background-color: #3c21b4;
+}
+
+.progressText {
+  display: block;
+  text-align: center;
+  margin-top: 8px;
+  color: #666;
+  font-size: 0.75rem;
+}
+
+.forceApplyText {
+  display: block;
+  text-align: center;
+  margin-top: 8px;
+  color: #ff9800;
+  font-size: 0.75rem;
+  font-style: italic;
+}
+
+.applybutton {
+  background: #3c21b4 !important;
+  color: white;
+  padding: 16px 28px;
+  border-radius: 100px;
+  font-size: 1rem;
+  font-weight: 500;
+  text-transform: none;
+  transition: all 0.3s ease;
+  width: 100%;
+  letter-spacing: 0;
+  box-shadow: 0 4px 20px rgba(60, 33, 180, 0.15) !important;
+}
+
+.applybutton:hover {
+  background: #2a1580 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(60, 33, 180, 0.25) !important;
+}
+
+.applybutton:active {
+  transform: translateY(0);
+}
+
+/* Añadir estilo para el botón de "ya aplicado" */
+.appliedButton {
+  background: #6b7280 !important;
+  cursor: not-allowed !important;
+  opacity: 0.8;
+  box-shadow: none !important;
+}
+
+.appliedButton:hover {
+  background: #6b7280 !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.matchSection {
+  background-color: rgba(60, 33, 180, 0.03);
+  padding: 16px;
+  border-radius: 16px;
+}
+
+.matchIndicator {
+  height: 6px;
+  background-color: rgba(60, 33, 180, 0.1);
+  border-radius: 3px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.matchBar {
+  height: 100%;
+  background: linear-gradient(90deg, #3c21b4, #6a4bdf);
+  border-radius: 3px;
+}
+
+.matchText {
+  color: #555;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.alert {
+  border-radius: 12px;
+  font-weight: 500;
+}
+
+/* Auth Dialog Styles */
+.authDialogPaper {
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+  animation: fadeInScale 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.authDialogContent {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.authIcon {
+  background-color: rgba(60, 33, 180, 0.1);
+  color: #3c21b4;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.authIcon svg {
+  font-size: 32px;
+}
+
+.authTitle {
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #111;
+  font-size: 1.5rem;
+  letter-spacing: -0.3px;
+}
+
+.authDescription {
+  color: #666;
+  margin-bottom: 32px;
+  max-width: 400px;
+  line-height: 1.6;
+}
+
+.profileRequirements {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  margin-bottom: 32px;
+  background-color: rgba(60, 33, 180, 0.03);
+  padding: 24px;
+  border-radius: 16px;
+}
+
+.profileRequirement {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.profileRequirementIcon {
+  color: #3c21b4;
+  font-size: 20px;
+}
+
+.authButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.loginButton {
+  background: #3c21b4 !important;
+  color: white !important;
+  padding: 12px 24px !important;
+  border-radius: 100px !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  text-transform: none !important;
+  width: 100%;
+}
+
+.loginButton:hover {
+  background: #2a1580 !important;
+}
+
+.signupButton {
+  border-color: #3c21b4 !important;
+  color: #3c21b4 !important;
+  padding: 12px 24px !important;
+  border-radius: 100px !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  text-transform: none !important;
+  width: 100%;
+}
+
+.signupButton:hover {
+  background-color: rgba(60, 33, 180, 0.04) !important;
+}
+
+@media (max-width: 960px) {
+  .dialogcontent {
+    padding: 40px;
+  }
+
+  .jobtitle {
+    font-size: 2rem;
+  }
+
+  .jobmeta {
+    margin-top: 24px;
+    padding: 32px;
+  }
+
+  .titleBackground {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 600px) {
+  .dialogcontent {
+    padding: 32px 24px;
+  }
+
+  .jobtitle {
+    font-size: 1.75rem;
+  }
+
+  .jobmeta {
+    padding: 24px;
+    border-radius: 20px;
+  }
+
+  .metaContainer {
+    gap: 20px;
+  }
+
+  .applybutton {
+    padding: 14px 24px;
+  }
+
+  .titleBackground {
+    padding: 20px;
+  }
+
+  .authDialogContent {
+    padding: 32px 24px;
+  }
+
+  .profileRequirements {
+    padding: 20px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+

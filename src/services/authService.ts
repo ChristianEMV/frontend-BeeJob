@@ -755,3 +755,49 @@ export const getPostulantById = async (
   }
 }
 
+export const applyForVacant = async (requestDTO: RequestPostulationDTO): Promise<ResponsePostulationDTO> => {
+  try {
+    const token = localStorage.getItem("token")
+    if (!token) {
+      throw new Error("Authentication token not found")
+    }
+
+    const response = await axios.post(`${API_URL_POSTULATION}/apply`, requestDTO, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    })
+
+    console.log("Postulación enviada:", response.data)
+    return response.data
+  } catch (error) {
+    console.error("Error applying for vacant:", error)
+    if (axios.isAxiosError(error) && error.response) {
+      console.error("Respuesta de error de la API:", error.response)
+      throw new Error(error.response.data?.message || "Error applying for vacant")
+    } else {
+      throw new Error("Error applying for vacant")
+    }
+  }
+}
+
+export const hasAppliedToVacant = async (vacantId: number): Promise<boolean> => {
+  try {
+    // Obtener todas las postulaciones del usuario
+    const postulations = await getUserPostulations({
+      page: 0,
+      size: 100,
+      sortDirection: "DESC",
+      status: null,
+    })
+
+    // Verificar si alguna postulación corresponde a la vacante
+    return postulations.content.some((postulation: ResponsePostulationDTO) => postulation.vacantId === vacantId)
+  } catch (error) {
+    console.error("Error checking if user has applied to vacant:", error)
+    return false
+  }
+}
+
+
