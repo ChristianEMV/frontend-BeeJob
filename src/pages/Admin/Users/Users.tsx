@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { useEffect, useState } from "react"
+import type React from "react";
+import { useEffect, useState } from "react";
 import {
   Table,
   TableBody,
@@ -23,14 +23,31 @@ import {
   Tooltip,
   InputAdornment,
   TextField,
-} from "@mui/material"
-import { styled } from "@mui/material/styles"
-import { Info as InfoIcon, Refresh as RefreshIcon,  Search as SearchIcon,
-    ArrowUpward as ArrowUpwardIcon,
-    ArrowDownward as ArrowDownwardIcon,} from "@mui/icons-material"
-import { getAllPostulants, updatePostulantStatus, getPostulantById } from "../../../services/authService"
-import type { PaginationRequestDTO, ResponseGetPostulantsDTO, UpdateUserStatusDTO } from "../../../services/authService"
-import styles from "./users.module.css"
+  TablePagination,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@mui/material";
+import { styled } from "@mui/material/styles";
+import {
+  Info as InfoIcon,
+  Refresh as RefreshIcon,
+  Search as SearchIcon,
+  ArrowUpward as ArrowUpwardIcon,
+  ArrowDownward as ArrowDownwardIcon,
+} from "@mui/icons-material";
+import {
+  getAllPostulants,
+  updatePostulantStatus,
+  getPostulantById,
+} from "../../../services/adminUserService";
+import type {
+  PaginationRequestDTO,
+  ResponseGetPostulantsDTO,
+  UpdateUserStatusDTO,
+} from "../../../services/adminUserService";
+import styles from "./users.module.css";
 
 // Custom styled components
 const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
@@ -40,18 +57,18 @@ const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
   boxShadow: "0 6px 16px rgba(0, 0, 0, 0.12)",
   overflow: "hidden",
   border: "1px solid rgba(27, 0, 150, 0.1)",
-}))
+}));
 
 const StyledTableHead = styled(TableHead)(() => ({
   backgroundColor: "#1b0096",
-}))
+}));
 
 const StyledHeaderCell = styled(TableCell)(() => ({
   color: "white",
   fontWeight: "bold",
   fontSize: "0.9rem",
   padding: "16px",
-}))
+}));
 
 const StyledTableRow = styled(TableRow)(() => ({
   "&:nth-of-type(odd)": {
@@ -61,7 +78,7 @@ const StyledTableRow = styled(TableRow)(() => ({
     backgroundColor: "rgba(27, 0, 150, 0.07)",
     transition: "background-color 0.2s ease",
   },
-}))
+}));
 
 const StyledSwitch = styled(Switch)(() => ({
   "& .MuiSwitch-switchBase.Mui-checked": {
@@ -70,7 +87,7 @@ const StyledSwitch = styled(Switch)(() => ({
   "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track": {
     backgroundColor: "#1b0096",
   },
-}))
+}));
 
 const StyledModalContent = styled(Box)(() => ({
   position: "absolute",
@@ -83,7 +100,7 @@ const StyledModalContent = styled(Box)(() => ({
   boxShadow: "0 8px 24px rgba(0, 0, 0, 0.15)",
   padding: "0",
   outline: "none",
-}))
+}));
 
 const ModalHeader = styled(Box)(() => ({
   backgroundColor: "#1b0096",
@@ -94,33 +111,33 @@ const ModalHeader = styled(Box)(() => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-}))
+}));
 
 const ModalBody = styled(Box)(() => ({
   padding: "24px",
-}))
+}));
 
 const ModalFooter = styled(Box)(() => ({
   padding: "16px 24px",
   display: "flex",
   justifyContent: "flex-end",
   borderTop: "1px solid rgba(0, 0, 0, 0.1)",
-}))
+}));
 
 const UserInfoItem = styled(Box)(() => ({
   display: "flex",
   marginBottom: "12px",
-}))
+}));
 
 const UserInfoLabel = styled(Typography)(() => ({
   fontWeight: "bold",
   width: "140px",
   color: "#090030",
-}))
+}));
 
 const UserInfoValue = styled(Typography)(() => ({
   flex: 1,
-}))
+}));
 
 const EmailButton = styled(Button)(() => ({
   color: "#1b0096",
@@ -129,50 +146,91 @@ const EmailButton = styled(Button)(() => ({
   "&:hover": {
     backgroundColor: "rgba(27, 0, 150, 0.05)",
   },
-}))
+}));
 
 const RefreshButton = styled(IconButton)(() => ({
   color: "#1b0096",
   marginBottom: "16px",
-}))
+}));
 
 const StatusChip = styled(Chip)(({ status }: { status: boolean }) => ({
   backgroundColor: status ? "rgba(46, 125, 50, 0.1)" : "rgba(211, 47, 47, 0.1)",
   color: status ? "#2e7d32" : "#d32f2f",
   fontWeight: "bold",
   marginLeft: "8px",
-}))
+}));
 
-type SortField = "userId" | "name" | "email" | "firstLastName" | null
-type SortDirection = "asc" | "desc"
+type SortField = "userId" | "name" | "email" | "firstLastName" | null;
+type SortDirection = "asc" | "desc";
+
+// Custom debounce hook
+const useDebounce = <T extends unknown>(value: T, delay: number): T => {
+  const [debouncedValue, setDebouncedValue] = useState<T>(value);
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+
+  return debouncedValue;
+};
 
 const Users: React.FC = () => {
-  const [users, setUsers] = useState<ResponseGetPostulantsDTO[]>([])
-  const [loading, setLoading] = useState<boolean>(true)
-  const [error, setError] = useState<string | null>(null)
-  const [selectedUser, setSelectedUser] = useState<ResponseGetPostulantsDTO | null>(null)
-  const [modalOpen, setModalOpen] = useState<boolean>(false)
-  const [searchTerm, setSearchTerm] = useState<string>("")
-  const [sortField, setSortField] = useState<SortField>(null)
-  const [sortDirection, setSortDirection] = useState<SortDirection>("asc")
+  const [users, setUsers] = useState<ResponseGetPostulantsDTO[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
+  const [selectedUser, setSelectedUser] =
+    useState<ResponseGetPostulantsDTO | null>(null);
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [statusFilter, setStatusFilter] = useState<
+    "all" | "active" | "inactive"
+  >("all");
+  const [sortField, setSortField] = useState<SortField>("email"); 
+  const [sortDirection, setSortDirection] = useState<SortDirection>("asc");
+  // Nuevos estados para paginación
+  const [page, setPage] = useState<number>(0);
+  const [size, setSize] = useState<number>(10);
+  const [totalPages, setTotalPages] = useState<number>(0);
+  const [totalElements, setTotalElements] = useState<number>(0);
 
+  const debouncedSearchTerm = useDebounce(searchTerm, 500);
   // Fetch users from the backend
   const fetchUsers = async () => {
     try {
-      setLoading(true)
+      setLoading(true);
       const filter: PaginationRequestDTO = {
-        page: 0,
-        size: 100,
-      }
-      const response = await getAllPostulants(filter)
-      setUsers(response.content)
+        page,
+        size,
+        sortDirection,
+        sortField: sortField || "email",
+        search: debouncedSearchTerm,
+        status: statusFilter !== "all" ? statusFilter === "active" : undefined,
+      };
+
+      const response = await getAllPostulants(filter);
+      setUsers(response.content);
+      setTotalPages(response.totalPages);
+      setTotalElements(response.totalElements);
     } catch (err) {
-      console.error("Error fetching users:", err)
-      setError("Failed to load users. Please try again later.")
+      console.error("Error fetching users:", err);
+      setError("Failed to load users. Please try again later.");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
+
+  useEffect(() => {
+    fetchUsers();
+  }, [page, size, sortField, sortDirection, statusFilter]);
+
+  useEffect(() => {
+    setPage(0);
+  }, [debouncedSearchTerm, statusFilter]);
 
   // Toggle user status
   const handleToggleStatus = async (userId: number, currentStatus: boolean) => {
@@ -180,96 +238,99 @@ const Users: React.FC = () => {
       const request: UpdateUserStatusDTO = {
         userId,
         status: !currentStatus,
-      }
-      await updatePostulantStatus(request)
+      };
+      await updatePostulantStatus(request);
       setUsers((prevUsers) =>
-        prevUsers.map((user) => (user.userId === userId ? { ...user, status: !currentStatus } : user)),
-      )
+        prevUsers.map((user) =>
+          user.userId === userId ? { ...user, status: !currentStatus } : user
+        )
+      );
     } catch (err) {
-      console.error("Error updating user status:", err)
-      setError("Failed to update user status. Please try again.")
+      console.error("Error updating user status:", err);
+      setError("Failed to update user status. Please try again.");
     }
-  }
+  };
 
   // Fetch user details and open modal
   const handleEmailClick = async (id: number) => {
     try {
-      const user = await getPostulantById({ id })
-      setSelectedUser(user)
-      setModalOpen(true)
+      const user = await getPostulantById({ id });
+      setSelectedUser(user);
+      setModalOpen(true);
     } catch (err) {
-      console.error("Error fetching user details:", err)
-      setError("Failed to load user details. Please try again later.")
+      console.error("Error fetching user details:", err);
+      setError("Failed to load user details. Please try again later.");
     }
-  }
+  };
 
   const handleCloseModal = () => {
-    setModalOpen(false)
-    setSelectedUser(null)
-  }
+    setModalOpen(false);
+    setSelectedUser(null);
+  };
 
   useEffect(() => {
-    fetchUsers()
-  }, [])
+    fetchUsers();
+  }, [page, size, sortField, sortDirection]);
 
   // Get user initials for avatar
   const getUserInitials = (name: string, firstLastName: string) => {
-    return `${name.charAt(0)}${firstLastName.charAt(0)}`.toUpperCase()
-  }
+    const firstNameLetter = name?.charAt(0) || "";
+    const lastNameLetter = firstLastName?.charAt(0) || "";
+    return `${firstNameLetter}${lastNameLetter}`.toUpperCase();
+    return `${name.charAt(0)}${firstLastName.charAt(0)}`.toUpperCase();
+  };
 
   const handleSort = (field: SortField) => {
-    if (sortField === field) {
-      // Toggle direction if same field
-      setSortDirection(sortDirection === "asc" ? "desc" : "asc")
-    } else {
-      // Set new field and default to ascending
-      setSortField(field)
-      setSortDirection("asc")
-    }
-  }
+    const newDirection =
+      sortField === field && sortDirection === "asc" ? "desc" : "asc";
+    setSortField(field);
+    setSortDirection(newDirection);
+    setPage(0); // Resetear a la primera página al cambiar ordenamiento
+  };
 
   const getSortIcon = (field: SortField) => {
-    if (sortField !== field) return null
+    if (sortField !== field) return null;
 
     return sortDirection === "asc" ? (
-      <ArrowUpwardIcon fontSize="small" sx={{ ml: 0.5, color: "#1b0096" }} />
+      <ArrowUpwardIcon fontSize="small" sx={{ ml: 0.5, color: "#ffffff" }} />
     ) : (
-      <ArrowDownwardIcon fontSize="small" sx={{ ml: 0.5, color: "#1b0096" }} />
-    )
-  }
+      <ArrowDownwardIcon fontSize="small" sx={{ ml: 0.5, color: "#ffffff" }} />
+    );
+  };
 
   const filterUsers = (users: ResponseGetPostulantsDTO[]) => {
-    if (!searchTerm.trim()) return users
+    if (!searchTerm.trim()) return users;
 
-    const searchTermLower = searchTerm.toLowerCase()
+    const searchTermLower = searchTerm.toLowerCase();
 
     return users.filter(
       (user) =>
         user.name.toLowerCase().includes(searchTermLower) ||
         user.email.toLowerCase().includes(searchTermLower) ||
         user.firstLastName.toLowerCase().includes(searchTermLower) ||
-        (user.secondLastName && user.secondLastName.toLowerCase().includes(searchTermLower)),
-    )
-  }
+        (user.secondLastName &&
+          user.secondLastName.toLowerCase().includes(searchTermLower))
+    );
+  };
 
   const sortUsers = (users: ResponseGetPostulantsDTO[]) => {
-    if (!sortField) return users
+    if (!sortField) return users;
 
     return [...users].sort((a, b) => {
-      let valueA = a[sortField]
-      let valueB = b[sortField]
+      let valueA = a[sortField];
+      let valueB = b[sortField];
 
       // Handle string comparison
       if (typeof valueA === "string" && typeof valueB === "string") {
-        valueA = valueA.toLowerCase()
-        valueB = valueB.toLowerCase()
+        valueA = valueA.toLowerCase();
+        valueB = valueB.toLowerCase();
       }
 
-      if (valueA < valueB) return sortDirection === "asc" ? -1 : 1
-      if (valueA > valueB) return sortDirection === "asc" ? 1 : -1
-      return 0
-    })
-  }
+      if (valueA < valueB) return sortDirection === "asc" ? -1 : 1;
+      if (valueA > valueB) return sortDirection === "asc" ? 1 : -1;
+      return 0;
+    });
+  };
 
   if (loading) {
     return (
@@ -277,18 +338,22 @@ const Users: React.FC = () => {
         <CircularProgress style={{ color: "#1b0096" }} />
         <Typography style={{ color: "#090030" }}>Loading users...</Typography>
       </Box>
-    )
+    );
   }
 
   if (error) {
     return (
       <Box className={styles.errorContainer}>
         <Typography color="error">{error}</Typography>
-        <Button variant="contained" style={{ backgroundColor: "#1b0096", marginTop: "16px" }} onClick={fetchUsers}>
+        <Button
+          variant="contained"
+          style={{ backgroundColor: "#1b0096", marginTop: "16px" }}
+          onClick={fetchUsers}
+        >
           Try Again
         </Button>
       </Box>
-    )
+    );
   }
 
   return (
@@ -302,7 +367,14 @@ const Users: React.FC = () => {
         </Typography>
       </Box>
 
-      <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "16px" }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          marginBottom: "16px",
+        }}
+      >
         <TextField
           placeholder="Search by name, email or last names..."
           variant="outlined"
@@ -329,8 +401,48 @@ const Users: React.FC = () => {
             ),
           }}
         />
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: 2,
+            ml: "auto", // Esto empujará todo el grupo a la derecha
+          }}
+        ></Box>
+        <FormControl
+          variant="outlined"
+          size="small"
+          sx={{
+            width: 150,
+            "& .MuiOutlinedInput-root": {
+              borderRadius: "8px",
+              "&:hover .MuiOutlinedInput-notchedOutline": {
+                borderColor: "rgba(27, 0, 150, 0.3)",
+              },
+              "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
+                borderColor: "#1b0096",
+              },
+            },
+            "& .MuiInputLabel-root": {
+              color: "rgba(9, 0, 48, 0.6)",
+            },
+          }}
+        >
+          <InputLabel>Status</InputLabel>
+          <Select
+            value={statusFilter}
+            onChange={(e) =>
+              setStatusFilter(e.target.value as "all" | "active" | "inactive")
+            }
+            label="Status"
+          >
+            <MenuItem value="all">All status</MenuItem>
+            <MenuItem value="active">Active</MenuItem>
+            <MenuItem value="inactive">Inactive</MenuItem>
+          </Select>
+        </FormControl>
         <Tooltip title="Refresh users">
-          <RefreshButton onClick={fetchUsers}>
+          <RefreshButton onClick={fetchUsers}sx={{ mt: 2 }}>
             <RefreshIcon />
           </RefreshButton>
         </Tooltip>
@@ -340,17 +452,39 @@ const Users: React.FC = () => {
         <Table>
           <StyledTableHead>
             <TableRow>
-              <StyledHeaderCell onClick={() => handleSort("userId")} sx={{ cursor: "pointer" }}>
-                <Box sx={{ display: "flex", alignItems: "center" }}>ID {getSortIcon("userId")}</Box>
+              <StyledHeaderCell
+                onClick={() => handleSort("userId")}
+                sx={{ cursor: "pointer" }}
+              >
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  Id {getSortIcon("userId")}
+                </Box>
               </StyledHeaderCell>
-              <StyledHeaderCell onClick={() => handleSort("name")} sx={{ cursor: "pointer" }}>
-                <Box sx={{ display: "flex", alignItems: "center" }}>User {getSortIcon("name")}</Box>
+              <StyledHeaderCell
+                onClick={() => handleSort("name")}
+                sx={{ cursor: "pointer" }}
+              >
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  User {getSortIcon("name")}
+                </Box>
               </StyledHeaderCell>
-              <StyledHeaderCell onClick={() => handleSort("email")} sx={{ cursor: "pointer" }}>
-                <Box sx={{ display: "flex", alignItems: "center" }}>Email {getSortIcon("email")}</Box>
+              {/* Nueva posición de Last Names */}
+              <StyledHeaderCell
+                onClick={() => handleSort("firstLastName")}
+                sx={{ cursor: "pointer" }}
+              >
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  Last Names {getSortIcon("firstLastName")}
+                </Box>
               </StyledHeaderCell>
-              <StyledHeaderCell onClick={() => handleSort("firstLastName")} sx={{ cursor: "pointer" }}>
-                <Box sx={{ display: "flex", alignItems: "center" }}>Last Names {getSortIcon("firstLastName")}</Box>
+              {/* Email se mueve después */}
+              <StyledHeaderCell
+                onClick={() => handleSort("email")}
+                sx={{ cursor: "pointer" }}
+              >
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  Email {getSortIcon("email")}
+                </Box>
               </StyledHeaderCell>
               <StyledHeaderCell align="center">Status</StyledHeaderCell>
               <StyledHeaderCell align="center">Actions</StyledHeaderCell>
@@ -370,6 +504,11 @@ const Users: React.FC = () => {
                         marginRight: "12px",
                         fontSize: "0.9rem",
                       }}
+                      src={
+                        user.image
+                          ? `data:image/jpeg;base64,${user.image}`
+                          : undefined
+                      }
                     >
                       {getUserInitials(user.name, user.firstLastName)}
                     </Avatar>
@@ -377,17 +516,22 @@ const Users: React.FC = () => {
                   </Box>
                 </TableCell>
                 <TableCell>
-                  <EmailButton onClick={() => handleEmailClick(user.userId)}>{user.email}</EmailButton>
-                </TableCell>
-                <TableCell>
                   {user.firstLastName} {user.secondLastName}
                 </TableCell>
+                <TableCell>
+                  {/* <EmailButton onClick={() => handleEmailClick(user.userId)}> */}
+                  {user.email}
+                  {/* </EmailButton> */}
+                </TableCell>
+
                 <TableCell align="center">
                   <Chip
                     label={user.status ? "Active" : "Inactive"}
                     size="small"
                     sx={{
-                      backgroundColor: user.status ? "rgba(46, 125, 50, 0.1)" : "rgba(211, 47, 47, 0.1)",
+                      backgroundColor: user.status
+                        ? "rgba(46, 125, 50, 0.1)"
+                        : "rgba(211, 47, 47, 0.1)",
                       color: user.status ? "#2e7d32" : "#d32f2f",
                       fontWeight: "medium",
                     }}
@@ -397,7 +541,9 @@ const Users: React.FC = () => {
                   <Tooltip title={user.status ? "Disable User" : "Enable User"}>
                     <StyledSwitch
                       checked={user.status}
-                      onChange={() => handleToggleStatus(user.userId, user.status)}
+                      onChange={() =>
+                        handleToggleStatus(user.userId, user.status)
+                      }
                       size="small"
                     />
                   </Tooltip>
@@ -415,6 +561,31 @@ const Users: React.FC = () => {
             ))}
           </TableBody>
         </Table>
+        <TablePagination
+          component="div"
+          count={totalElements}
+          page={page}
+          onPageChange={(_, newPage) => setPage(newPage)}
+          rowsPerPage={size}
+          onRowsPerPageChange={(e) => {
+            setSize(parseInt(e.target.value, 10));
+            setPage(0);
+          }}
+          rowsPerPageOptions={[2, 5, 10, 15]}
+          labelRowsPerPage="Items per page:"
+          labelDisplayedRows={({ from, to, count }) =>
+            `${from}-${to} of ${count}`
+          }
+          sx={{
+            ".MuiTablePagination-toolbar": {
+              backgroundColor: "rgba(27, 0, 150, 0.03)",
+            },
+            ".MuiTablePagination-selectLabel, .MuiTablePagination-displayedRows":
+              {
+                color: "#090030",
+              },
+          }}
+        />
       </StyledTableContainer>
 
       {/* Modal for user details */}
@@ -430,8 +601,17 @@ const Users: React.FC = () => {
                       color: "#1b0096",
                       marginRight: "12px",
                     }}
+                    src={
+                      selectedUser.image
+                        ? `data:image/jpeg;base64,${selectedUser.image}`
+                        : undefined
+                    }
                   >
-                    {getUserInitials(selectedUser.name, selectedUser.firstLastName)}
+                    {!selectedUser.image &&
+                      getUserInitials(
+                        selectedUser.name,
+                        selectedUser.firstLastName
+                      )}
                   </Avatar>
                   <Box>
                     <Typography variant="h6">
@@ -450,41 +630,56 @@ const Users: React.FC = () => {
               </ModalHeader>
 
               <ModalBody>
-                <Typography variant="subtitle1" sx={{ fontWeight: "bold", color: "#090030", mb: 2 }}>
+                <Typography
+                  variant="subtitle1"
+                  sx={{ fontWeight: "bold", color: "#090030", mb: 2 }}
+                >
                   Personal Information
                 </Typography>
 
                 <UserInfoItem>
                   <UserInfoLabel variant="body2">Email:</UserInfoLabel>
-                  <UserInfoValue variant="body2">{selectedUser.email}</UserInfoValue>
+                  <UserInfoValue variant="body2">
+                    {selectedUser.email}
+                  </UserInfoValue>
                 </UserInfoItem>
 
                 <UserInfoItem>
                   <UserInfoLabel variant="body2">Full Name:</UserInfoLabel>
                   <UserInfoValue variant="body2">
-                    {selectedUser.name} {selectedUser.firstLastName} {selectedUser.secondLastName}
+                    {selectedUser.name} {selectedUser.firstLastName}{" "}
+                    {selectedUser.secondLastName}
                   </UserInfoValue>
                 </UserInfoItem>
 
                 <UserInfoItem>
                   <UserInfoLabel variant="body2">Phone Number:</UserInfoLabel>
-                  <UserInfoValue variant="body2">{selectedUser.phoneNumber || "Not provided"}</UserInfoValue>
+                  <UserInfoValue variant="body2">
+                    {selectedUser.phoneNumber || "Not provided"}
+                  </UserInfoValue>
                 </UserInfoItem>
 
                 <Divider sx={{ my: 2 }} />
 
-                <Typography variant="subtitle1" sx={{ fontWeight: "bold", color: "#090030", mb: 2 }}>
+                <Typography
+                  variant="subtitle1"
+                  sx={{ fontWeight: "bold", color: "#090030", mb: 2 }}
+                >
                   Location Information
                 </Typography>
 
                 <UserInfoItem>
                   <UserInfoLabel variant="body2">Country:</UserInfoLabel>
-                  <UserInfoValue variant="body2">{selectedUser.adressCountry || "Not provided"}</UserInfoValue>
+                  <UserInfoValue variant="body2">
+                    {selectedUser.adressCountry || "Not provided"}
+                  </UserInfoValue>
                 </UserInfoItem>
 
                 <UserInfoItem>
                   <UserInfoLabel variant="body2">State:</UserInfoLabel>
-                  <UserInfoValue variant="body2">{selectedUser.adressState || "Not provided"}</UserInfoValue>
+                  <UserInfoValue variant="body2">
+                    {selectedUser.adressState || "Not provided"}
+                  </UserInfoValue>
                 </UserInfoItem>
               </ModalBody>
 
@@ -514,8 +709,7 @@ const Users: React.FC = () => {
         </StyledModalContent>
       </Modal>
     </Box>
-  )
-}
+  );
+};
 
-export default Users
-
+export default Users;

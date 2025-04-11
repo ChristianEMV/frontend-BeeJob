@@ -111,7 +111,7 @@ const AdminNavbar: React.FC<AdminNavbarProps> = ({ isAuthenticated, onLogout }) 
           <Button
             color="inherit"
             component={Link}
-            to="/users"
+            to="/adminUsers"
             sx={{ color: isHome ? "#1B0096" : "white" }}
           >
             Users
