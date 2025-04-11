@@ -1,111 +1,110 @@
 /* Contenedor principal de la tabla */
 .tableContainer {
-    margin: 20px auto;
-    max-width: 1200px;
-    border-radius: 12px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-    overflow: hidden;
-    border: 1px solid rgba(27, 0, 150, 0.1);
-  }
-  
-  /* Contenedor de carga */
-  .loadingContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 300px;
-    gap: 16px;
-  }
-  
-  /* Contenedor de error */
-  .errorContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 300px;
-    color: #d32f2f;
-    text-align: center;
-    padding: 0 20px;
-  }
-  
-  /* Contenedor del modal */
-  .modalContent {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 500px;
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-    padding: 0;
-    outline: none;
-  }
-  
-  /* Header styles from Applicants component */
-  .headerContainer {
-    margin-bottom: 32px;
-  }
-  
-  .applicantstitle {
-    color: #090030;
-    font-weight: 600;
-    margin-bottom: 8px;
-    letter-spacing: -0.5px;
-    position: relative;
-    display: inline-block;
-    padding-bottom: 8px;
-  }
-  
-  .applicantstitle::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background-color: #1b0096;
-    border-radius: 2px;
-  }
-  
-  .applicantsSubtitle {
-    color: rgba(9, 0, 48, 0.6);
-  }
-  
-  /* Add these styles for the search input */
-  .searchInput {
-    border-radius: 8px;
-    border: 1px solid rgba(9, 0, 48, 0.1);
-    transition: all 0.2s ease;
-  }
-  
-  .searchInput:hover {
-    border-color: rgba(27, 0, 150, 0.3);
-  }
-  
-  .searchInput:focus-within {
-    border-color: #1b0096;
-    box-shadow: 0 0 0 2px rgba(27, 0, 150, 0.1);
-  }
-  
-  /* Add styles for the sort icons */
-  .sortIcon {
-    margin-left: 4px;
-    color: #1b0096;
-    font-size: 16px;
-  }
-  
-  .sortableHeader {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    transition: background-color 0.2s ease;
-  }
-  
-  .sortableHeader:hover {
-    background-color: rgba(27, 0, 150, 0.1);
-  }
-  
-  
+  margin: 20px auto;
+  max-width: 1200px;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  border: 1px solid rgba(27, 0, 150, 0.1);
+}
+
+/* Contenedor de carga */
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  gap: 16px;
+}
+
+/* Contenedor de error */
+.errorContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  color: #d32f2f;
+  text-align: center;
+  padding: 0 20px;
+}
+
+/* Contenedor del modal */
+.modalContent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  padding: 0;
+  outline: none;
+}
+
+/* Header styles from Applicants component */
+.headerContainer {
+  margin-bottom: 32px;
+}
+
+.applicantstitle {
+  color: #090030;
+  font-weight: 600;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 8px;
+}
+
+.applicantstitle::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #1b0096;
+  border-radius: 2px;
+}
+
+.applicantsSubtitle {
+  color: rgba(9, 0, 48, 0.6);
+}
+
+/* Add these styles for the search input */
+.searchInput {
+  border-radius: 8px;
+  border: 1px solid rgba(9, 0, 48, 0.1);
+  transition: all 0.2s ease;
+}
+
+.searchInput:hover {
+  border-color: rgba(27, 0, 150, 0.3);
+}
+
+.searchInput:focus-within {
+  border-color: #1b0096;
+  box-shadow: 0 0 0 2px rgba(27, 0, 150, 0.1);
+}
+
+/* Add styles for the sort icons */
+.sortIcon {
+  margin-left: 4px;
+  color: #1b0096;
+  font-size: 16px;
+}
+
+.sortableHeader {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.2s ease;
+}
+
+.sortableHeader:hover {
+  background-color: rgba(27, 0, 150, 0.1);
+}
+
